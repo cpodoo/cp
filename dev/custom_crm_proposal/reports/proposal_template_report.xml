@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_business_proposal">
+        <t t-call="custom_crm_proposal.proposal_custom_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+            <div class="page">
+                <div class="oe_structure" />
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <img src="/custom_crm_proposal/static/src/img/pps_header.png"  style="height:550px;"/>
+                <br/>
+                <div class='mt-2'>
+                    <h3 style="text-align: left; font-weight: bold;">
+                        Producing Tech Leaders for Tomorrow.
+                    </h3>
+                    <h6 style="text-align: left;">
+                        Complete &amp; Comprehensive Robotics, AI &amp; Coding Solution for the Schools
+                    </h6>
+                    <div style="text-align: left; margin-top: 70px;">
+                        <h6>PROPOSAL SUBMITTED TO:</h6>
+                        <h4>
+                            <t t-out="doc.name" />
+                        </h4>
+                        <h6>
+                            <t t-out="doc.proposal_date.strftime('%d %B %Y')" />
+                        </h6>
+                    </div>
+                </div>
+                <!-- Introduction p1-->
+                <br/>
+                <br/>
+                <br/>
+                <h5><strong>ROBOX AI CODING BASED STEM LABS BY JAY ROBOTIX</strong></h5>
+                <br/>
+                <br/>
+                <span><strong>Jay Robotix</strong>, a <strong>Make in India</strong> company, is revolutionizing STEM education in INDIA. We set up hands-on robotics labs <strong>(ROBOX STEM Labs)</strong> that bring academic subjects to life through practical hands on and project-based learning methods. ROBOX STEM Labs are designed to provide an exciting platform to learn, play and create projects with focus on areas such as <strong>Robotics, AI, Coding, Rapid Prototyping, Drones and IoT.</strong> The approach equips students with the essential 21st-century skills they need to succeed.</span>
+                <br/>
+                <span>For over a decade, we've been a leader in educational innovation, crafting world-class products based on cutting-edge research. We partner with schools to set up labs, deploy curriculum, assign trainers, and deliver comprehensive 5-year STEM education programs.</span>
+                <br/>
+                <span><strrong>JR boasts a successful track record of collaborating with over 400 schools across India, impacting the academic journey of more than 100,000 students.</strrong> We are passionate about igniting a passion for STEM education in young minds, equipping them with the skills and knowledge to thrive in the 21st century.</span>
+                <br/>
+                <img src="/custom_crm_proposal/static/src/img/pps_skills.png"
+                    style="height:550px; display:block; margin-left:auto; margin-right:auto;"/>
+                <br/>
+                <br/>
+                <br/>
+                <h4><strong>Alignment with National Education Policy (NEP):</strong></h4>
+                <span>Our ROBOX STEM Labs align perfectly with the NEP's focus on practical learning. Students explore STEM (Science, Technology, Engineering, Math) through hands-on activities, fostering creativity, problem-solving, and a love for STEM subjects</span>
+                <br/>
+                <br/>
+                <br/>
+                <h4><strong>PROPOSAL: ROBOX STEM Labs in the BOOT Model, where in following is our scope</strong></h4>
+                <h5><strong>1. KEY ASPECTS:</strong></h5>
+                <br/>
+                <br/>
+                <span>
+                    a. <strong>Build Own Operate and Transfer Model (BOOT Model) – A 5 Year Program: End to End Execution</strong> and also training of the students in ROBOX STEM Lab for the schools starting from <span t-out="doc.grade"/> students, every year for the next 5 years. We charge fees per student on yearly basis.
+                </span><br/>
+                <span>
+                    b. <strong>Execution includes:</strong> Setting up of Lab, installation, commission, training &amp; maintenance of the Lab, which will be completely our responsibility.
+                </span><br/>
+                <span>
+                    c. We set up hardware which is upgraded year on year. (for more details pls see Section 2 below)
+                </span><br/>
+                <span>d. We also set up inhouse trainers who will be sitting in the schools and conduct the training programs.</span><br/>
+                <span>e. We provide detailed lesson plans for the execution of the program across the year.</span><br/>
+                <span>f. We provide workbooks for each student</span><br/>
+                <span>g. We do the survey of your school, understand your infrastructure and design a customised solution as per the infrastructure and number of students.</span><br/>
+                <span>h. Coding Platform – RoboGuru – A Game based Visual Learning Coding Software tool integrated with Robotics and physics enable engine. www.roboguru.net. This unique Software, basic version will be provided to each and every student to practice coding from anywhere.</span><br/>
+                <span>i. Training of the School Teachers who are interested.</span><br/>
+                <span>j. The Program, every year is structured with detailed curriculum, well planned classes, events, workshops on latest trends in technology education and assessments for the students.</span><br/>
+                <span>k. The students at the end of the program, every year are provided with Certifications &amp; also guidance to continue their education to build a serious career path. Students will be a part of ROBOX Alumni Network, an evolving influential network of students, teachers and career counsellors helping students design an informed career path.</span>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <h5><strong>2. PATH BREAKING USAGE OF AI IN CLASSROOMS:</strong></h5>
+                <span>The classes will be taken to next level, where in students are introduced with prompt engineering techniques as an extension to the lessons they are learning for completion of their tasks.</span><br/>
+                <span><strong>a. AI-powered learning:</strong> Personalized content and pacing for each student.</span><br/>
+                <span><strong>b. Post-class prompt engineering:</strong> Reinforces classroom learning through interactive exercises. </span><br/>
+                <span><strong>c. Critical thinking development:</strong> Crafting prompts to explore different perspectives and analyze information on the projects they are doing in the robotics STEM classes.</span><br/>
+                <span><strong>d. Enhanced research skills:</strong> Using AI to investigate topics and synthesize knowledge.</span><br/>
+                <span><strong>e. Creative problem-solving:</strong> Designing prompts to model scenarios and test hypotheses.</span><br/>
+                <span><strong>f. Personalized learning experience:</strong> Engaging students and providing personalised feedback.</span><br/>
+                <span><strong>g. Prepares students for the future:</strong> Equips them with essential AI-era skills.</span><br/>
+                <span><strong>h. Seamless classroom integration:</strong> Complements and extends teaching methods.</span>
+                <br/>
+                <br/>
+                <br/>
+                <h5><strong>3. DELIVERABLES: BILL OF MATERIAL EVERY YEAR: (For 600 Students)</strong></h5>
+                <!-- DELIVERABLES -->
+                <t t-if="doc.deliverable_ids">
+                  <table class="table table-sm table-bordered" style="width:100%; margin-top:1em;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="text-left">SRNo</th>
+                            <th class="text-left">Year</th>
+                            <th class="text-left">Deliverable</th>
+                            <th class="text-left">Description</th>
+                            <th class="text-left">UOM</th>
+                            <th class="text-right">Quantity</th>
+                            <th class="text-left">Display</th> 
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <t t-foreach="doc.deliverable_ids" t-as="d">
+                            <tr t-if="d.display == True">
+                                <td><span t-field="d.srno"/></td>
+                                <td><span t-field="d.year"/></td>
+                                <td><span t-field="d.item"/></td>
+                                <td><span t-field="d.description"/></td>
+                                <td><span t-field="d.uom"/></td>
+                                <td class="text-right"><span t-field="d.quantity"/></td>
+                                <td><span t-field="d.display"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                  </table>
+                </t>
+                <span><strong>*The Year wise hardware can always be restructured as per the school’s interests. For Example, if the schools want to introduce 3D printing in the year ONE itself, we can do suitable changes to the lesson plans and hardware to set up in the year ONE, with minor changes in the pricing.</strong></span>
+                <br/>
+                <br/>
+                <h5><strong>4. CURRICULUM PLAN EVERY YEAR</strong></h5>
+                <span>a. Every Grade will be provided with Robotics Classes, with 2 block period periods/48 hours per each students delivering 15 Sessions across the year.</span><br/>
+                <span>b. All the Classes are linked with Academics and latest trends in technology with real time relevance to applied projects</span>
+                <br/>
+                <br/>
+                <h5><strong>5. EVENTS EVERY YEAR</strong></h5>
+                <span><strong>a. Demo/Expo Day for the students:</strong> A one-day Exhibition/ Demonstration Expo by the students where they will display and explain about their projects on ROBOX or working models – Probably in October (Based on School calendar</span><br/>
+                <span><strong>b. 2 Days for Competition Day for the students – Dec – Feb</strong> A One-day practice session for all the students before competition day to make students well-verse on the rules &amp; regulations of the competition. A one-day competition day for the students where in the teams will compete - ROBOX Challenge.</span><br/>
+                <span>c. Students will be introduced to latest trends in outside world with an info session/practical workshop as deemed suitable on the below areas. The workshops are not restricted or limited to the below areas. These are oriented towards Student level.</span><br/>
+                <br/>
+                <ul>
+                    <li>Robotics – Advanced Application Workshop</li>
+                    <li>IoT Workshop Using ROBOX</li>
+                    <li>Drone – UAV Workshop</li>
+                    <li>Giving and eye to ROBOX - Artificial Intelligence / Image processing</li>
+                    <li>using Python</li>
+                    <li>Cloud Computing / Block chain</li>
+                    <li>Humanoid Robot</li>
+                </ul>
+                <br/>
+                <h5><strong>6. ASSESSMENTS EVERY YEAR</strong></h5>
+                <span>a. Each &amp; Every Student will be provided with a Workbook. Students are encouraged to fill the workbooks with their findings during their classes (No HomeWorks). Students are assessed based on their Workbook.</span><br/>
+                <span>b. Students will also be assessed on quarterly basis in terms of Essay Writing in Robotics &amp; Latest Trends. Students will be provided with space in the workbooks/separate worksheets whenever there is such an assessment.</span><br/>
+                <span>c. Students will also be assessed on Quizzes.</span><br/>
+                <span>d. Top Performing Students will be competing in the competitions.</span><br/>
+                <span>e. Students will be assessed based on the Solutions provided by them to the Problem Statement Challenges, given to them twice in a year, with the knowledge acquired so far in the classes.</span><br/>
+
+                <h5><strong>7. COMMERCIALS (For 1000 students)</strong></h5>
+                <span>Pricing model: For all the hardware, workbooks, yearlong training, support, maintenance and all other aspects explained above, we charge fees per each student.</span><br/>
+
+                <span>In the Year One, we charge ₹<t t-esc="doc.first_year_charges"/> Taxes per each Student for full academic Year.</span><br/>
+                <span>From year 2, there will be increase of <t t-esc="doc.second_year_increase"/>% on the fees Year on Year.</span><br/>
+                <span>The Fees will be collected upfront at the start of the Academic Year.</span><br/>
+                <br/>
+
+                <h5><strong>8. Support &amp; Maintenance (For all 5 Years)</strong></h5>
+                <span>a. 100% Support &amp; Maintenance with no questions asked to the school management.</span><br/>
+                <span>b. Repair – Free of Cost</span><br/>
+                <span>c. Spare Parts – Free of Cost.</span><br/>
+                <br/>
+                <h5>Frequently Asked Questions (From Schools):</h5>
+                <span><strong>a. Do we have to deploy any additional teachers from schools’ side?</strong><br/>
+                    Ans: Not Required. We set up our own expert trainers who will be responsible from training and maintenance of the lab. We just need support from the school teachers to send the students to the lab regularly.
+                </span><br/>
+                <span><strong>b. Does School need to buy any equipment/hardware/software?</strong><br/>
+                    Ans: Not Required. School need not purchase any equipment. We charge fees per students and every year; we upgrade the material as per 2. Deliverables list year.
+                </span><br/>
+                <span><strong>c. Do you provide curriculum for every year?</strong><br/>
+                    Ans: Yes, we provide detailed curriculum plan, lesson plan and all the required videos, ppts to be used to taught to the students.
+                </span><br/>
+                <span><strong>d. Do You conduct competitions?</strong><br/>
+                    Ans: Yes, we conduct competitions and also exhibitions in the school.
+                </span><br/>
+                <span><strong>e. Will there be any assessment for the students?</strong><br/>
+                    Ans: Yes, If the school is interested, we do conduct the Examinations to the students inline with their formative assessments.
+                </span><br/>
+                <span><strong>f. Do you Provide Certificate for the Students?</strong><br/>
+                    Ans: Yes, After the completion of the Year of the program, each and every student will be provided with certification of that particular course for that particular Year.
+                </span><br/>
+                <span><strong>g. Are there any other hidden charges to the school?</strong><br/>
+                    Ans: Apart from the School fees charged, per student. We do NOT collect fees for any other spare parts, maintenance, books or whatsoever.
+                </span><br/>
+                <span><strong>h. Can students participate in the Global Competitions?</strong><br/>
+                    Ans: Selective students can be further trained to a particular global robotics competition.
+                </span><br/>
+                <span><strong>i. Does each and every student will be provided with workbook?</strong><br/>
+                    Ans: Yes, Workbook is a key instrument in tracking the progress of the activities and also act as a showcase to the parents on what student is learning the classrooms.
+                </span><br/>
+                <span><strong>j. Do you provide any videos/ppts for the students?</strong><br/>
+                    Ans: Yes, there will be videos and ppts for the Key concepts.
+                </span><br/>
+                <br/>
+                <h5>POINT OF CONTACT</h5>
+                <span t-field="doc.user_id.name"/><br/>
+                Mobile: <span t-field="doc.user_id.phone"/><br/>
+                Email: <span t-field="doc.user_id.email"/><br/>
+            </div>
+
+        </t>
+    </template>
+    <template id="report_business_proposal_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="custom_crm_proposal.report_business_proposal" t-lang="doc.partner_id.lang" />
+            </t>
+        </t>
+    </template>
+</odoo>

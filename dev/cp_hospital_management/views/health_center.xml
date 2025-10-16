@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_health_center_kanban" model="ir.ui.view">
+	    <field name="name">health.center.kanban</field>
+	    <field name="model">health.center</field>
+	    <field name="arch" type="xml">
+	        <kanban>
+	            <field name="name" />
+	            <field name="health_center_type" />
+	            <field name="city" />
+	            <field name="email" />
+	            <field name="country_id" can_create="true" can_write="true" />
+	            <field name="id" />
+				<templates>
+			        <t t-name="kanban-box">
+			            <div class="oeh_medical_vignette oe_semantic_html_override d-flex flex-row">
+			                <div class="oeh_medical_image me-2 flex-shrink-0">
+			                    <!-- This button makes the image clickable -->
+			                    <button name="open" type="open" class="oe_kanban_action p-0 border-0 bg-transparent">
+			                        <img t-if="record.image" t-att-alt="record.name.value" t-att-src="kanban_image('health.center', 'image', record.id.raw_value)" class="oeh_medical_picture"/>
+			                        <img t-else="" t-att-alt="record.name.value" t-att-src="'/web/static/img/placeholder.png'" class="oeh_medical_picture"/>
+			                    </button>
+			                </div>
+			                <div class="oeh_medical_details flex-grow-1">
+			                    <!-- This button makes the name clickable (optional) -->
+			                     <button name="open" type="open" class="oe_kanban_action text-start p-0 border-0 bg-transparent fw-bold mb-1">
+			                        <field name="name"/>
+			                     </button>
+			                    <ul class="m-0 p-0 list-unstyled">
+			                        <!-- ... other list items ... -->
+			                         <li t-if="record.health_center_type.raw_value">
+			                             <field name="health_center_type"/>
+			                         </li>
+			                         <li t-if="record.city.raw_value and record.country_id.raw_value">
+			                             <field name="city"/>, <field name="country_id"/>
+			                         </li>
+			                         <li t-if="record.email.raw_value">
+			                             <i class="fa fa-envelope me-1" role="img" aria-label="Email" title="Email"></i>
+			                             <a t-attf-href="mailto:#{record.email.raw_value}">
+			                                 <field name="email"/>
+			                             </a>
+			                         </li>
+			                    </ul>
+			                </div>
+			            </div>
+			        </t>
+			    </templates>
+	            
+
+	            <!-- <templates>
+	                <t t-name="kanban-box">
+	                    <div class="oeh_medical_vignette oe_semantic_html_override">
+	                        <div class="oeh_medical_image">
+	                            <a data-type="open" href="#" class=" oe_kanban_action oe_kanban_action_a">
+	                                <img t-if="record.id.value" t-att-alt="record.id.value" t-att-src="kanban_image('health.center', 'image', record.id.value)" class="oeh_medical_picture"/>
+	                            </a>
+	                        </div>
+	                        <div class="oeh_medical_details">
+	                            <h4>
+	                                <a data-type="open" href="#" class=" oe_kanban_action oe_kanban_action_a">
+	                                    <t name="name"  t-esc="record.name.value"/>
+	                                </a>
+	                            </h4>
+	                            <ul>
+	                                <li t-if="record.health_center_type.raw_value">
+	                                    <t name="health_center_type"  t-esc="record.health_center_type.value"/>
+	                                </li>
+	                                <li t-if="record.city.raw_value and record.country_id.raw_value">
+	                                    <t name="city"  t-esc="record.city.value"/>
+	                                    ,
+	                                    <t name="country_id" can_create="true" can_write="true"  t-esc="record.country_id.value"/>
+	                                </li>
+	                                <li t-if="record.email.raw_value">
+	                                    <a t-attf-href="mailto:#{record.email.raw_value}">
+	                                        <t name="email"  t-esc="record.email.value"/>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </t>
+	            </templates> -->
+	        </kanban>
+	    </field>
+	</record>
+	<record id="view_health_center_search" model="ir.ui.view">
+	    <field name="name">health.center.select</field>
+	    <field name="model">health.center</field>
+	    <field name="arch" type="xml">
+	        <search string="Health Center">
+	            <field name="name"/>
+	            <field name="health_center_type"/>
+	            <field name="street"/>
+	            <field name="city"/>
+	            <field name="state_id"/>
+	            <field name="country_id"/>
+	            <field name="website"/>
+	            <group expand="0" name="group_by" string="Group By">
+	                <filter name="health_center" string="Health Center Type"  context="{'group_by': 'health_center_type'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	<record id="view_health_center_list" model="ir.ui.view">
+	    <field name="name">health.center.list</field>
+	    <field name="model">health.center</field>
+	    <field name="arch" type="xml">
+	        <list string="Health Centers">
+	            <field name="name" />
+	            <field name="health_center_type" />
+	            <field name="street" />
+	            <field name="city" />
+	            <field name="state_id" can_create="true" can_write="true" />
+	            <field name="country_id" can_create="true" can_write="true" />
+	            <field name="website" />
+	        </list>
+	    </field>
+	</record>
+	<record id="view_health_center_form" model="ir.ui.view">
+	    <field name="name">health.center.form</field>
+	    <field name="model">health.center</field>
+	    <field name="arch" type="xml">
+	        <form string="Health Centers">
+	            <sheet>
+	                <field name="image" widget="image" class="oe_avatar" options="{'preview_image': 'image'}"/>
+	                <div class="oe_title">
+	                    <h1>
+	                        <field name="name" required="1" default_focus="1" placeholder="Name"/>
+	                    </h1>
+                        <div>
+                            <field name="health_center_type" string=" Health Center" required="1" placeholder="Health Center Type" options="{'no_open': True, 'no_create': True}"/>
+                        </div>
+	                </div>
+
+	                <group> 
+	                    <group> 
+	                        <label for="street" string="Address"/>
+                            
+	                        <div class="o_address_format">
+	                            <field name="street" placeholder="Street..." class="o_address_street"/>
+	                            <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+	                            <field name="city" placeholder="City" class="o_address_city"/>
+	                            <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_create': True}"/>
+	                            <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+	                            <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': True, 'no_create': True}"/>
+	                        </div>
+	                        <field name="website" widget="url" placeholder="e.g. https://www.odoo.com"/>
+	                    </group>
+	                    <group> 
+	                        <field name="phone" widget="phone"/>
+	                        <field name="mobile" widget="phone"/>
+	                        <field name="fax"/> 
+	                        <field name="email" widget="email"/>
+	                    </group>
+	                </group>
+
+	                <notebook>
+	                    <page string="Extra Information" name="extra_info">
+                            <field name="info" placeholder="Additional notes about the health center..."/>
+	                    </page>
+               
+	                </notebook>
+	            </sheet>
+                <chatter/>
+	        </form>
+	    </field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_health_center">
+	    <field name="name">Healthcare centers</field>
+	    <field name="res_model">health.center</field>
+	    <field name="view_mode">kanban,list,form</field>
+	</record>
+	
+	<menuitem name="Healthcare centers" id="menu_health_center" parent="menu_health_centers_main" action="action_health_center" sequence="0"/>
+
+</odoo>

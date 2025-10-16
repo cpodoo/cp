@@ -1,0 +1,53 @@
+.oeh_medical_vignette {
+    min-height: 100px;
+    padding: 8px;
+}
+.oeh_medical_image, .oeh_medical_details {
+    display: inline-block;
+    vertical-align: top;
+}
+.oeh_medical_image {
+    border-collapse: separate;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+    width: 100px;
+}
+.oeh_medical_picture {
+    clip: rect(10px, 100px, 110px, 0px);
+    height: 100px;
+    width: 100px;
+}
+.oeh_medical_picture_wide {
+    clip: rect(0px, 115px, 100px, 15px);
+    height: 100px;
+    width: auto;
+}
+.oeh_medical_details {
+    color: #4c4c4c;
+    font-size: 13px;
+    min-height: 120px;
+    padding: 2px 5px;
+    width: 210px;
+}
+.oeh_medical_details h4 {
+    font-size: 13px;
+    margin: 0;
+}
+.oeh_medical_details h4 a {
+    color: #4c4c4c;
+}
+.oeh_medical_details h4 a:hover {
+    text-decoration: underline;
+}
+.oeh_medical_details ul {
+    list-style: outside none none;
+    margin: 3px 0 5px;
+    padding: 0;
+}
+.oeh_medical_details li {
+    margin: 2px 0;
+    padding: 0;
+}

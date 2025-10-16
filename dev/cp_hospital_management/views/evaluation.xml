@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="view_evaluation_search">
+	    <field name="name">evaluation.search</field>
+	    <field name="model">evaluation</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Evaluation">
+	            <field name="name"/>
+	            <field name="patient"/>
+	            <field name="doctor"/>
+	            <field name="evaluation_start_date"/>
+	            <field name="evaluation_end_date"/>
+	            <field name="appointment"/>
+	            <field name="evaluation_type"/>
+	            <newline />
+	            <group expand="0" string="Group By...">
+	                <filter name="physician" string="Physician"  context="{'group_by': 'doctor'}"/>
+	                <filter name="patient" string="Patient"  context="{'group_by': 'patient'}"/>
+	                <filter name="evaluation" string="Evaluation"  context="{'group_by': 'name'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_evaluation_list">
+	    <field name="name">evaluation.list</field>
+	    <field name="model">evaluation</field>
+	    <field name="arch" type="xml">
+	        <list  string="Evaluations">
+	            <field name="name" required="1" readonly="1"/>
+	            <field name="patient" required="1"/>
+	            <field name="doctor" required="1"/>
+	            <field name="appointment"  />
+	            <field name="evaluation_start_date" required="1"/>
+	            <field name="bmi" />
+	            <field name="evaluation_type" required="1"/>
+	        </list>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_evaluation_form">
+	    <field name="name">evaluation.form</field>
+	    <field name="model">evaluation</field>
+	    <field name="arch" type="xml">
+	        <form string="Evaluation">
+	            <sheet>
+	                <div class="oe_left" style="width: 500px;">
+	                    <div class="oe_title" style="width: 390px;">
+	                      <h1>
+	                          <field name="name" class="oe_inline" placeholder="Name" />
+	                      </h1>
+	                      <field name="patient" domain="[('is_patient','=',True)]" required="1"/>
+	                  </div>
+	              </div>
+	              <group>
+	                  <group>
+	                      <field name="doctor" options="{'no_create': True}" required="1"/>
+	                      <field name="evaluation_start_date" required="1"/>
+	                      <field name="appointment" domain="[('patient','=',patient)]" context="{'default_patient': patient}"  />
+	                  </group>
+	                  <group>
+	                      <field name="evaluation_type" required="1"/>
+	                      <field name="evaluation_end_date" />
+	                      <field name="chief_complaint" />
+	                  </group>
+	              </group>
+	              <group string="Evaluation Summary">
+	                  <field name="notes_complaint" nolabel="1" />
+	              </group>
+	              <notebook>
+	                  <page string="Signs">
+	                      <group string="Vital Signs">
+	                          <group>
+	                              <field name="temperature" />
+	                              <field name="diastolic" />
+	                              <field name="respiratory_rate" />
+	                          </group>
+	                          <group>
+	                              <field name="systolic" />
+	                              <field name="bpm" />
+	                              <field name="osat" />
+	                          </group>
+	                      </group>
+	                      <group string="Anthropometry">
+	                          <group>
+	                              <field name="weight" />
+	                              <field name="abdominal_circ" />
+	                              <field name="bmi" />
+	                          </group>
+	                          <group>
+	                              <field name="height" />
+	                              <field name="head_circumference" />
+	                          </group>
+	                      </group>
+	                      <group>
+	                          <group>
+	                              <field name="edema" />
+	                              <field name="petechiae" />
+	                              <field name="acropachy" />
+	                              <field name="miosis" />
+	                              <field name="cough" />
+	                              <field name="arritmia" />
+	                              <field name="heart_extra_sounds" />
+	                              <field name="ascites" />
+	                              <field name="bronchophony" />
+	                              <field name="hypotonia" />
+	                              <field name="jaundice" />
+	                              <field name="goiter" />
+	
+	                          </group>
+	                          <group>
+	                              <field name="cyanosis" />
+	                              <field name="hematoma" />
+	                              <field name="nystagmus" />
+	                              <field name="mydriasis" />
+	                              <field name="palpebral_ptosis" />
+	                              <field name="heart_murmurs" />
+	                              <field name="jugular_engorgement" />
+	                              <field name="lung_adventitious_sounds" />
+	                              <field name="masses" />
+	                              <field name="hypertonia" />
+	                              <field name="xerosis" />
+	
+	                          </group>
+	                      </group>
+	                      <group string="Nutrition">
+	                          <group>
+	                              <field name="malnutrition" />
+	                          </group>
+	                          <group>
+	                              <field name="dehydration" />
+	                          </group>
+	                      </group>
+	                      <group string="Glucose">
+	                          <group>
+	                              <field name="glycemia" />
+	                          </group>
+	                          <group>
+	                              <field name="hba1c" />
+	                          </group>
+	                      </group>
+	                      <group string="Lipids">
+	                          <group>
+	                              <field name="cholesterol_total" />
+	                              <field name="ldl" />
+	                          </group>
+	                          <group>
+	                              <field name="hdl" />
+	                              <field name="tag" />
+	                          </group>
+	                      </group>
+	                  </page>
+	                  <page string="Symptoms">
+	                      <group string="Pain">
+	                          <group>
+	                              <field name="pain" />
+	                              <field name="arthralgia" />
+	                              <field name="abdominal_pain" />
+	                              <field name="thoracic_pain" />
+	                              <field name="pelvic_pain" />
+	                              <field name="hoarseness" />
+	                              <field name="sore_throat" />
+	                              <field name="ear_discharge" />
+	                              <field name="chest_pain_excercise" />
+	                              <field name="astenia" />
+	                              <field name="weight_change" />
+	                              <field name="hemoptysis" />
+	                              <field name="epistaxis" />
+	                              <field name="rinorrhea" />
+	                              <field name="vomiting" />
+	                              <field name="polydipsia" />
+	                              <field name="polyuria" />
+	                              <field name="vesical_tenesmus" />
+	                              <field name="dysuria" />
+	                          </group>
+	                          <group>
+	                              <field name="pain_intensity" style="width: 30%" />
+	                              <field name="myalgia" />
+	                              <field name="cervical_pain" />
+	                              <field name="lumbar_pain" />
+	                              <field name="headache" />
+	                              <field name="odynophagia" />
+	                              <field name="otalgia" />
+	                              <field name="chest_pain" />
+	                              <field name="orthostatic_hypotension" />
+	                              <field name="anorexia" />
+	                              <field name="abdominal_distension" />
+	                              <field name="hematemesis" />
+	                              <field name="gingival_bleeding" />
+	                              <field name="nausea" />
+	                              <field name="dysphagia" />
+	                              <field name="polyphagia" />
+	                              <field name="nocturia" />
+	                              <field name="pollakiuria" />
+	                          </group>
+	                      </group>
+	                      <group string="Miscellaneous">
+	                          <group>
+	                              <field name="mood_swings" />
+	                              <field name="pruritus" />
+	                              <field name="disturb_sleep" />
+	                              <field name="orthopnea" />
+	                              <field name="paresthesia" />
+	                              <field name="dizziness" />
+	                              <field name="tinnitus" />
+	                              <field name="eye_glasses" />
+	                              <field name="diplopia" />
+	                              <field name="dysmenorrhea" />
+	                              <field name="metrorrhagia" />
+	                              <field name="vaginal_discharge" />
+	                              <field name="diarrhea" />
+	                              <field name="rectal_tenesmus" />
+	                              <field name="proctorrhagia" />
+	                              <field name="sexual_dysfunction" />
+	                          </group>
+	                          <group>
+	                              <field name="stress" />
+	                              <field name="insomnia" />
+	                              <field name="dyspnea" />
+	                              <field name="amnesia" />
+	                              <field name="paralysis" />
+	                              <field name="vertigo" />
+	                              <field name="syncope" />
+	                              <field name="blurry_vision" />
+	                              <field name="photophobia" />
+	                              <field name="amenorrhea" />
+	                              <field name="menorrhagia" />
+	                              <field name="urethral_discharge" />
+	                              <field name="constipation" />
+	                              <field name="melena" />
+	                              <field name="xerostomia" />
+	                          </group>
+	                      </group>
+	                  </page>
+	                  <page string="Mental Status">
+	                      <group string="Glasgow Coma Scale">
+	                          <group>
+	                              <field name="loc" />
+	                              <field name="loc_verbal" />
+	                          </group>
+	                          <group>
+	                              <field name="loc_eyes"  />
+	                              <field name="loc_motor" />
+	                          </group>
+	                      </group>
+	                      <group string="Mental Assessment and Impairments">
+	                          <group>
+	                              <field name="mood" style="width:40%;" />
+	                              <field name="orientation" />
+	                              <field name="knowledge_current_events" />
+	                              <field name="abstraction" />
+	                              <field name="calculation_ability" />
+	                              <field name="praxis" />
+	                          </group>
+	                          <group>
+	                              <field name="violent_behaviour" />
+	                              <field name="memory" />
+	                              <field name="judgement" />
+	                              <field name="vocabulary" />
+	                              <field name="object_recognition" />
+	                          </group>
+	                      </group>
+	                  </page>
+	                  <page string="Diagnosis">
+	                        <group string="Information on Diagnosis">
+	                            <field name="info_diagnosis" nolabel="1" />
+	                        </group>
+	                        <group string="Treatment Plan">
+	                            <field name="directions" nolabel="1" />
+	                        </group>
+	                    </page>
+	                    <page string="Extra Information">
+	                        <field name="notes" nolabel="1" placeholder="Extra Information.." />
+	                    </page>
+	                </notebook>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	<record model="ir.actions.act_window" id="action_evaluation">
+	    <field name="name">Evaluation</field>
+	    <field name="res_model">evaluation</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	<menuitem name="Evaluations" id="menu_evaluation" parent="menu_physicians" action="action_evaluation" sequence="3"/>
+
+</odoo>

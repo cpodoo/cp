@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="new_update_notification_list_view" model="ir.ui.view">
+        <field name="name">new.update.notification.list</field>
+        <field name="model">new.update.notification</field>
+        <field name="arch" type="xml">
+            <list string="Notifications">
+                <field name="name"/>
+                <field name="state"/>
+                <field name="create_date" optional="show"/>
+                <field name="write_date" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="new_update_notification_form_view" model="ir.ui.view">
+        <field name="name">new.update.notification.form</field>
+        <field name="model">new.update.notification</field>
+        <field name="arch" type="xml">
+            <form string="Notification">
+                <header>
+                    <button name="set_confirm" string="Activate" type="object" class="btn-primary"/>
+                    <button name="set_done" string="Close" type="object" class="btn-secondary"/>
+                    <button name="set_draft" string="Set to Draft" type="object" class="btn-secondary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,confirm,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="Notification Title..."/>
+                        </h1>
+                    </div>
+                    <notebook>
+                        <page string="Content" name="content">
+                            <field name="description" widget="html" options="{'safe': True}"
+                                   placeholder="Enter the notification content here..."/>
+                        </page>
+                        <page string="Assigned Users" name="assigned_users">
+                            <field name="user_notification_ids" widget="one2many" mode="list" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="user" widget="many2one_avatar_user"/>
+                                    <field name="useraction" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Action -->
+    <record id="new_update_notification_action" model="ir.actions.act_window">
+        <field name="name">Update Notifications</field>
+        <field name="res_model">new.update.notification</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new notification or announcement.
+            </p>
+            <p>
+                Enter the content, assign users via the 'Assigned Users' tab, and set the notification to 'Active' using
+                the button in the header to display it as a popup for those users and send an email.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_new_notifications"
+              name="Update Notification"
+              parent="base.menu_custom"
+              sequence="2"/>
+
+    <menuitem id="new_update_notification_action_id"
+              parent="menu_new_notifications"
+              action="new_update_notification_action"
+              sequence="5"
+              groups="base.group_no_one"/>
+
+</odoo>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_pharmacy_kanban" model="ir.ui.view">
+	    <field name="name">pharmacy.kanban</field>
+	    <field name="model">health.center.pharmacy</field>
+	    <field name="arch" type="xml">
+	        <kanban>
+	            <field name="name" />
+	            <field name="institution" />
+	            <field name="city" />
+	            <field name="country_id" can_create="true" can_write="true" />
+	            <field name="email" />
+	            <field name="id" />
+	
+	            <templates>
+	                <t t-name="kanban-box">
+	                    <div class="oeh_medical_vignette oe_semantic_html_override">
+	                        <div class="oeh_medical_image">
+	                            <a data-type="open" href="#" class=" oe_kanban_action oe_kanban_action_a">
+	                                <img t-if="record.id.value" t-att-alt="record.id.value" t-att-src="kanban_image('health.center.pharmacy', 'image', record.id.value)" class="oeh_medical_picture"/>
+	                            </a>
+	                        </div>
+	                        <div class="oeh_medical_details">
+	                            <h4>
+	                                <a data-type="open" href="#" class=" oe_kanban_action oe_kanban_action_a">
+	                                    <t name="name"  t-esc="record.name.value"/>
+	                                </a>
+	                            </h4>
+	                            <ul>
+	                                <li t-if="record.institution.raw_value">
+	                                    <t name="institution" can_create="true" can_write="true"  t-esc="record.institution.value"/>
+	                                </li>
+	                                <li t-if="record.city.raw_value and record.country_id.raw_value">
+	                                    <t name="city"  t-esc="record.city.value"/>
+	                                    ,
+	                                    <t name="country_id" can_create="true" can_write="true"  t-esc="record.country_id.value"/>
+	                                </li>
+	                                <li t-if="record.email.raw_value">
+	                                    <a t-attf-href="mailto:#{record.email.raw_value}">
+	                                        <t name="email"  t-esc="record.email.value"/>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </t>
+	            </templates>
+	        </kanban>
+	    </field>
+	</record>
+	<record id="view_pharmacy_list" model="ir.ui.view">
+	    <field name="name">pharmacy.list</field>
+	    <field name="model">health.center.pharmacy</field>
+	    <field name="arch" type="xml">
+	        <list string="Pharmacies">
+	            <field name="name" />
+	            <field name="institution" can_create="true" can_write="true" />
+	            <field name="street" />
+	            <field name="city" />
+	            <field name="state_id" can_create="true" can_write="true" />
+	            <field name="country_id" can_create="true" can_write="true" />
+	            <field name="website" />
+	        </list>
+	    </field>
+	</record>
+	<record id="view_pharmacy_form" model="ir.ui.view">
+	    <field name="name">pharmacy.form</field>
+	    <field name="model">health.center.pharmacy</field>
+	    <field name="arch" type="xml">
+	        <form string="Pharmacies">
+	            <sheet>
+	                <field name="image" widget="image" class="oe_avatar" options="{'preview_image': 'image'}" />
+	               		<div class="oe_title">
+	                    	<h1>
+	                       		<field name="name" required="1" default_focus="1" placeholder="Name"/>
+	                  		</h1>
+	                  		<div>
+	                     		<field name="institution" string=" Health Center" placeholder="Health Centers"  options="{'no_quick_create': True, 'no_create_edit': True}" />
+	                  		</div>                
+	              		</div>
+	                <group>
+	                    <group>
+	                        <label for="street" string="Address"/>
+	                        <div>
+	                            <field name="street" placeholder="Street..." />
+	                            <field name="street2" />
+	                            <div class="address_format">
+	                                <field name="city" placeholder="City" style="width: 40%" />
+	                                <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%" options="{'no_open': True}"  />
+	                                <field name="zip" placeholder="ZIP" style="width: 20%" />
+	                            </div>
+	                            <field name="country_id" placeholder="Country" class="oe_no_button" options="{'no_open': True, 'no_create': True}"  />
+	                        </div>
+	                        <field name="website" widget="url" placeholder="e.g. www.odoo.com" />
+	                    </group>
+	                    <group>
+	                        <field name="phone" placeholder="e.g. +32.81.81.37.00" />
+	                        <field name="mobile" />
+	                        <field name="fax" />
+	                        <field name="email" widget="email" />
+	                    </group>
+	                </group>
+	                <notebook>
+	                    <page string="Prescriptions">
+	                        <field name="prescription_line_ids" widget="one2many_list" readonly="1">
+	                            <list string="Prescription Lines">
+	                                <field name="name"/>
+	                                <field name="prescription_id" string="Prescription Reference"/>
+	                                <field name="indication"/>
+	                                <field name="dose"/>
+	                                <field name="frequency_unit"/>
+	                                <field name="dose_form"/>
+	                                <field name="frequency"/>
+	                                <field name="duration"/>
+	                                <field name="duration_period"/>
+	                                <field name="info" string="Comment"/>
+	                            </list>
+	                        </field>
+	
+	                    </page>
+	                    <page string="Extra Information">
+	                        <field name="info" nolabel="1" />
+	                    </page>
+	                </notebook>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	
+	
+	<record model="ir.actions.act_window" id="action_health_center_pharmacy">
+	    <field name="name">Apothecary</field>
+	    <field name="res_model">health.center.pharmacy</field>
+	    <field name="view_mode">kanban,list,form</field>
+	</record>
+	
+	<menuitem name="Apothecary" id="menu_health_center_pharmacies" parent="menu_health_centers_main" action="action_health_center_pharmacy" sequence="5"/>
+
+</odoo>

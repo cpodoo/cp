@@ -1,0 +1,223 @@
+<odoo>
+    <!-- School Form View -->
+    <record id="view_school_form" model="ir.ui.view">
+        <field name="name">School Form</field>
+        <field name="model">school.school</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_send_welcome_email"
+                            type="object"
+                            string="Send Welcome Email"
+                            class="oe_highlight"/>
+                    <!--                    <button name="%(school.action_planning_wizard)d" type="action" icon="fa-calendar"-->
+                    <!--                            string="Calculate"/>-->
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,approved,rejected"/>
+                        <button name="action_submit"
+                                type="object"
+                                string="Submit"
+                                class="btn btn-primary"
+                                x-invisible="record.state.raw_value !== 'draft'"/>
+
+                        <button name="action_approve"
+                                type="object"
+                                string="Approve"
+                                class="btn btn-success"
+                                x-invisible="record.state.raw_value !== 'submitted'"/>
+
+                        <button name="action_reject"
+                                type="object"
+                                string="Reject"
+                                class="btn btn-danger"
+                                x-invisible="record.state.raw_value !== 'submitted'"/>
+
+                        <button name="action_set_to_draft"
+                                type="object"
+                                string="Reset to Draft"
+                                class="btn btn-secondary"
+                                x-invisible="!['approved', 'rejected'].includes(record.state.raw_value)"/>
+                    <!--                    <div name="button_box" position="inside">-->
+                    <!--                        <button class="oe_stat_button"-->
+                    <!--                                type="object"-->
+                    <!--                                icon="fa-taxi"-->
+                    <!--                                name="action_get_vehicles_record">-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
+                </header>
+                <sheet>
+                    <div name="button_box" position="inside">
+                        <button class="oe_stat_button" type="object" icon="oi-view-list" name="action_open_student">
+                            <field string="Student Count" name="student_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_high_school_alumni"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-graduation-cap">
+                            <field name="high_school_alumni_count" string="Alumni" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="referral_code"/>
+                            <field name="email" widget="email"/>
+                            <field name="date" readonly="1"/>
+                            <field name="roll_number" readonly="1"/>
+                            <field name="contact_number" widget="phone" required="1"/>
+                            <field name="date_of_birth"/>
+                            <field name="age" readonly="1"/>
+                            <field name="student_type" readonly="1"/>
+                            <field name="gender"/>
+                            <field name="year_level"/>
+                            <field name="degree"/>
+                            <field name="country"/>
+                            <field name="mobile"/>
+                        </group>
+                        <group>
+                            <field name="high_school_name"/>
+                            <field name="extra_curricular" widget="radio"/>
+                            <field name="skills" widget="radio"/>
+                            <field name="sports" widget="radio"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="study_duration_days" readonly="1"/>
+                        </group>
+                        <group string="Academic Performance">
+                            <field name="marks_obtained"/>
+                            <field name="total_marks"/>
+                            <field name="percentage" readonly="1"/>
+                            <field name="grade" readonly="1"/>
+                        </group>
+                        <group string="Family Information">
+                            <field name="address"/>
+                            <field name="family_count" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details">
+                            <group>
+                                <field name="parent_student_id"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- School List View -->
+    <record id="view_school_list" model="ir.ui.view">
+        <field name="name">School List</field>
+        <field name="model">school.school</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="roll_number"/>
+                <field name="year_level"/>
+                <field name="degree"/>
+                <field name="email"/>
+                <field name="contact_number"/>
+                <field name="date_of_birth"/>
+                <field name="high_school_name"/>
+            </list>
+        </field>
+    </record>
+
+    <!--    pivot view-->
+    <record id="student_view_pivot" model="ir.ui.view">
+        <field name="name">student.view.pivot</field>
+        <field name="model">school.school</field>
+        <field name="arch" type="xml">
+            <pivot string="Student Enrollment Analysis">
+                <field name="name" type="row"/>
+                <field name="year_level" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+
+    <!-- Search View -->
+    <record id="view_student_search" model="ir.ui.view">
+        <field name="name">view.student.search</field>
+        <field name="model">school.school</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="year2" string="2nd Year" domain="[('year_level','=','2nd Year')]"/>
+                <filter name="btech" string="B.Tech" domain="[('degree','=','B.Tech')]"/>
+
+                <!-- Group By Filters -->
+                <group expand="1" string="Group By">
+                    <filter name="group_by_name" string="Name" context="{'group_by': 'name'}"/>
+                    <filter name="group_by_contact" string="Contact Number" context="{'group_by': 'contact_number'}"/>
+                    <filter name="group_by_email" string="Email" context="{'group_by': 'email'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--    kanban view-->
+    <record id="school_kanban_view" model="ir.ui.view">
+        <field name="name">school.kanban.view</field>
+        <field name="model">school.school</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="roll_number"/>
+                <field name="year_level"/>
+                <field name="email"/>
+                <field name="image"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <div style="float: right;">
+                                <img t-att-src="kanban_image('school.school', 'image', record.id.value)" width="60"
+                                     height="60"/>
+                            </div>
+                            <div>
+                                <div>
+                                    <strong>
+                                        <t t-esc="record.name.value"/>
+                                    </strong>
+                                </div>
+                                <div>
+                                    Year:
+                                    <t t-esc="record.year_level.value"/>
+                                </div>
+                                <div>
+                                    Email:
+                                    <t t-esc="record.email.value"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <!-- Action for School -->
+    <record id="action_school" model="ir.actions.act_window">
+        <field name="name">Schools</field>
+        <field name="res_model">school.school</field>
+        <field name="context">{'default_name':'Student Name', 'search_default_group_by_name':1}</field>
+        <field name="view_mode">kanban,pivot,graph,list,form</field>
+        <field name="search_view_id" ref="view_student_search"/>
+    </record>
+
+    <!-- Action for Students -->
+    <record id="action_student" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">school.student</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="school_management_menu" name="School Management" sequence="1"/>
+    <menuitem id="school_menu" name="Schools" parent="school_management_menu" action="action_school"/>
+</odoo>

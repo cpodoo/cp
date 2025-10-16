@@ -1,0 +1,16 @@
+<!--<odoo>-->
+<!--    <data>-->
+<!--            <record id="view_partner_form_inherit" model="ir.ui.view">-->
+<!--                <field name="name">res.partner.form.inherit</field>-->
+<!--                <field name="model">res.partner</field>-->
+<!--                <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--                <field name="arch" type="xml">-->
+
+<!--                    <xpath expr="//field[@name='email']" position="before">-->
+<!--                        <field name="preferred_contact_method"/>-->
+<!--                    </xpath>-->
+
+<!--                </field>-->
+<!--            </record>-->
+<!--    </data>-->
+<!--</odoo>-->

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_school_student_details">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="student">
+                <t t-call="school.sub_students"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="sub_students">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <t t-call="school.school_students"/>
+                <t t-call="school.school_students_more"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="school_students">
+        <h1 t-att-style="'color: red;'">Hello how are you?</h1>
+        <p><b>Name : </b><span t-field="student.name"/></p>
+<!--        <img src="/report/barcode/QR/hello world" width="80" height="80"-->
+<!--             alt="Barcode"/>-->
+        <img t-att-src="'/report/barcode/QR/' + (student.name or '')" height="80" width="80"
+             alt="Barcode"/>
+        <br/>
+
+        <img t-att-src="image_data_uri(student.image)"
+             t-if="student.image"
+             alt="Image not found"
+             height="80"
+             width="80"/>
+        <br/>
+        <div t-field="student.image"
+           t-options="{'widget':'image', 'height':80, 'width':80}"/>
+        <br/>
+        <img src="/school/static/description/icon.png"
+             alt="Image is not loaded."
+             height="80"
+             width="80"/>
+        <br/>
+
+<!--        <img src="https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68"-->
+<!--             alt="Image not found"-->
+<!--             height="80"-->
+<!--             width="80"/>-->
+<!--        <br/>-->
+<!--            <img t-att-src="'/report/barcode/EAN13/' + (student.name or '')" height="100" width="200"-->
+<!--             alt="Barcode"/>-->
+<!--        <br/>-->
+<!--            <img t-att-src="'/report/barcode/EAN8/' + (student.name or '')" height="80" width="80"-->
+<!--             alt="Barcode"/>-->
+<!--        <br/>-->
+<!--            <img t-att-src="'/report/barcode/code128/' + (student.name or '')" height="80" width="80"-->
+<!--             alt="Barcode"/>-->
+<!--        <br/>-->
+<!--            <img t-att-src="'/report/barcode/UPCA/' + (student.name or '')" height="80" width="80"-->
+<!--             alt="Barcode"/>-->
+<!--        <br/>-->
+<!--        <img t-att-src="'/report/barcode?type=%s&amp;value=%s&amp;height=%s&amp;width=%s'%('QR',student.name,100,100)" alt="barcode with some issue"/>-->
+
+        <p><b>Email : </b><span t-field="student.email"/></p>
+        <p><b>Contact Number : </b><span t-field="student.contact_number"/></p>
+        <p><b>Country : </b><sapn t-field="student.country"/></p>
+        <p><b>Degree : </b><sapn t-field="student.degree"/></p>
+    </template>
+
+    <template id="school_students_more">
+        <p><b>Roll No. :</b> <span t-field="student.roll_number"/> </p>
+    </template>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="report_mobile_sell_bill_action" model="ir.actions.report">
+        <field name="name">Mobile Sell Bill</field>
+        <field name="model">mobile.sell.bill</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tax_print.report_mobile_sell_bill</field>
+        <field name="report_file">tax_print.report_mobile_sell_bill</field>
+        <field name="print_report_name">'Sell Bill - %s' % (object.name)</field>
+    </record>
+</odoo>

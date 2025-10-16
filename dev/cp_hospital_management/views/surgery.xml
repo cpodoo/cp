@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="view_surgery_search">
+	    <field name="name">surgery.search</field>
+	    <field name="model">surgery</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Surgery">
+	            <field name="name"/>
+	            <field name="surgery_type_id"/>
+	            <field name="patient"/>
+	            <field name="surgery_start_date"/>
+	            <field name="classification"/>
+	            <field name="surgeon"/>
+	            <field name="anesthetist"/>
+	            <field name="institution"/>
+	            <field name="state"/>
+	            <newline />
+	            <group expand="0" string="Group By...">
+	                <filter name="pateint" string="Patient" domain="[]" context="{'group_by': 'patient'}"/>
+	                <filter name="physician" string="Physician" domain="[]" context="{'group_by': 'surgeon'}"/>
+	                <filter name="evaluation_classification" string="Evaluation #" domain="[]" context="{'group_by': 'classification'}"/>
+	                <filter name="evaluation_institution" string="Evaluation #" domain="[]" context="{'group_by': 'institution'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	
+	<record model="ir.ui.view" id="view_surgery_list">
+	    <field name="name">surgery.list</field>
+	    <field name="model">surgery</field>
+	    <field name="type">list</field>
+	    <field name="arch" type="xml">
+	        <list string="Sugeries">
+	            <field name="name" required="1" readonly="1"/>
+	            <field name="patient" readonly="state != 'Draft'" required="1"/>
+	            <field name="surgery_type_id"/>
+	            <field name="surgery_start_date" readonly="state != 'Draft'"/>
+	            <field name="classification" readonly="state != 'Draft'" required="1"/>
+	            <field name="surgeon" readonly="state != 'Draft'" required="1"/>
+	            <field name="anesthetist" readonly="state != 'Draft'" required="1"/>
+	            <field name="institution" readonly="state != 'Draft'" required="1"/>
+	            <field name="state" readonly="1"/>
+	        </list>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_surgery_form">
+	    <field name="name">surgery.form</field>
+	    <field name="model">surgery</field>
+	    <field name="arch" type="xml">
+	        <form string="Surgeries">
+	            <header>
+	                <button confirm="Are you sure you want to confirm the surgery detail?" name="action_surgery_confirm" invisible="state != 'Draft'" string="Confirm Surgery" type="object" class="oe_highlight"/>
+	                <button confirm="Are you sure you want to start surgery?" name="action_surgery_start" invisible="state != 'Confirmed'" string="Start Surgery" type="object" class="oe_highlight"/>
+	                <button confirm="Are you sure you want to end surgery?" name="action_surgery_end" invisible="state != 'In Progress'" string="End Surgery" type="object" class="oe_highlight"/>
+	                <button confirm="Are you sure you want to cancel the surgery?" name="action_surgery_cancel" invisible="state not in ('Draft','Confirmed')" string="Cancel Surgery" type="object"/>
+	                <button confirm="Are you sure you want to set surgery record in Draft state?" name="action_surgery_set_to_draft" invisible="state != 'Cancelled'" string="Set To Draft" type="object" class="oe_highlight"/>
+	                <field name="state" widget="statusbar" statusbar_visible="Draft,Confirmed,In Progress,Done" statusbar_colors="{'Draft':'blue','Confirmed':'green','In Progress':'green','Done':'grey','Cancelled':'red'}" readonly="1"/>
+	                <button name="create_invoices" class="btn-primary" string="Create Invoice" type="object" invisible="state != 'Done'"/>
+	            </header>
+	            <sheet>
+	                <div class="oe_button_box" name="button_box">
+	                    <button name="action_view_invoice" type="object" context="{'search_default_number': name,'default_number': name}"
+	                            invisible="invoice_count == 0" class="oe_stat_button" icon="fa-pencil-square-o">
+	                        <field string="Invoices" name="invoice_count" widget="statinfo" readonly="1"/>
+	                    </button>
+	                </div>
+	                <div class="oe_title">
+	                    <h1>
+	                        <field name="name" readonly="1" required="1" placeholder="Name"/>
+	                    </h1>
+	                </div>
+	                <group>
+	                    <group>
+	                        <field name="patient" domain="[('is_patient','=',True)]" readonly="state != 'Draft'" required="1"/>
+	                        <field name="surgery_type_id"/>
+	                    </group>
+	                    <group>
+	                    </group>
+	                </group>
+	                <group>
+	                    <group>
+	                        <field name="surgery_start_date" invisible="state in ('Draft','Confirmed','Cancelled')" readonly="state != 'Draft'"/>
+	                    </group>
+	                    <group>
+	                        <field name="surgery_end_date" invisible="state in ('Draft','Confirmed','Cancelled','In Progress')" readonly="state != 'Draft'"/>
+	                    </group>
+	                </group>
+	                <group>
+	                    <group>
+	                        <field name="classification" readonly="state != 'Draft'" required="1"/>
+	                        <field name="surgeon" readonly="state != 'Draft'" required="1"/>
+	                        <field name="anesthetist" readonly="state != 'Draft'" required="1"/>
+	                        <field name="signed_by" readonly="1"/>
+	                    </group>
+	                    <group>
+	                        <field name="institution" options="{'no_create': True}" readonly="state != 'Draft'" required="1"/>
+	                        <field name="building" domain="[('institution','=',institution)]" options="{'no_create': True}" readonly="state != 'Draft'" required="1"/>
+	                        <field name="operating_room" domain="[('building','=',building),('state','=','Free')]" options="{'no_create': True}" readonly="state != 'Draft'" required="1"/>
+	                    </group>
+	                </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	<record model="ir.actions.act_window" id="action_surgery">
+	    <field name="name">Surgery</field>
+	    <field name="res_model">surgery</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	<menuitem name="Surgeries" id="menu_surgery_main" parent="menu_root_hospital_management"  sequence="3"/>
+	<menuitem name="Surgeries" id="menu_surgery" parent="menu_surgery_main" action="action_surgery" sequence="1"/>
+	
+	<record model="ir.ui.view" id="view_surgery_type_search">
+	    <field name="name">surgery.type.search</field>
+	    <field name="model">surgery.type</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Surgery">
+	            <field name="name"/>
+	            <field name="charge"/>
+	            <newline />
+	            <group expand="0" string="Group By...">
+	                <filter name="surgery" string="Surgery" domain="[]" context="{'group_by': 'name'}"/>
+	                <filter name="charge" string="Charge" domain="[]" context="{'group_by': 'charge'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	
+	<record model="ir.ui.view" id="view_surgery_type_list">
+	    <field name="name">surgery.type.list</field>
+	    <field name="model">surgery.type</field>
+	    <field name="arch" type="xml">
+	        <list string="Sugeries Types">
+	            <field name="name"/>
+	            <field name="charge"/>
+	        </list>
+	    </field>
+	</record>
+	
+	<record model="ir.ui.view" id="view_surgery_type_form">
+	    <field name="name">surgery.type_form</field>
+	    <field name="model">surgery.type</field>
+	    <field name="arch" type="xml">
+	        <form string="Surgeries">
+	            <sheet>
+	                <group>
+	                    <field name="name"/>
+	                    <field name="charge"/>
+	                </group>
+	            </sheet>
+	        </form>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="action_surgery_type">
+	    <field name="name">Surgery Type</field>
+	    <field name="res_model">surgery.type</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	
+	<menuitem name="Surgery Types" id="menu_surgery_type" action="action_surgery_type" parent="menu_health_product_config"/>
+
+</odoo>

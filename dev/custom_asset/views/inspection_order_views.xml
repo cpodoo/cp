@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_inspection_order_tree" model="ir.ui.view">
+        <field name="name">inspection.order.tree</field>
+        <field name="model">inspection.order</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="inspection_order_no"/>
+                <field name="assigned_to"/>
+                <field name="scheduled_date"/>
+                <field name="actual_date"/>
+                <field name="stage"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_inspection_order_form" model="ir.ui.view">
+        <field name="name">inspection.order.form</field>
+        <field name="model">inspection.order</field>
+        <field name="arch" type="xml">
+            <form string="Inspection Order">
+                <header>
+                    <button name="action_schedule" string="Schedule" type="object" class="btn-primary" stage="draft"/>
+                    <button name="action_start_inspection" string="Start Inspection" type="object" class="btn-primary"
+                            stage="scheduled"/>
+                    <button name="action_complete_inspection" string="Complete" type="object" class="btn-success"
+                            stage="in_progress"/>
+                    <button name="action_cancel_inspection" string="Cancel" type="object" class="btn-secondary"
+                            stage="draft,scheduled,in_progress"/>
+                    <field name="stage" widget="statusbar" statusbar_visible="draft,scheduled,in_progress,completed"/>
+                </header>
+                <sheet>
+                    <!-- Title with Inspection Order No -->
+                    <div class="oe_title">
+                        <h1>
+                            <field name="inspection_order_no" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <!-- Asset & Location Info -->
+                    <group>
+                        <group name="asset_info" string="Asset Information">
+                            <field name="current_reading"/>
+                        </group>
+
+                        <group name="location_info" string="Location Information">
+                            <field name="warehouse_id"/>
+                            <field name="current_location"/>
+                            <field name="warehouse_address"/>
+                        </group>
+                    </group>
+
+                    <!-- Schedule & Inspection Info -->
+                    <group>
+                        <group name="schedule_info" string="Schedule Information">
+                            <field name="scheduled_date"/>
+                            <field name="planned_date"/>
+                            <field name="actual_date"/>
+                            <field name="assigned_to"/>
+                        </group>
+
+                        <group name="inspection_info" string="Inspection Information">
+                            <field name="owner_id"/>
+                        </group>
+                    </group>
+
+                    <!-- Tabs -->
+                    <notebook>
+                        <page string="Remarks and Findings" name="remarks">
+                            <field name="remarks_note" widget="html"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_inspection_order" model="ir.actions.act_window">
+        <field name="name">Inspection Orders</field>
+        <field name="res_model">inspection.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Inspection Order
+            </p>
+        </field>
+    </record>
+</odoo>

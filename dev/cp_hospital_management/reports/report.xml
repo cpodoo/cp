@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Prescription Report -->
+        <record id="action_report_prescription_card" model="ir.actions.report">
+            <field name="name">Prescription PDF</field>
+            <field name="model">prescription</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cp_hospital_management.prescription</field>
+            <field name="report_file">cp_hospital_management.prescription</field>
+            <field name="paperformat_id" ref="cp_hospital_management.paperformat_prescription"/>
+            <field name="print_report_name">'Prescription - %s' % (object.name or 'PRES')</field>
+            <field name="binding_model_id" ref="model_prescription"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Appointment Report -->
+        <record id="action_report_appointment_card" model="ir.actions.report">
+            <field name="name">Appointment Card</field>
+            <field name="model">appointment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cp_hospital_management.appointment</field>
+            <field name="report_file">cp_hospital_management.appointment</field>
+            <field name="paperformat_id" ref="cp_hospital_management.paperformat_appointment"/>
+            <field name="print_report_name">'Appointment - %s' % (object.name or 'APPT')</field>
+            <field name="binding_model_id" ref="model_appointment"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Out-Patient Report -->
+        <record id="action_report_out_patient_card" model="ir.actions.report">
+            <field name="name">Patient Card</field>
+            <field name="model">res.partner</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cp_hospital_management.outpatient</field>
+            <field name="report_file">cp_hospital_management.outpatient</field>
+            <field name="paperformat_id" ref="cp_hospital_management.paperformat_patient_card"/>
+            <field name="print_report_name">'Patient Card - %s' % (object.name or 'Partner')</field>
+            <field name="binding_model_id" ref="base.model_res_partner"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- In-Patient Report -->
+        <record id="action_report_in_patient_admission" model="ir.actions.report">
+            <field name="name">In-Patient Admission Report</field>
+            <field name="model">inpatient.admissions</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cp_hospital_management.report_inpatient</field>
+            <field name="report_file">cp_hospital_management.report_inpatient</field>
+            <field name="paperformat_id" ref="cp_hospital_management.paperformat_inpatient_admission"/>
+            <field name="print_report_name">'In-Patient - %s' % (object.name or 'Admission')</field>
+            <field name="binding_model_id" ref="model_inpatient_admissions"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Surgery Report -->
+        <record id="action_report_patient_surgery" model="ir.actions.report">
+            <field name="name">Patient Surgery Report</field>
+            <field name="model">surgery</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cp_hospital_management.surgery</field>
+            <field name="report_file">cp_hospital_management.surgery</field>
+            <field name="paperformat_id" ref="cp_hospital_management.paperformat_surgery"/>
+            <field name="print_report_name">'Surgery - %s' % (object.name or 'SRG')</field>
+            <field name="binding_model_id" ref="model_surgery"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Lab Tests Report -->
+        <record id="action_report_patient_lab_tests" model="ir.actions.report">
+            <field name="name">Patient Lab Tests Report</field>
+            <field name="model">lab.tests</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cp_hospital_management.lab_tests</field>
+            <field name="report_file">cp_hospital_management.lab_tests</field>
+            <field name="paperformat_id" ref="cp_hospital_management.paperformat_lab_tests"/>
+            <field name="print_report_name">'Lab Test - %s' % (object.name or 'LAB')</field>
+            <field name="binding_model_id" ref="model_lab_tests"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_doctor_card" model="ir.actions.report">
+            <field name="name">Doctor Card</field>
+            <field name="model">res.partner</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cp_hospital_management.doctor</field>
+            <field name="report_file">cp_hospital_management.doctor</field>
+            <field name="paperformat_id" ref="cp_hospital_management.paperformat_doctor"/>
+            <field name="print_report_name">'Doctor - %s' % (object.name or 'Doctor')</field>
+            <field name="binding_model_id" ref="hr.model_res_partner"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_nurse_card" model="ir.actions.report">
+            <field name="name">Nurse Card</field>
+            <field name="model">hr.employee</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cp_hospital_management.nurse</field>
+            <field name="report_file">cp_hospital_management.nurse</field>
+            <field name="paperformat_id" ref="cp_hospital_management.paperformat_nurse_card"/>
+            <field name="print_report_name">'Nurse Card - %s' % (object.name or 'Nurse')</field>
+            <field name="binding_model_id" ref="hr.model_hr_employee"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

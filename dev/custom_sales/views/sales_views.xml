@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_order_form_inherit_custom_sales" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.custom.sales</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Add Stat Buttons -->
+<!--            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">-->
+<!--                <field name="project_count" invisible="1"/>-->
+<!--                <button name="action_view_projects"-->
+<!--                        type="object"-->
+<!--                        string="Projects"-->
+<!--                        class="oe_stat_button"-->
+<!--                        icon="fa-folder-open"/>-->
+<!--            </xpath>-->
+
+            <!-- Existing Custom Tab -->
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Custom Info">
+                    <group>
+                        <field name="custom_notes"/>
+                    </group>
+                    <group>
+                        <field name="delivery_instructions"/>
+                        <field name="delivery_time"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

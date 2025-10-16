@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_patient_appointments" model="ir.actions.act_window">
+        <field name="name">Patient Appointments</field>
+        <field name="res_model">appointment</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_patient': active_id, 'default_patient': active_id}</field>
+        <field name="domain">[('patient', '=', active_id)]</field>
+    </record>
+    <record id="action_patient_prescriptions" model="ir.actions.act_window">
+        <field name="name">Patient Prescriptions</field>
+        <field name="res_model">prescription</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_patient': active_id, 'default_patient': active_id}</field>
+        <field name="domain">[('patient', '=', active_id)]</field>
+    </record>
+    <record id="action_patient_vaccines" model="ir.actions.act_window">
+        <field name="name">Patient Vaccines</field>
+        <field name="res_model">vaccine</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_patient': active_id, 'default_patient': active_id}</field>
+        <field name="domain">[('patient', '=', active_id)]</field>
+    </record>
+    <record id="action_patient_admissions" model="ir.actions.act_window">
+        <field name="name">Patient Admissions</field>
+        <field name="res_model">inpatient.admissions</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_patient': active_id, 'default_patient': active_id}</field>
+        <field name="domain">[('patient', '=', active_id)]</field>
+    </record>
+    <record id="action_patient_evaluations" model="ir.actions.act_window">
+        <field name="name">Patient Evaluations</field>
+        <field name="res_model">evaluation</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_patient': active_id, 'default_patient': active_id}</field>
+        <field name="domain">[('patient', '=', active_id)]</field>
+    </record>
+    <record id="action_patient_surgeries" model="ir.actions.act_window">
+        <field name="name">Patient Surgeries</field>
+        <field name="res_model">surgery</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_patient': active_id, 'default_patient': active_id}</field>
+        <field name="domain">[('patient', '=', active_id)]</field>
+    </record>
+    <record id="action_patient_lab_tests" model="ir.actions.act_window">
+        <field name="name">Lab Tests</field>
+        <field name="res_model">lab.tests</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_patient': active_id, 'default_patient': active_id}</field>
+        <field name="domain">[('patient', '=', active_id)]</field>
+    </record>
+
+    <record id="view_patient_form" model="ir.ui.view">
+        <field name="name">patient.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                 <!-- Changed position slightly for better layout -->
+                <field name="is_patient"/>
+            </xpath>
+            <div name="button_box" position="inside">
+                <button type="action" class="oe_stat_button" name="%(action_patient_appointments)d"
+                        invisible="not is_patient"
+                        icon="fa-calendar">
+                        <!-- context="{'search_default_patient': active_id,'default_patient': active_id}" -->
+                        
+                    <field string="Appointments" name="app_count" widget="statinfo"/>
+                </button>
+                <button type="action" class="oe_stat_button" name="%(action_patient_prescriptions)d"
+                        invisible="not is_patient"  icon="fa-list-alt">
+                        <!-- context="{'search_default_patient': active_id,'default_patient': active_id}" -->
+                       
+                    <field string="Prescriptions" name="prescription_count" widget="statinfo"/>
+                </button>
+                <button type="action" class="oe_stat_button" name="%(action_patient_vaccines)d"
+                        invisible="not is_patient" icon="fa-eyedropper">
+                        <!-- context="{'search_default_patient': active_id,'default_patient': active_id}" -->
+                        
+                    <field string="Vaccines" name="vaccine_count" widget="statinfo"/>
+                </button>
+                <button type="action" class="oe_stat_button" name="%(action_patient_admissions)d"
+                        invisible="not is_patient" icon="fa-hospital-o">
+                        <!-- context="{'search_default_patient': active_id,'default_patient': active_id}" -->
+                        
+                    <field string="Admissions" name="admission_count" widget="statinfo"/>
+                </button>
+                <button type="action" class="oe_stat_button" name="%(action_patient_evaluations)d"
+                        invisible="not is_patient" icon="fa-stethoscope">
+                        <!-- context="{'search_default_patient': active_id,'default_patient': active_id}" -->
+                        
+                    <field string="Evaluations" name="evaluation_count" widget="statinfo"/>
+                </button>
+                <button type="action" class="oe_stat_button" name="%(action_patient_surgeries)d"
+                        invisible="not is_patient" icon="fa-scissors">
+                        <!-- context="{'search_default_patient': active_id,'default_patient': active_id}" -->
+                        
+                    <field string="Surgeries" name="surgery_count" widget="statinfo"/>
+                </button>
+                <button type="action" class="oe_stat_button" name="%(action_patient_lab_tests)d"
+                        invisible="not is_patient" icon="fa-flask">
+                        <!-- context="{'search_default_patient': active_id,'default_patient': active_id}" -->
+                        
+                    <field string="Lab Tests" name="lab_test_count" widget="statinfo"/>
+                </button>
+            </div>
+            <field name="company_type" position="attributes">
+                <attribute name="invisible">is_patient</attribute>
+            </field>
+            <field name="parent_id" position="attributes">
+                <attribute name="invisible">is_patient</attribute>
+            </field>
+            <xpath expr="//sheet/group[1]/group[1]" position="attributes">
+                <attribute name="invisible">is_patient</attribute>
+            </xpath>
+            <xpath expr="//sheet/group[1]/group[2]" position="attributes">
+                 <attribute name="invisible">is_patient</attribute>
+             </xpath>
+            <xpath expr="//sheet/group[1]" position="inside">
+                 <group invisible="not is_patient" string="Patient Information">
+                     <field name="bdate" required="is_patient"/>
+                     <field name="sex" required="is_patient"/>
+                     <field name="blood_type"/>
+                     <field name="rh"/>
+                     <field name="marital_status" required="is_patient"/>
+                     <field name="responsible"/>
+                     <field name="family_phy"/>
+                 </group>
+            </xpath>
+             <xpath expr="//sheet/notebook" position="attributes">
+                 <attribute name="invisible">is_patient</attribute>
+             </xpath>
+             <xpath expr="//sheet/group[1]" position="after">
+                <notebook colspan="4" invisible="not is_patient">
+                     <page name="patient_personal" string="Personal Info">
+                        <group>
+                            <group string="Contact Details">
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                    <field name="city" placeholder="City" class="o_address_city"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                </div>
+                                <field name="phone" widget="phone"/>
+                                <field name="mobile" widget="phone"/>
+                                <field name="email" widget="email"/>
+                                <field name="website" widget="url"/>
+                                <field name="function" string ="Profession" placeholder="e.g. Doctor, Engineer"/>
+                            </group>
+                             <group string="Status">
+                                <field name="patient_deceased"/>
+                                <field name="user_ids" invisible="1"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Family &amp; Insurance" name="patient_family_insurance">
+                        <group string="Family">
+                            <field name="family" nolabel="1" >
+                                <list string="Family Lines" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="relation"/>
+                                    <field name="age"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+                    <page string="Medicines" name="patient_medicines">
+                     <field name="prescription_line" readonly="1">
+                         <list string="Prescription Lines">
+                             <field name="name"/>
+                             <field name="prescription_id" string="Prescription Ref"/>
+                             <field name="indication"/>
+                             <field name="dose"/>
+                             <field name="frequency_unit"/>
+                             <field name="dose_form"/>
+                             <field name="frequency"/>
+                             <field name="duration"/>
+                             <field name="duration_period"/>
+                             <field name="info" string="Comment"/>
+                         </list>
+                         <form string="Prescription Lines">
+                             <group col="4">
+                                 <field name="name"/>
+                                 <field name="indication"/>
+                                 <field name="dose_form"/>
+                                 <field name="dose_route"/>
+                                 <field name="start_treatment"/>
+                                 <field name="end_treatment"/>
+                                 <field name="prescription_id" string="Prescription Ref"/>
+                             </group>
+                             <group>
+                                    <group string="Dosage">
+                                        <field name="qty"/>
+                                        <label for="dose" string="Dose" />
+                                        <div class="o_row">
+                                            <field name="dose"/>
+                                            <field name="dose_unit" placeholder='unit'/>
+                                        </div>
+                                    </group>
+                                    <group string="Common Dosage" col="2">
+                                        <field name="common_dosage"/>
+                                        <field name="admin_times"/>
+                                    </group>
+                                </group>
+                                <separator string="Specific Dosage Frequency"/>
+                                <p>Time in between doses the patient must wait (e.g., for 1 pill each 8 hours, put 8 and select 'hours').</p>
+                                <group col="4">
+                                    <field name="frequency"/>
+                                    <field name="frequency_unit"/>
+                                </group>
+                                <separator string="Treatment Duration"/>
+                                <p>Period the patient must take the medication (minutes, hours, days, etc.) or indefinitely.</p>
+                                <group col="4">
+                                    <field name="duration"/>
+                                    <field name="duration_period"/>
+                                </group>
+                                <separator string="Comment"/>
+                                <field name="info"/>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="Lab Tests" name="patient_lab_tests">
+                        <field name="lab_test_ids" readonly="1">
+                            <list>
+                                <field name="name"/>
+                                <field name="date_requested"/>
+                                <field name="physician_id"/>
+                                <field name="pathologist_id"/>
+                                <field name="date_analysis"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Lifestyle" name="patient_lifestyle">
+                        <group>
+                            <group string="Physical Exercise">
+                                <field name="exercise" />
+                                <field name="exercise_minutes_day" />
+                            </group>
+                            <group string="Sleep">
+                                <field name="sleep_during_daytime" />
+                                <field name="sleep_hours" />
+                            </group>
+                        </group>
+                        <group string="Diet info">
+                            <group>
+                                <field name="number_of_meals" />
+                                <field name="eats_alone" />
+                                <field name="coffee" />
+                                <field name="coffee_cups" />
+                            </group>
+                            <group>
+                                <field name="soft_drinks" />
+                                <field name="salt" />
+                                <field name="diet" />
+                                <field name="diet_info" />
+                            </group>
+                        </group>
+                        <group string="Lifestyle Information">
+                            <field name="lifestyle_info" nolabel="1" />
+                        </group>
+                        <notebook>
+                            <page string="Addictions">
+                                <group string="Smoking">
+                                    <group>
+                                        <field name="smoking" />
+                                        <field name="ex_smoker" />
+                                        <field name="age_start_smoking" />
+                                    </group>
+                                    <group>
+                                        <field name="smoking_number" />
+                                        <field name="passive_smoker" />
+                                        <field name="age_quit_smoking" />
+                                    </group>
+                                </group>
+                                <group string="Drinking">
+                                    <group>
+                                        <field name="alcohol" />
+                                        <field name="age_start_drinking" />
+                                        <field name="alcohol_beer_number" />
+                                        <field name="alcohol_liquor_number" />
+                                    </group>
+                                    <group>
+                                        <field name="ex_alcoholic" />
+                                        <field name="age_quit_drinking" />
+                                        <field name="alcohol_wine_number" />
+                                    </group>
+                                </group>
+                                <group string="Drugs">
+                                    <group>
+                                        <field name="drug_usage" />
+                                        <field name="age_start_drugs" />
+                                        <field name="ex_drug_addict" />
+                                    </group>
+                                    <group>
+                                        <field name="drug_iv" />
+                                        <field name="age_quit_drugs" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </page>
+                    <page string="Socioeconomics" name="patient_socioeconomics">
+                        <separator string="General"/>
+                        <group col="4">
+                            <field name="socio"/>
+                            <field name="works_at_home"/>
+                            <field name="Edu_level"/>
+                            <field name="hour_out_home"/>
+                         <field name="house_condition"/>
+                            <field name="occupation"/>
+                            <field name="income"/>
+                        </group>
+                        <separator string="Infrastructure"/>
+                        <group col="4">
+                            <field name="sanitary_sewers"/>
+                            <field name="gas_supply"/>
+                            <field name="running_water"/>
+                            <field name="telephone"/>
+                            <field name="trash_recollection"/>
+                            <field name="television"/>
+                            <field name="elctrical_supply"/>
+                            <field name="internet"/>
+                        </group>
+                        <separator string="Family APGAR"/>
+                        <group col="4">
+                            <field name="family_help"/>
+                            <field name="family_time_sharing"/>
+                            <field name="family_discuss"/>
+                            <field name="family_affection"/>
+                        </group>
+                    </page>
+                    <page string="Evaluations" name="patient_evaluations">
+                        <field name="evaluation_ids" widget="one2many_list" readonly="1">
+                            <list string="Evaluation Lines">
+                                <field name="name"/>
+                                <field name="doctor"/>
+                                <field name="appointment"/>
+                                <field name="evaluation_start_date"/>
+                                <field name="evaluation_end_date"/>
+                                <field name="bmi"/>
+                                <field name="evaluation_type"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Surgeries" name="patient_surgeries">
+                        <field name="surgery_ids" widget="one2many_list" readonly="1">
+                            <list string="Surgery">
+                                <field name="name"/>
+                                <field name="surgery_start_date"/>
+                                <field name="classification"/>
+                                <field name="surgeon"/>
+                                <field name="anesthetist"/>
+                                <field name="institution"/>
+                                <field name="state"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Call Logs" name="patient_call_logs">
+                         <field name="call_log_ids" widget="one2many_list" readonly="1" context="{'default_patient': id}">
+                            <list string="Call Logs Information">
+                                <field name="name"/>
+                                <field name="call_type"/>
+                                <field name="log_date"/>
+                                <field name="person_in_charge"/>
+                                <field name="call_log"/>
+                            </list>
+                         </field>
+                    </page>
+                 </notebook>
+             </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_patient">
+        <field name="name">OutPatient Admissions</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context">{'default_is_patient':True}</field>
+        <field name="domain">[('is_patient','=',True)]</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new patient record.
+          </p><p>
+            This list shows all partners marked as patients.
+          </p>
+        </field>
+    </record>
+
+    <record id="action_partner_form" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context">{"search_default_customer":1, 'default_is_patient': False}</field>
+        <field name="domain">[('is_patient','=',False), ('customer_rank', '>', 0)]</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to add a contact in your address book.
+            </p><p>
+                Odoo helps you easily track all activities related to
+                a customer: discussions, history of business opportunities,
+                documents, etc.
+            </p>
+        </field>
+    </record>
+
+     <menuitem name="OutPatient Admissions" id="menu_patient"
+               parent="menu_patient_management" 
+               action="action_patient" sequence="0"/>
+
+    <record id="view_patient_sale_button_hidden" model="ir.ui.view">
+        <field name="name">patient.form.hide.sale.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="sale.res_partner_view_buttons"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']/button[field/@name='sale_order_count']" position="attributes">
+                <attribute name="invisible">is_patient</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_patient_invoice_button_hidden" model="ir.ui.view">
+        <field name="name">patient.form.hide.invoice.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.partner_view_buttons"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_partner_invoices']" position="attributes">
+                 <attribute name="invisible">is_patient</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_patient_purchase_button_hidden" model="ir.ui.view">
+        <field name="name">patient.form.hide.purchase.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="purchase.res_partner_view_purchase_buttons"/>
+        <field name="arch" type="xml">
+             <xpath expr="//div[@name='button_box']/button[field/@name='purchase_order_count']" position="attributes">
+                <attribute name="invisible">is_patient</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_patient_vendor_bill_button_hidden" model="ir.ui.view">
+	    <field name="name">patient.form.hide.vendorbill.button</field>
+	    <field name="model">res.partner</field>
+	    <field name="inherit_id" ref="account.partner_view_buttons"/>
+	    <field name="priority">20</field>
+	    <field name="arch" type="xml">
+	        <xpath expr="//button[@name='action_view_partner_invoices']" position="attributes">
+	            <attribute name="invisible">is_patient</attribute>
+	        </xpath>
+	    </field>
+	</record>
+
+    <record id="view_patient_opportunity_button_hidden" model="ir.ui.view">
+        <field name="name">patient.form.hide.crm.buttons</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="crm.view_partners_form_crm1"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']/button[@name='action_view_opportunity']" position="attributes">
+                <attribute name="invisible">is_patient</attribute>
+            </xpath>
+            <xpath expr="//div[@name='button_box']/button[@name='schedule_meeting']" position="attributes">
+                <attribute name="invisible">is_patient</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_pcr_qweb_report">
+        <t t-call="service_center.custom_layout">
+            <div class="page">
+                <div class="oe_structure" />
+                <div class="mt-5 text-center" style="border: 2px solid black; background-color: #d3d3d3; padding: 5px;">
+                    <h6 style="margin: 0; font-weight: bold; text-decoration: underline;">
+                        Project Completion Report / Statement
+                    </h6>
+                </div>
+                <br/>
+                <table style="width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 15px;">
+                    <tr style="border: 1px solid black;">
+                            <center><b>Job Details</b></center>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="font-weight: bold;padding: 10px; border: 1px solid black; width: 200px;">Reference No.</td>
+                        <td style="padding: 10px; border: 1px solid black;">
+                            <div>
+                                <span t-out="o.ref" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="font-weight: bold;padding: 10px; border: 1px solid black; width: 200px;">Client</td>
+                        <td style="padding: 10px; border: 1px solid black;">
+                            <div>
+                                <span t-out="o.partner_id.name"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="font-weight: bold;padding: 10px; border: 1px solid black; width: 200px;">Work Order No.</td>
+                        <td style="padding: 10px; border: 1px solid black;">
+                            <div>
+                                <span t-out="o.work_order_no"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="font-weight: bold;padding: 10px; border: 1px solid black; width: 200px;">Work Order No.</td>
+                        <td style="padding: 10px; border: 1px solid black;">
+                            <div>
+                                <span t-out="o.work_order_no"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="font-weight: bold;padding: 10px; border: 1px solid black; width: 200px;">Delivery Location</td>
+                        <td style="padding: 10px; border: 1px solid black;">
+                            <div>
+                                <span t-out="o.delivery_location_id.name"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="font-weight: bold;padding: 10px; border: 1px solid black; width: 200px;">Job Description &amp; Item</td>
+                        <td style="padding: 10px; border: 1px solid black;">
+                            <t t-foreach="o.job_line" t-as="line">
+                                <div>
+                                    <span t-out="line.name" />
+                                </div>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="font-weight: bold;padding: 10px; border: 1px solid black; width: 200px;">Warranty</td>
+                        <td style="padding: 10px; border: 1px solid black;">
+                            <div>
+                                <span t-out="o.warranty_id.name"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <table style="width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 15px;">
+                    <tr style="border: 1px solid black;">
+                            <center><b>Prepared By</b></center>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="font-weight: bold;padding: 10px; border: 1px solid black; width: 200px;">Description</td>
+                        <td style="padding: 10px; border: 1px solid black;">
+                            <div>
+                                <span t-out="o.prepared_by"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <table style="width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 15px;">
+                    <tr style="border: 1px solid black;">
+                            <center><b>Approved By</b></center>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="font-weight: bold;padding: 10px; border: 1px solid black; width: 200px;">Approved By</td>
+                        <td style="padding: 10px; border: 1px solid black;">
+                            <div>
+                                <span t-out="o.approved_by"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+    <template id="custom_pcr_pdf_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="service_center.custom_pcr_qweb_report"/>
+            </t>
+        </t>
+    </template>
+<record id="paperformat_custom" model="report.paperformat">
+        <field name="name">Custom Paperformat</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="False"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">50</field>
+        <field name="margin_bottom">7</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_spacing">45</field>
+        <field name="dpi">90</field>
+    </record>
+ <record id="action_report_project_completion_report" model="ir.actions.report">
+        <field name="name">Project Completion Report</field>
+        <field name="model">project.completion</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">service_center.custom_pcr_pdf_report</field>
+        <field name="report_file">service_center.custom_pcr_pdf_report</field>
+        <field name="binding_model_id" ref="service_center.model_service_request" />
+        <field name="paperformat_id" ref="service_center.paperformat_custom"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

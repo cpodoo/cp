@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <record model="crm.stage" id="crm.stage_lead2" forcecreate="False">
+        <field name="name">Qualified Low</field>
+        <field name="sequence">2</field>
+    </record>
+    <record model="crm.stage" id="stage_lead22" forcecreate="False">
+        <field name="name">Qualified Medium</field>
+        <field name="sequence">4</field>
+    </record>
+    <record model="crm.stage" id="stage_lead23" forcecreate="False">
+        <field name="name">Qualified High</field>
+        <field name="sequence">5</field>
+    </record>
+    <record model="crm.stage" id="stage_mou" forcecreate="False">
+        <field name="name">MOU</field>
+        <field name="sequence">6</field>
+    </record>
+    <record model="crm.stage" id="crm.stage_lead4" forcecreate="False">
+        <field name="name">Won</field>
+        <field name="fold" eval="False" />
+        <field name="is_won">True</field>
+        <field name="sequence">7</field>
+    </record>
+    <record model="crm.stage" id="stage_execution">
+        <field name="name">Execution</field>
+        <field name="sequence">8</field>
+    </record>
+</odoo>

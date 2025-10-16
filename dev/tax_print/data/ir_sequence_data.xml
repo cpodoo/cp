@@ -1,0 +1,9 @@
+<odoo>
+    <record id="seq_mobile_sell_bill" model="ir.sequence">
+        <field name="name">Mobile Sell Bill</field>
+        <field name="code">mobile.sell.bill</field>
+        <field name="prefix">MSB/</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+    </record>
+</odoo>

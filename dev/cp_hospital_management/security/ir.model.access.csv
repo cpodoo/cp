@@ -1,0 +1,58 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner_patient,res.partner patient,model_res_partner,cp_hospital_management.group_patient,1,1,1,1
+access_patient_family_patient,patient.family patient,model_patient_family,cp_hospital_management.group_patient,1,1,1,1
+access_hr_employee_patient,hr.employee patient,model_hr_employee,cp_hospital_management.group_patient,1,0,0,0
+access_hr_employee_physician,hr.employee physician,model_hr_employee,cp_hospital_management.group_physician,1,0,0,0
+access_lab_tests_patient,lab.tests patient,model_lab_tests,cp_hospital_management.group_patient,1,0,0,0
+access_lab_tests_line_patient,lab.tests.line patient,model_lab_tests_line,cp_hospital_management.group_patient,1,0,0,0
+access_group_medical_test_type,medical.test_type,model_medical_test_type,base.group_user,1,1,1,1
+access_group_call_log,call.log,model_call_log,base.group_user,1,1,1,1
+access_group_custom_invoice,custom.invoice,model_custom_invoice,base.group_user,1,1,1,1
+access_group_evaluation,evaluation,model_evaluation,base.group_user,1,1,1,1
+access_group_health_center,health.center,model_health_center,base.group_user,1,1,1,1
+access_group_health_center_building,health.center.building,model_health_center_building,base.group_user,1,1,1,1
+access_group_health_center_ward,health.center.ward,model_health_center_ward,base.group_user,1,1,1,1
+access_group_health_center_beds,health.center.beds,model_health_center_beds,base.group_user,1,1,1,1
+access_group_health_center_ot,health.center.ot,model_health_center_ot,base.group_user,1,1,1,1
+access_group_health_center_pharmacy,health.center.pharmacy,model_health_center_pharmacy,base.group_user,1,1,1,1
+access_group_health_center_domiciliary_unit,health.center.domiciliary.unit,model_health_center_domiciliary_unit,base.group_user,1,1,1,1
+access_group_hospital_management,hospital_management,model_hospital_management,base.group_user,1,1,1,1
+access_group_imaging_test_type,imaging.test.type,model_imaging_test_type,base.group_user,1,1,1,1
+access_group_inpatient_admissions,inpatient.admissions,model_inpatient_admissions,base.group_user,1,1,1,1
+access_group_insurance,insurance,model_insurance,base.group_user,1,1,1,1
+access_group_lab_tests,lab.tests,model_lab_tests,base.group_user,1,1,1,1
+access_group_lab_tests_line,lab.tests.line,model_lab_tests_line,base.group_user,1,1,1,1
+access_group_lab_tests_type,lab.tests.type,model_lab_tests_type,base.group_user,1,1,1,1
+access_group_medicine,medicine,model_medicine,base.group_user,1,1,1,1
+access_group_newborn,newborn,model_newborn,base.group_user,1,1,1,1
+access_group_newborn_line,newborn.line,model_newborn_line,base.group_user,1,1,1,1
+access_group_opthalmology,opthalmology,model_opthalmology,base.group_user,1,1,1,1
+access_group_disease,disease,model_disease,base.group_user,1,1,1,1
+access_group_disease_category,disease.category,model_disease_category,base.group_user,1,1,1,1
+access_group_physician_speciality,physician.speciality,model_physician_speciality,base.group_user,1,1,1,1
+access_group_physician_degree,physician.degree,model_physician_degree,base.group_user,1,1,1,1
+access_group_prescription_line,prescription.line,model_prescription_line,base.group_user,1,1,1,1
+access_group_surgery,surgery,model_surgery,base.group_user,1,1,1,1
+access_group_surgery_type,surgery.type,model_surgery_type,base.group_user,1,1,1,1
+access_group_vaccine,vaccine,model_vaccine,base.group_user,1,1,1,1
+access_group_prescription,prescription,model_prescription,base.group_user,1,1,1,1
+access_group_appointment,appointment,model_appointment,base.group_user,1,1,1,1
+access_group_imaging_test,imaging.test,model_imaging_test,base.group_user,1,1,1,1
+access_group_patient_family,Patient.family,model_patient_family,base.group_user,1,1,1,1
+access_speciality_data_rec_user,access_speciality_data,model_speciality_data,base.group_user,1,1,1,1
+access_degree_data_rec_user,access_degree_data,model_degree_data,base.group_user,1,1,1,1
+access_role_data_rec_user,access_role_data,model_role_data,base.group_user,1,1,1,1
+access_procedure_rec_user,access_procedure_data,model_procedure,base.group_user,1,1,1,1
+access_procedure_lines_rec_user,access_procedure_lines,model_procedure_lines,base.group_user,1,1,1,1
+access_doc_surgery_line_rec_user,access_doc_surgery_line,model_doc_surgery_line,base.group_user,1,1,1,1
+access_nurse_surgery_line_rec_user,access_nurse_surgery_line,model_nurse_surgery_line,base.group_user,1,1,1,1
+access_allergy_rec_user,access_allergy,model_allergy,base.group_user,1,1,1,1
+access_doctor_membership_rec_user,access_doctor_membership,model_doctor_membership,base.group_user,1,1,1,1
+access_doctor_procedures_rec_user,access_doctor_procedures,model_doctor_procedures,base.group_user,1,1,1,1
+access_ethnic_group_rec_user,access_ethnic_group,model_ethnic_group,base.group_user,1,1,1,1
+access_customer_type_rec,access_customer_type,model_customer_type,base.group_user,1,1,1,1
+access_customer_group_rec,access_customer_group,model_customer_group,base.group_user,1,1,1,1
+access_vendor_type_rec,access_vendor_type,model_vendor_type,base.group_user,1,1,1,1
+access_allowed_surgeon_record,access_allowed_surgeon_rec,model_allowed_surgeon,base.group_user,1,1,1,1
+access_vaccination_record,access_vaccination_rec_id,model_vaccination,base.group_user,1,1,1,1
+access_nurse_vaccination_record,access_nurse_vaccination_rec_id,model_nurse_vaccination,base.group_user,1,1,1,1

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_inpatient_search" model="ir.ui.view">
+	    <field name="name">inpatient.search</field>
+	    <field name="model">inpatient.admissions</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Inpatient Admissions">
+	            <field name="name"/>
+	            <field name="patient"/>
+	            <field name="addmission_type"/>
+	            <field name="institution"/>
+	            <field name="building"/>
+	            <field name="ward"/>
+	            <field name="bed"/>
+	            <field name="hospitallization_date"/>
+	            <field name="discharge_date"/>
+	            <newline />
+	            <group expand="0" name="group_by" string="Group By...">
+	                <filter name="patient" string="Patient"  context="{'group_by': 'patient'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	
+	<record model="ir.ui.view" id="view_inpatient_list">
+	    <field name="name">inpatient.list</field>
+	    <field name="model">inpatient.admissions</field>
+	    <field name="arch" type="xml">
+	        <list>
+	            <field name="name"/>
+	            <field name="patient"/>
+	            <field name="addmission_type"/>
+	            <field name="institution"/>
+	            <field name="building"/>
+	            <field name="hospitallization_date"/>
+	            <field name="discharge_date"/>
+	        </list>
+	    </field>
+	</record>
+	
+	<record model="ir.ui.view" id="view_inpatient_form">
+	    <field name="name">inpatient.form</field>
+	    <field name="model">inpatient.admissions</field>
+	    <field name="arch" type="xml">
+	        <form string="Inpatient Admissions">
+	            <sheet>
+	                <div class="oe_title">
+		                <h1>
+		                    <field name="name" readonly="1"/>
+		                </h1>
+	            	</div>
+	                <group>
+	                <group col="2">
+	                    <field name="patient" domain="[('is_patient','=',True)]"/>
+	                    <field name="addmission_type"/>
+	                    <field name="hospitallization_date"/>
+	                    <field name="discharge_date"/>
+	                </group>
+	                <group col="2">
+	                    <field name="institution" can_create="true" can_write="true" />
+	                    <field name="building" domain="[('institution','=',institution)]" context="{'default_institution': institution}" can_create="true" can_write="true" />
+	                    <field name="ward" domain="[('building','=',building)]" context="{'default_building': building}" can_create="true" can_write="true" />
+	                    <field name="bed" domain="[('ward','=',ward)]" context="{'default_ward': ward}" can_create="true" can_write="true" />
+	                </group>
+	                </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="action_impatient_admission">
+	    <field name="name">InPatient Admissions</field>
+	    <field name="res_model">inpatient.admissions</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	
+	<menuitem name="InPatient Admissions" id="menu_impatient_addmission" parent="menu_patient_management" action="action_impatient_admission" sequence="1"/>
+
+</odoo>

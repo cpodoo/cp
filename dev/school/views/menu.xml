@@ -1,0 +1,7 @@
+<odoo>
+        <menuitem name="Overtime"
+                  id="overtime.menu_1"
+                  parent="overtime.menu_root"
+                  action="action_window"
+                  groups="school.overtime_manager_access"/>
+</odoo>

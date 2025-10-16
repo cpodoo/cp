@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+
+    <record id="view_purchase_order_form_custom" model="ir.ui.view">
+      <field name="name">purchase.order.form.custom</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+
+      <field name="arch" type="xml">
+
+        <!-- Add field after 'partner_id' -->
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="x_purchase_reference"/>
+        </xpath>
+
+        <!-- Add button in header -->
+        <xpath expr="//header" position="inside">
+          <button name="action_custom_purchase_button"
+                  string="Confirm Custom"
+                  type="object"
+                  class="btn-primary"
+                  icon="fa-check"/>
+        </xpath>
+
+        <!-- Modify label of 'date_order' -->
+        <xpath expr="//field[@name='date_order']" position="attributes">
+          <attribute name="string">Order Date (Modified)</attribute>
+        </xpath>
+
+        <!-- Replace 'notes' field -->
+        <xpath expr="//field[@name='notes']" position="replace">
+          <field name="notes" placeholder="Custom notes here..."/>
+        </xpath>
+
+        <!-- Insert field before 'currency_id' -->
+<!--        <xpath expr="//field[@name='currency_id']" position="before">-->
+<!--          <label string="Extra Label"/>-->
+<!--        </xpath>-->
+
+          <xpath expr="//field[@name='currency_id']" position="before">
+                <span class="o_form_label">Extra Label</span>
+          </xpath>
+
+         <!-- Add a group of fields inside the 'sheet' (child of the form) -->
+         <!-- Add a new tab beside Products, Other Information, etc. -->
+          <xpath expr="//notebook" position="inside">
+            <page string="Custom Info">
+              <group>
+                 <field name="x_priority"/>
+                 <field name="x_delivery_date"/>
+                 <field name="x_internal_note"/>
+              </group>
+            </page>
+          </xpath>
+
+      </field>
+    </record>
+
+  </data>
+</odoo>

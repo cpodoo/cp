@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Health center data-->
+        <record id="health_centre_1" model="health.center">
+            <field name="name">Healthcare Center 1</field>
+            <field name="health_center_type">hospital</field>
+            <field name="city">Taipei</field>
+            <field name="zip">106</field>
+            <field name="country_id" ref="base.tw"/>
+            <field name="slistt">31 Hong Kong street</field>
+            <field name="email">healthcare@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+            <field name="website">http://www.healthcare1@gmail.com</field>
+        </record>
+
+        <record id="health_centre_2" model="health.center">
+            <field name="name">Healthcare Center 2</field>
+            <field name="health_center_type">nursing</field>
+            <field name="city">Wavre</field>
+            <field name="zip">1206</field>
+            <field name="country_id" ref="base.tw"/>
+            <field name="street">31 Hong Kong street</field>
+            <field name="email">healthcare@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+            <field name="website">http://www.healthcare2@gmail.com</field>
+        </record>
+
+        <record id="health_centre_3" model="health.center">
+            <field name="name">Healthcare Center 3</field>
+            <field name="health_center_type">clinic</field>
+            <field name="city">Shanghai</field>
+            <field name="zip">1061</field>
+            <field name="country_id" ref="base.tw"/>
+            <field name="street">31 Hong Kong street</field>
+            <field name="email">healthcare@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+            <field name="website">http://www.healthcare3@gmail.com</field>
+        </record>
+
+        <!--Building data-->
+        <record id="building_1" model="health.center.building">
+            <field name="name">Building 1</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="code">001</field>
+        </record>
+
+        <record id="building_2" model="health.center.building">
+            <field name="name">Building 2</field>
+            <field name="institution" ref="health_centre_2"/>
+            <field name="code">002</field>
+        </record>
+
+        <record id="building_3" model="health.center.building">
+            <field name="name">Building 3</field>
+            <field name="institution" ref="health_centre_3"/>
+            <field name="code">003</field>
+        </record>
+
+
+        <!--Ward data-->
+        <record id="ward_1" model="health.center.ward">
+            <field name="name">Ward 1</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="building" ref="building_1"/>
+            <field name="gender">men</field>
+        </record>
+
+        <record id="ward_2" model="health.center.ward">
+            <field name="name">Ward 2</field>
+            <field name="institution" ref="health_centre_2"/>
+            <field name="building" ref="building_2"/>
+            <field name="gender">women</field>
+        </record>
+
+        <record id="ward_3" model="health.center.ward">
+            <field name="name">Ward 3</field>
+            <field name="institution" ref="health_centre_3"/>
+            <field name="building" ref="building_3"/>
+            <field name="gender">men</field>
+        </record>
+
+        <record id="ward_4" model="health.center.ward">
+            <field name="name">Ward 4</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="building" ref="building_1"/>
+            <field name="gender">unisex</field>
+        </record>
+
+        <!--Bed data-->
+        <record id="bed_1" model="health.center.beds">
+            <field name="name">Bed 1</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="building" ref="building_1"/>
+            <field name="ward" ref="ward_1"/>
+            <field name="bed_type">Gatch Bed</field>
+            <field name="state">Free</field>
+        </record>
+
+        <record id="bed_2" model="health.center.beds">
+            <field name="name">Bed 2</field>
+            <field name="institution" ref="health_centre_2"/>
+            <field name="building" ref="building_2"/>
+            <field name="ward" ref="ward_2"/>
+            <field name="bed_type">Strecher</field>
+            <field name="state">Reserved</field>
+        </record>
+
+        <record id="bed_3" model="health.center.beds">
+            <field name="name">bed 3</field>
+            <field name="institution" ref="health_centre_3"/>
+            <field name="building" ref="building_3"/>
+            <field name="ward" ref="ward_3"/>
+            <field name="bed_type">Electric</field>
+            <field name="state">Occupied</field>
+        </record>
+
+        <record id="bed_4" model="health.center.beds">
+            <field name="name">bed 4</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="building" ref="building_1"/>
+            <field name="ward" ref="ward_1"/>
+            <field name="bed_type">Low Air Loss</field>
+            <field name="state">Not Available</field>
+        </record>
+
+        <!--OT data-->
+        <record id="ot_1" model="health.center.ot">
+            <field name="name">Operating Room 1</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="building" ref="building_1"/>
+            <field name="state">Not Available</field>
+        </record>
+
+        <record id="ot_2" model="health.center.ot">
+            <field name="name">Operating Room 2</field>
+            <field name="institution" ref="health_centre_2"/>
+            <field name="building" ref="building_2"/>
+            <field name="state">Free</field>
+        </record>
+
+        <record id="ot_3" model="health.center.ot">
+            <field name="name">Operating Room 3</field>
+            <field name="institution" ref="health_centre_2"/>
+            <field name="building" ref="building_2"/>
+            <field name="state">Occupied</field>
+        </record>
+
+        <record id="ot_4" model="health.center.ot">
+            <field name="name">Operating Room 4</field>
+            <field name="institution" ref="health_centre_3"/>
+            <field name="building" ref="building_3"/>
+            <field name="state">Reserved</field>
+        </record>
+
+
+        <!--Apothecary data-->
+        <record id="apothecary_1" model="health.center.pharmacy">
+            <field name="name">Apothecary 1</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="city">Shanghai</field>
+            <field name="zip">1061</field>
+            <field name="country_id" ref="base.tw"/>
+            <field name="street">31 Hong Kong street</field>
+            <field name="email">Apothecary1@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+            <field name="website">http://www.apothecary1@gmail.com</field>
+        </record>
+
+        <record id="apothecary_2" model="health.center.pharmacy">
+            <field name="name">Apothecary 2</field>
+            <field name="institution" ref="health_centre_2"/>
+            <field name="city">Wavre</field>
+            <field name="zip">1206</field>
+            <field name="country_id" ref="base.tw"/>
+            <field name="street">31 Hong Kong street</field>
+            <field name="email">Apothecary2@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+            <field name="website">http://www.apothecary2@gmail.com</field>
+        </record>
+
+        <record id="apothecary_3" model="health.center.pharmacy">
+            <field name="name">Apothecary 3</field>
+            <field name="institution" ref="health_centre_3"/>
+            <field name="city">Taipei</field>
+            <field name="zip">106</field>
+            <field name="country_id" ref="base.tw"/>
+            <field name="street">31 Hong Kong street</field>
+            <field name="email">Apothecary3@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+            <field name="website">http://www.apothecary3@gmail.com</field>
+        </record>
+
+        <!--Domiciliary Unit data-->
+        <record id="domiciliary_unit_1" model="health.center.domiciliary.unit">
+            <field name="name">Domiciliary Unit 1</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="address_city">Wavre</field>
+            <field name="zip">1026</field>
+            <field name="address_country" ref="base.tw"/>
+            <field name="street">31 Hong Kong street</field>
+            <field name="email">DomiciliaryUnit@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+        </record>
+
+        <record id="domiciliary_unit_2" model="health.center.domiciliary.unit">
+            <field name="name">Domiciliary Unit 2</field>
+            <field name="institution" ref="health_centre_2"/>
+            <field name="address_city">Shanghai</field>
+            <field name="zip">1306</field>
+            <field name="address_country" ref="base.tw"/>
+            <field name="street">31 Hong Kong street</field>
+            <field name="email">DomiciliaryUnit@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+        </record>
+
+        <record id="domiciliary_unit_3" model="health.center.domiciliary.unit">
+            <field name="name">Domiciliary Unit 3</field>
+            <field name="institution" ref="health_centre_3"/>
+            <field name="address_city">Taipei</field>
+            <field name="zip">106</field>
+            <field name="address_country" ref="base.tw"/>
+            <field name="street">31 Hong Kong street</field>
+            <field name="email">DomiciliaryUnit@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+        </record>
+
+        <record id="domiciliary_unit_4" model="health.center.domiciliary.unit">
+            <field name="name">Domiciliary Unit 4</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="address_city">Shanghai</field>
+            <field name="zip">1306</field>
+            <field name="address_country" ref="base.tw"/>
+            <field name="street">31 Hong Kong street</field>
+            <field name="email">DomiciliaryUnit@mail.com</field>
+            <field name="phone">(+886) (02) 4162 2023</field>
+        </record>
+        
+    </data>
+</odoo>

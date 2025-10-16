@@ -1,0 +1,15 @@
+<odoo>
+	  <record id="product_category_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.category.form.inherit</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group[@name='first']" position="after">
+                <span class="d-inline-flex">
+                    <field name="is_ingredient_ok"/>
+                    <label for="is_ingredient_ok"/>
+                </span>
+            </xpath>
+        </field>
+    </record>
+</odoo>

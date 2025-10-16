@@ -1,0 +1,139 @@
+<odoo>
+    <record id="view_transport_cost_sheet_form" model="ir.ui.view">
+        <field name="name">transport.cost.sheet.form</field>
+        <field name="model">transport.cost.sheet</field>
+        <field name="arch" type="xml">
+            <form string="Transport Cost Sheet">
+                <sheet>
+                    <h1>Cost Sheet
+                        <field name="name" readonly="1" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="client_name" />
+                        </group>
+                        <group>
+                            <field name="route" />
+                        </group>
+                    </group>
+                    <group string="Cargo &amp; Transit">
+                        <group>
+                            <field name="cargo_origin" />
+                            <field name="mob_origin" />
+                            <field name="demob_origin" />
+                            <field name="free_waiting_time" />
+                        </group>
+                        <group>
+                            <field name="cargo_destination" />
+                            <field name="mob_destination" />
+                            <field name="demob_destination" />
+                            <field name="km_run_per_day" />
+                        </group>
+                        <group>
+                            <field name="cargo_distance" />
+                            <field name="mob_distance" />
+                            <field name="demob_distance" />
+                            <field name="total_distance" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="cargo_transit_time" />
+                            <field name="mob_transit_time" />
+                            <field name="demob_transit_time" />
+                            <field name="total_time" readonly="1" />
+                        </group>
+                    </group>
+                    <group string="Vehicle Specs">
+                        <group>
+                            <field name="length_mm" />
+                            <field name="width_mm" />
+                            <field name="client_drawing" />
+                            <field name="loading_drawing" />
+                            <field name="puller_make" />
+                            <field name="puller_type" />
+                            <field name="axles_no" />
+                            <field name="axle_make" />
+                        </group>
+                        <group>
+                            <field name="height_mm" />
+                            <field name="weight_mt" />
+                            <field name="lashing_drawing" />
+                            <field name="stability_calc" />
+                            <field name="payload_mt_1" />
+                            <field name="drop_deck" />
+                            <field name="payload_mt_2" />
+                            <field name="frame" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="MOB, DEMOB &amp; LOADING, UNLOADING COST">
+                            <field name="cost_line_ids">
+                                <list editable="bottom">
+                                    <field name="category" />
+                                    <field name="description" />
+                                    <field name="quantity" />
+                                    <field name="rate" />
+                                    <field name="amount" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- List View -->
+    <record id="view_transport_cost_sheet_list" model="ir.ui.view">
+        <field name="name">transport.cost.sheet.list</field>
+        <field name="model">transport.cost.sheet</field>
+        <field name="arch" type="xml">
+            <list string="Transport Cost Sheets">
+                <field name="client_name" />
+                <field name="cargo_origin" />
+                <field name="cargo_destination" />
+                <field name="total_distance" />
+                <field name="total_time" />
+            </list>
+        </field>
+    </record>
+        <!-- Kanban View -->
+    <record id="view_transport_cost_sheet_kanban" model="ir.ui.view">
+        <field name="name">transport.cost.sheet.kanban</field>
+        <field name="model">transport.cost.sheet</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column" default_group_by="client_name">
+                <field name="client_name"/>
+                <field name="cargo_origin"/>
+                <field name="cargo_destination"/>
+                <field name="total_distance"/>
+                <field name="total_time"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card">
+                            <div class="o_kanban_details">
+                                <strong><field name="client_name"/></strong><br/>
+                                <div>
+                                    <span>From: <field name="cargo_origin"/></span><br/>
+                                    <span>To: <field name="cargo_destination"/></span><br/>
+                                    <span>Distance: <field name="total_distance"/> km</span><br/>
+                                    <span>Time: <field name="total_time"/> hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- Action -->
+    <record id="action_transport_cost_sheet" model="ir.actions.act_window">
+        <field name="name">Transport Cost Sheets</field>
+        <field name="res_model">transport.cost.sheet</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Transport Cost Sheet
+            </p>
+        </field>
+    </record>
+</odoo>

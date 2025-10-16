@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Root Menu: Transport Management (same as existing) -->
+    <menuitem id="menu_transport_root"
+              name="Transport Management"
+              sequence="10" />
+
+        <!-- Dashboard Client Action using OWL -->
+    <record id="action_transport_dashboard" model="ir.actions.client">
+        <field name="name">Transport Dashboard</field>
+        <field name="tag">transport_dashboard_tag</field>
+    </record>
+
+    <!-- Dashboard Menu (opens JS-based OWL dashboard) -->
+    <menuitem id="menu_transport_dashboard"
+              name="Dashboard"
+              parent="menu_transport_root"
+              action="action_transport_dashboard"
+              sequence="15" />
+
+    <!-- Cost Sheets Menu (already exists, repeated here for clarity) -->
+    <menuitem id="menu_transport_cost_sheet"
+              name="Cost Sheets"
+              parent="menu_transport_root"
+              action="action_transport_cost_sheet"
+              sequence="20" />
+</odoo>

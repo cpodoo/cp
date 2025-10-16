@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_mobile_sell_bill">
+        <t t-call="web.external_layout">
+            <main>
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <h2>Mobile Sell Bill</h2>
+                        <p>
+                            <strong>Date:</strong>
+                            <t t-esc="doc.date"/>
+                        </p>
+                        <p>
+                            <strong>Model:</strong>
+                            <t t-esc="doc.phone_model"/>
+                        </p>
+                        <p>
+                            <strong>IMEI:</strong>
+                            <t t-esc="doc.imei_number"/>
+                        </p>
+                        <p>
+                            <strong>Customer:</strong>
+                            <t t-esc="doc.customer_name"/>
+                        </p>
+                        <p>
+                            <strong>Address:</strong>
+                            <t t-esc="doc.customer_address"/>
+                        </p>
+                        <p>
+                            <strong>Phone:</strong>
+                            <t t-esc="doc.customer_phone"/>
+                        </p>
+                        <p>
+                            <strong>ID Proof:</strong>
+                            <t t-if="doc.id_proof == 'aadhar'">Aadhar Card</t>
+                            <t t-elif="doc.id_proof == 'license'">Driving License</t>
+                            <t t-elif="doc.id_proof == 'voter'">Voter Card</t>
+                            <t t-elif="doc.id_proof == 'pan'">PAN Card</t>
+                            <t t-else="">-</t>
+                        </p>
+                        <p>
+                            <strong>Remarks:</strong>
+                            <t t-esc="doc.remarks"/>
+                        </p>
+                    </div>
+                </t>
+            </main>
+        </t>
+    </template>
+</odoo>

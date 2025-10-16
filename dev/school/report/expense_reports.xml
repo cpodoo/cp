@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Report Action Definition -->
+    <record id="action_expense_request_report" model="ir.actions.report">
+        <field name="name">Expense Report</field>
+        <field name="model">hr.expense</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school.report_expense_report_details</field>
+        <field name="report_file">school.report_expense_report_details</field>
+        <field name="binding_model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

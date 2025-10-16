@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+
+        <record id="view_employee_training_form" model="ir.ui.view">
+            <field name="name">hr.employee.training.form</field>
+            <field name="model">hr.employee.training</field>
+            <field name="arch" type="xml">
+                <form string="Employee Training">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="employee_id"/>
+                            <field name="training_date"/>
+                            <field name="trainer"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

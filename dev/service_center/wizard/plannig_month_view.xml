@@ -1,0 +1,27 @@
+<odoo>
+    <record id="plannig_month_list_view" model="ir.ui.view">
+        <field name="name">Planning Month</field>
+        <field name="model">planning.month</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                </group>
+                <footer>
+                    <button name="create_planning" string="Create" class="oe_highlight" type="object"/>
+                    <button string="Cancel" special="cancel" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+
+    </record>
+    <record id="action_planning_months" model="ir.actions.act_window">
+        <field name="name">Planning Month</field>
+        <field name="res_model">planning.month</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'active_id': active_id}</field>
+    </record>
+</odoo>

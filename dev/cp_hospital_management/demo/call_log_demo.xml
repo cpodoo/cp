@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Call Log data-->
+        <record id="call_log_1" model="call.log">
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="call_type">Phone</field>
+            <field name="call_log">Call Log Details</field>
+        </record>
+
+        <record id="call_log_2" model="call.log">
+            <field name="patient" ref="base.res_partner_2"/>
+            <field name="call_type">Email</field>
+            <field name="call_log">Call Log Details</field>
+        </record>
+
+        <record id="call_log_3" model="call.log">
+            <field name="patient" ref="base.res_partner_3"/>
+            <field name="call_type">SMS</field>
+            <field name="call_log">Call Log Details</field>
+        </record>
+
+        <record id="call_log_4" model="call.log">
+            <field name="patient" ref="base.res_partner_4"/>
+            <field name="call_type">Phone</field>
+            <field name="call_log">Call Log Details</field>
+        </record>
+
+        <record id="call_log_5" model="call.log">
+            <field name="patient" ref="base.res_partner_12"/>
+            <field name="call_type">Other</field>
+            <field name="call_log">Call Log Details</field>
+        </record>
+
+        <record id="call_log_6" model="call.log">
+            <field name="patient" ref="base.res_partner_18"/>
+            <field name="call_type">SMS</field>
+            <field name="call_log">Call Log Details</field>
+        </record>
+
+        <record id="call_log_7" model="call.log">
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="call_type">Other</field>
+            <field name="call_log">Call Log Details</field>
+        </record>
+
+        <record id="call_log_8" model="call.log">
+            <field name="patient" ref="base.res_partner_4"/>
+            <field name="call_type">Email</field>
+            <field name="call_log">Call Log Details</field>
+        </record>
+
+        <record id="call_log_9" model="call.log">
+            <field name="patient" ref="base.res_partner_12"/>
+            <field name="call_type">Phone</field>
+            <field name="call_log">Call Log Details</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+    <menuitem id="service_center_menu"
+              name="Service Center"
+              sequence="1"/>
+
+    <menuitem id="service_request_menu"
+              name="Service Request"
+              parent="service_center_menu"
+              action="action_service_request"
+              sequence="1"/>
+
+    <menuitem id="service_configuration_menu"
+              name="Configuration"
+              parent="service_center_menu"
+              sequence="2"/>
+
+    <menuitem id="service_Brand_menu"
+              name="Brand"
+              parent="service_configuration_menu"
+              action="action_brand"
+              sequence="1"/>
+    <menuitem id="service_product_menu"
+              name="Product"
+              parent="service_configuration_menu"
+              action="action_product_item"
+              sequence="2"/>
+
+</odoo>

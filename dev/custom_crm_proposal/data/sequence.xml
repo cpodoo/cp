@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_mou_id" model="ir.sequence">
+        <field name="name">MoU ID</field>
+        <field name="code">proposal.mou</field>
+        <field name="prefix">IN%(year)s-25/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <record id="seq_bp_id" model="ir.sequence">
+        <field name="name">Business Proposal ID</field>
+        <field name="code">proposal.bp</field>
+        <field name="prefix">BS%(year)s-25/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+</odoo>

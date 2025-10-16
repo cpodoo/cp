@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_retail_bill">
+        <t t-call="web.external_layout">
+            <t t-if="docs">
+                <t t-set="o" t-value="docs[0]"/>
+                <main class="page">
+                    <div style="text-align:center;">
+                        <h2 style="color:#007bff;margin:0;">Shree Mobile Shop</h2>
+                        <p style="margin:0;">G456, Basant Lok Comm., Vasant Vihar, Tardeo Road, Maharashtra - 400001</p>
+                        <p style="margin:0;">Ph: 111 2222 3333</p>
+                        <p style="font-weight:bold;margin:10px 0;">Get All Your Desired Smart Phones From Apple To Vivo
+                            On Huge Discounts And Easy EMI
+                        </p>
+                    </div>
+
+                    <p style="font-weight:bold; border-top: 2px solid black; border-bottom: 2px solid black; padding: 4px 0;">
+                        GSTIN :
+                        <t t-esc="o.company_id.vat"/>
+                        <span style="float:right; color:#007bff;">TAX INVOICE</span>
+                    </p>
+
+                    <table width="100%" style="border-collapse:collapse; margin-bottom:10px;">
+                        <tr>
+                            <td>
+                                <strong>Name:</strong>
+                                <t t-esc="o.partner_id.name"/>
+                                <br/>
+                                <strong>Address:</strong>
+                                <t t-esc="o.partner_id.contact_address"/>
+                                <br/>
+                                <strong>Phone:</strong>
+                                <t t-esc="o.partner_id.phone or '-'"/>
+                                <br/>
+                                <strong>GSTIN:</strong>
+                                <t t-esc="o.partner_id.vat or '-'"/>
+                                <br/>
+                                <strong>Place of Supply:</strong>
+                                <t t-esc="o.partner_id.state_id.name"/>
+                                (
+                                <t t-esc="o.partner_id.state_id.code"/>
+                                )
+                            </td>
+                            <td style="text-align:right;">
+                                <strong>Invoice No.:</strong>
+                                <t t-esc="o.name"/>
+                                <br/>
+                                <strong>Invoice Date:</strong>
+                                <t t-esc="o.date_order.strftime('%d-%b-%Y')"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-sm" style="width:100%; border:1px solid black; border-collapse:collapse;">
+                        <thead>
+                            <tr style="background:#f0f0f0; border:1px solid black;">
+                                <!--                                <th style="border:1px solid black;">Sr. No.</th>-->
+                                <th style="border:1px solid black;">Name of Product / Service</th>
+                                <!--                                <th style="border:1px solid black;">HSN / SAC</th>-->
+                                <th style="border:1px solid black;">Qty</th>
+                                <th style="border:1px solid black;">Rate</th>
+                                <th style="border:1px solid black;">Taxable Value</th>
+                                <th style="border:1px solid black;">IGST %</th>
+                                <th style="border:1px solid black;">IGST Amt</th>
+                                <th style="border:1px solid black;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.order_line" t-as="line" t-index="i">
+                                <!--                                <td style="border:1px solid black;"><t t-esc="i + 1"/></td>-->
+                                <td style="border:1px solid black;">
+                                    <t t-esc="line.name"/>
+                                    <t t-if="line.product_id.default_code"><br/>IMEI/
+                                        <t t-esc="line.product_id.default_code"/>
+                                    </t>
+                                </td>
+                                <!--                                <td style="border:1px solid black;">-->
+                                <!--                                    <t t-if="line.product_id and hasattr(line.product_id, 'hs_code')">-->
+                                <!--                                        <t t-esc="line.product_id.hs_code"/>-->
+                                <!--                                    </t>-->
+                                <!--                                    <t t-if="not line.product_id or not hasattr(line.product_id, 'hs_code')">-</t>-->
+                                <!--                                </td>-->
+                                <td style="border:1px solid black;">
+                                    <t t-esc="line.product_uom_qty"/>
+                                    <t t-esc="line.product_uom.name"/>
+                                </td>
+                                <td style="border:1px solid black;">
+                                    <t t-esc="line.price_unit"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                                <td style="border:1px solid black;">
+                                    <t t-esc="line.price_subtotal"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                                <td style="border:1px solid black;">18.00</td>
+                                <td style="border:1px solid black;">
+                                    <t t-esc="line.price_subtotal * 0.18"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                                <td style="border:1px solid black;">
+                                    <t t-esc="line.price_subtotal * 1.18"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="border:1px solid black;">
+                                    <strong>Total</strong>
+                                </td>
+                                <td style="border:1px solid black;">
+                                    <strong>
+                                        <t t-esc="sum(line.product_uom_qty for line in o.order_line)"/>
+                                    </strong>
+                                </td>
+                                <td style="border:1px solid black;"></td>
+                                <td style="border:1px solid black;">
+                                    <t t-esc="o.amount_untaxed"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                                <td style="border:1px solid black;">18.00</td>
+                                <td style="border:1px solid black;">
+                                    <t t-esc="o.amount_tax"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                                <td style="border:1px solid black;">
+                                    <t t-esc="o.amount_total"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="margin-top:10px;">
+                        <p>
+                            <strong>Total in Words:</strong>
+                            <span>
+                                <t t-esc="o.currency_id.with_context(lang=o.partner_id.lang).amount_to_text(o.amount_total)"/>
+                            </span>
+                        </p>
+                        <table width="50%" style="float:right; border-collapse:collapse;">
+                            <tr>
+                                <td>
+                                    <strong>Taxable Amount</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.amount_untaxed"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Add : IGST</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.amount_tax"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Total Tax</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.amount_tax"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Total Amount After Tax</strong>
+                                </td>
+                                <td style="font-weight:bold;">
+                                    <t t-esc="o.amount_total"
+                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="clear:both;"></div>
+                    </div>
+
+                    <h4>Bank Details</h4>
+                    <p>
+                        <strong>Name:</strong>
+                        ICICI
+                        <br/>
+                        <strong>Branch:</strong>
+                        Surate
+                        <br/>
+                        <strong>Acc. Number:</strong>
+                        2715500356
+                        <br/>
+                        <strong>IFSC:</strong>
+                        ICICI045F
+                        <br/>
+                        <strong>UPI ID:</strong>
+                        ifox@icici
+                    </p>
+                    <!--                    <p><img src="/web/image?model=sale.order&amp;id=<t t-esc='o.id'/>&amp;field=qrcode" style="height:80px;" alt="QR Code"/> Pay using UPI</p>-->
+
+                    <!-- Terms & Declaration -->
+                    <h4>Terms and Conditions</h4>
+                    <p>
+                        Subject to Maharashtra Junction.
+                        <br/>
+                        Our Responsibility Ceases as soon as goods leaves our Premises.
+                        <br/>
+                        Goods once sold will not be taken back.
+                        <br/>
+                        Delivery Ex-Premises.
+                    </p>
+
+                    <div style="text-align:right;">
+                        <p>Certified that the particulars given above are true and correct.</p>
+                        <p>
+                            <strong>For Go GST Bill Demo</strong>
+                        </p>
+                        <p>Authorised Signatory</p>
+                    </div>
+                </main>
+            </t>
+        </t>
+    </template>
+</odoo>

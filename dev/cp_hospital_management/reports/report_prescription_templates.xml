@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="prescription_document">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div style="height: 150px;"></div>
+                    <div style="margin-bottom: 15px;">
+                        <h3 style="color: #2A3F54; font-weight: bold; margin-bottom: 10px; text-align: center;">Patient Prescription</h3>
+                        <div style="font-size: 25px; font-weight: bold; margin-bottom: 10px;">
+                            <span t-field="o.name"/>
+                        </div>
+                        <table style="width: 100%; margin-bottom: 15px; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 50%; vertical-align: top;">
+                                    <strong>Patient:</strong>
+                                    <span t-field="o.patient.name"/>
+                                </td>
+                                <td style="width: 50%; vertical-align: top;">
+                                    <strong>Physician:</strong>
+                                    <span t-field="o.doctor.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; vertical-align: top;">
+                                    <t t-if="o.pharmacy">
+                                        <strong>Pharmacy:</strong>
+                                        <span t-field="o.pharmacy.name"/>
+                                    </t>
+                                </td>
+                                <td style="width: 50%; vertical-align: top;">
+                                    <t t-if="o.date">
+                                        <strong>Prescription Date:</strong>
+                                        <span t-field="o.date"/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+                            <thead>
+                                <tr style="background-color: #f2f2f2; text-align: left;">
+                                    <th style="padding: 8px; border: 1px solid #ddd; color: #2A3F54;">Medicine</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd; color: #2A3F54;">Indication</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd; color: #2A3F54;">Dose</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd; color: #2A3F54;">Unit</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd; color: #2A3F54;">Form</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd; color: #2A3F54;">Day(s)</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd; color: #2A3F54;">Duration</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd; color: #2A3F54;">Period</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd; color: #2A3F54;">Comment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.prescription_line" t-as="line">
+                                    <td style="padding: 6px; border: 1px solid #ddd;"><span t-field="line.name"/></td>
+                                    <td style="padding: 6px; border: 1px solid #ddd;"><span t-field="line.indication"/></td>
+                                    <td style="padding: 6px; border: 1px solid #ddd;"><span t-field="line.dose"/></td>
+                                    <td style="padding: 6px; border: 1px solid #ddd;"><span t-field="line.frequency_unit"/></td>
+                                    <td style="padding: 6px; border: 1px solid #ddd;"><span t-field="line.dose_form"/></td>
+                                    <td style="padding: 6px; border: 1px solid #ddd;"><span t-field="line.frequency"/></td>
+                                    <td style="padding: 6px; border: 1px solid #ddd;"><span t-field="line.duration"/></td>
+                                    <td style="padding: 6px; border: 1px solid #ddd;"><span t-field="line.duration_period"/></td>
+                                    <td style="padding: 6px; border: 1px solid #ddd;"><span t-field="line.info"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <record id="paperformat_prescription" model="report.paperformat">
+            <field name="name">Patient Prescription</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">96</field>
+        </record>
+
+        <template id="prescription">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="cp_hospital_management.prescription_document" t-lang="o.patient.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

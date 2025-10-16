@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+        <!--    form view-->
+        <record id="view_real_estate_form" model="ir.ui.view">
+            <field name="name">Property Form</field>
+            <field name="model">test.model</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,under_review,approved,sold,cancelled"/>
+
+                        <button name="action_under_review"
+                                type="object"
+                                string="Send for Review"
+                                class="btn btn-secondary"
+                                x-invisible="record.state.raw_value !== 'draft'"/>
+
+                        <button name="action_approve"
+                                type="object"
+                                string="Approve"
+                                class="btn btn-success"
+                                x-invisible="record.state.raw_value !== 'under_review'"/>
+
+                        <button name="action_sold"
+                                type="object"
+                                string="Mark as Sold"
+                                class="btn btn-primary"
+                                x-invisible="record.state.raw_value !== 'approved'"/>
+
+                        <button name="action_cancel"
+                                type="object"
+                                string="Cancel"
+                                class="btn btn-danger"
+                                x-invisible="['sold', 'cancelled'].includes(record.state.raw_value)"/>
+
+                        <button name="action_set_to_draft"
+                                type="object"
+                                string="Reset to Draft"
+                                class="btn btn-light"
+                                x-invisible="record.state.raw_value === 'draft'"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="postcode"/>
+                                <field name="date_availability"/>
+                                <field name="create_date"/>
+                                <field name="create_uid"/>
+                                <field name="write_date"/>
+                                <field name="write_uid"/>
+                            </group>
+                            <group>
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
+                                <field name="living_area"/>
+                                <field name="garage"/>
+                                <field name="garden"/>
+                                <field name="garden_area"/>
+                                <field name="garden_orientation"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+
+    <record id="view_real_estate_list" model="ir.ui.view">
+        <field name="name">Property List</field>
+        <field name="model">test.model</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="create_uid"/>
+                <field name="write_uid"/>
+                <field name="expected_price"/>
+            </list>
+        </field>
+    </record>
+
+    <!--    action-->
+    <record id="real_estate_action" model="ir.actions.act_window">
+        <field name="name">Real Estate</field>
+        <field name="res_model">test.model</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="real_estate_root_menu"
+              name="Real Estate"
+              sequence="1"
+              action="real_estate_action"/>
+
+</odoo>

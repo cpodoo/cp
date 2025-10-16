@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_insurance_list" model="ir.ui.view">
+	    <field name="name">insurance.list</field>
+	    <field name="model">insurance</field>
+	    <field name="arch" type="xml">
+	        <list string="Insurance">
+	            <field name="name" />
+	            <field name="patient" />
+	            <field name="alias" />
+	            <field name="insurance_code" />
+	            <field name="state" />
+	            <field name="insurance_status" />
+	            <field name="insurance_info"/>
+	        </list>
+	    </field>
+	</record>
+	
+	<record model="ir.ui.view" id="insurance_kanban_view">
+	    <field name="name">insurane.kanban</field>
+	    <field name="model">insurance</field>
+	    <field name="arch" type="xml">
+	        <kanban class="o_insurance_kanban">
+	            <field name="name"/>
+	            <field name="alias"/>
+	            <field name="insurance_code"/>
+	            <field name="state"/>
+	            <field name="insurance_status"/>
+	            <field name="insurance_info"/>
+	            <templates>
+	                <t t-name="kanban-box">
+	                    <p class="oe_module_name">
+	                        <b><field name="name"/></b><br/>
+	                        <b><field name="alias"/></b><br/>
+	                        <b><field name="insurance_code"/></b><br/>
+	                        <b><field name="state"/></b><br/>
+	                        <b><field name="insurance_status"/></b><br/>
+	                        <b><field name="insurance_info"/></b><br/>
+	                    </p>
+	                </t>
+	            </templates>
+	        </kanban>
+	    </field>
+	</record>
+
+	<record id="view_insurance_form" model="ir.ui.view">
+	    <field name="name">insurance.form</field>
+	    <field name="model">insurance</field>
+	    <field name="arch" type="xml">
+	        <form string="Insurances">
+	            <header>
+	                <field name="state" widget="statusbar" clickable="True" statusbar_visible="new,revised,waiting,okay"/>
+	            </header>
+	            <sheet>
+	                <div class="oe_title">
+	                    <div class="oe_edit_only">
+	                        <label for="patient"/>
+	                    </div>
+	                    <h1>
+	                        <field name="patient" default_focus="1" placeholder="Patient..."/>
+	                    </h1>
+	                    <div class="oe_edit_only">
+	                        <label for="name"/>
+	                    </div>
+	                    <h1>
+	                        <field name="name" default_focus="1" placeholder="Name..."/>
+	                    </h1>
+	                    <div class="oe_edit_only">
+	                        <label for="alias"/>
+	                    </div>
+	                    <h2>
+	                        <field name="alias" placeholder="Alias..."/>
+	                    </h2>
+	                    <div class="oe_edit_only">
+	                        <label for="insurance_code"/>
+	                    </div>
+	                    <h2>
+	                        <field name="insurance_code" placeholder="Insurance Code..."/>
+	                    </h2>
+	                    <div class="oe_edit_only">
+	                        <label for="description"/>
+	                    </div>
+	                    <field name="description" placeholder="Description..."/>
+	                </div>
+	                <notebook>
+	                    <page string="Insurance Information">
+	                        <group string="Status">
+	                            <field name="insurance_status" />
+	                            <field name="date_insurance_inclusion" />
+	                            <field name="date_insurance_activation" />
+	                            <field name="date_insurance_inactivation" />
+	                            <field name="date_insurance_suspension" />
+	                        </group>
+	                        <group string="Information" />
+	                        <div class="oe_edit_only">
+	                            <label for="insurance_info"/>
+	                        </div>
+	                        <field name="insurance_info" colspan="4" nolabel="1"/>
+	                        <group>
+	                            <group string="Creation" >
+	                                <field name="cus_create_uid" string="User" readonly="1" />
+	                                <field name="create_date" string="Date" readonly="1"/>
+	                            </group>
+	                            <group string="Last Update" >
+	                                <field name="write_uid" string="User" readonly="1"/>
+	                                <field name="write_date" string="Date" readonly="1"/>
+	                            </group>
+	                        </group>
+	                    </page>
+	                </notebook>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	
+	<record id="view_insurance_search" model="ir.ui.view">
+	    <field name="name">insurance.search</field>
+	    <field name="model">insurance</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Insurance">
+	            <field name="name" />
+	            <field name="alias" />
+	            <field name="insurance_code" />
+	            <field name="insurance_status" />
+	            <field name="insurance_info" />
+	            <newline />
+	            <group expand="0" string="Group By...">
+	                <filter name="stage" string="Stage"  context="{'group_by': 'state'}"/>
+	                <filter name="insurance_status" string="Insurance Status"  context="{'group_by':'insurance_status'}" />
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="action_insurance">
+	    <field name="name">Insurance</field>
+	    <field name="res_model">insurance</field>
+	    <!-- <field name="view_type">form</field> -->
+	    <field name="view_mode">list,form</field>
+	</record>
+	
+	<menuitem name="Insurances" id="menu_insurance" parent="menu_insurance_management" action="action_insurance" />
+
+</odoo>

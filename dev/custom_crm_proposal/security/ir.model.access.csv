@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_sale_order_line_user,crm.sale.order.line,model_crm_sale_order_line,,1,1,1,1
+access_crm_lead_deliverable,crm.lead.deliverable,model_crm_lead_deliverable,,1,1,1,1
+access_crm_proposal_installment,proposal.installment,model_proposal_installment,,1,1,1,1

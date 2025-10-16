@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_mou_proposal">
+        <t t-call="custom_crm_proposal.mou_custom_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+            <div class="page">
+                <div class="oe_structure" />
+                <div class="text-center" style="margin-top: 20px;">
+                    <h2><u><strong>MEMORANDUM OF UNDERSTANDING</strong></u></h2>
+                    <br />
+                    <h4>BETWEEN</h4>
+                    <h5><strong>M/s. JAY ROBOTIX LEARNING INDIA PVT. LTD.</strong></h5>
+                    <span>With their registered office at:</span><br />
+                    <span><strong>Office No 2, Plot no: B-11/8IN, Industrial Estate, First Floor, Sy No:15, Pantancheru,</strong></span><br />
+                    <span><strong>Sangareddy, Hyderabad, Telangana, 502319 IN</strong></span>
+                    <span><strong>Land line: 99858 14249</strong></span>
+                    <br />
+                    <span>Represented by its <strong>Director – Mohan Krishna N</strong></span><br />
+                    <span>Hereinafter called as</span><br />
+                    <span><strong>"FIRST PARTY"</strong></span><br />
+                    <h4>AND</h4>
+                    <h5><strong style="font-size: 16pt;" t-out="doc.partner_name" /></h5>
+                    <span>With their registered office at:</span><br />
+                    <t t-if="doc.street"><span t-out="doc.street" /><br /></t>
+                    <t t-if="doc.street2"><span t-out="doc.street2" /><br /></t>
+                    <t t-if="doc.state_id"><span t-out="doc.state_id.name" />-</t>
+                    <t t-if="doc.zip"><span t-out="doc.zip" /><br /></t>
+                    <span>Hereinafter called as</span><br />
+                    <strong><span>“SECOND PARTY”</span><br /></strong>
+                    <span><strong>On the</strong> <span t-out="doc.mou_date" /></span><br />
+                    <span><strong>MoU ID</strong> <span t-out="doc.mou_id" /></span><br />
+                    <br />
+                </div>
+                <div style="margin-top:30px; font-size:13px; line-height:1.6;">
+                    <p>
+                        <strong>JAY ROBOTIX LEARNING INDIA PVT. LTD. (Jay Robotix)</strong> is a company incorporated under the Companies Act, 2013, committed to providing technology-led solutions for augmenting learning abilities and expanding the realms of knowledge in students from Pre-schools, Schools, Higher Education Institutions, and vocational courses, thereby preparing and developing future technocrats and entrepreneurs in India and other countries.
+                        Hereinafter referred to as the <strong>"First Party"</strong>.
+                    </p>
+                    <p>
+                        <strong><span t-out="doc.partner_name" /></strong> <span t-out="doc.about_company" />
+                    </p>
+                    <p>
+                        The above parties enter into a <span t-out="doc.agreement_tenure" /> agreement to implement advanced, continuous, and comprehensive Robotics, STEM, and IoT solutions offerings to provide a world-class STEM education experience to the students of <span t-out="doc.partner_name" />. This Agreement will be on a <strong>Build, Own, Operate, Transfer (BOOT)</strong> basis. The First Party will act as the Original Equipment Manufacturer (OEM) and Service Provider, and the Second Party will act as the School Partner.
+                    </p>
+                </div>
+                <div style="margin-top:30px; font-size:13px; line-height:1.6;">
+                    <h4>NOW THEREFORE THIS MEMORANDUM OF UNDERSTANDING AGREEMENT WITNESSED AS UNDER:</h4>
+                    <p>
+                        Whereas, the <strong>First Party</strong> works in the area of STEM solutions for schools and has proposed the offerings to the <strong>Second Party</strong>.
+                    </p>
+                    <p>
+                        Whereas, the <strong>Second Party</strong> has understood the necessity of such education and is willing to provide all required support to the <strong>First Party</strong> to design an effective working model under the terms structured in this Agreement.
+                    </p>
+                </div>
+                <div style="margin-top:30px; font-size:13px; line-height:1.6;">
+                    <h4><strong>A. GENERAL TERMS</strong></h4>
+                    <p>Now Therefore, First Party and Second Party hereby agree as follows:</p>
+                    <ol style="margin-left: 20px;">
+                        <li>Robotics-based STEM Education will be offered by the First Party to the selected schools of the Second Party.</li>
+                        <li>First Party sets up and upgrades annually the required Robotics/STEM education setup for the first 5 years &amp; also provides trainer(s) and support for the functioning of the lab.</li>
+                        <li>Second Party would provide enough support to the First Party for setting up the timetables and calendar plans.</li>
+                        <li>Second Party should also provide access to the Computer Lab with an adjusted timetable for the First Party to conduct the Robotics classes in the school.</li>
+                        <li>First Party will set up the Robotics Lab Equipment/STEM education Equipment within 4 weeks of the signed &amp; attested copy of this document, as per the need based on the number of students/computers available.</li>
+                        <li>First Party will be completely responsible for all kinds of technical issues regarding the functioning of the lab equipment provided by the First Party.</li>
+                        <li>First Party will submit a year plan of classes, events, and quizzes to the Second Party.</li>
+                        <li>First Party will submit a detailed Quarterly Report to the Second Party on the activities and performance of the initiative.</li>
+                        <li>First Party will be open to the feedback on a quarterly basis from the Second Party and will do its best to incorporate them as required, if possible.</li>
+                        <li>First Party, after one year of operations, will enhance the lab with advanced sets of equipment and continue the operations for the second year. This process will be repeated for the first five years.</li>
+                        <li>First Party will provide inspirational designs and wallpapers that can serve as enormous promotional activity for the schools.</li>
+                        <li>First Party &amp; Second Party will exchange the branding guidelines and follow them diligently, with approvals on email from time to time, if required.</li>
+                        <li>First Party will also design a Social Media &amp; PR Campaign for Robotics classes within the framework of the Branding guidelines.</li>
+                        <li>First Party will give soft copies of Workbook class-wise for each student.</li>
+                        <li>First Party will handle this program for <span t-out="doc.grade" options="{'widget': 'selection'})" /> students in each school.</li>
+                        <li>This Agreement is between the parties, wherein the First Party sets up and upgrades annually the required Robotics/STEM education setup for the first 5 years &amp; also provides dedicated trainer(s) and support for the functioning of the lab.</li>
+                        <li>Second Party should also provide enough support to the First Party’s dedicated trainers for setting up the timetables and calendar plans. Second Party should provide typically two periods in a week for Robotics classes.</li>
+                        <li>First Party will set up the Robotics Lab Equipment/STEM education Equipment and IoT-related offerings within 4 weeks/or agreed date (Oct 01st in Year 1 &amp; April 01st every year from Year 2) of P.O submission by the school as per the need based on the number of students/computers available.</li>
+                        <li>First Party will provide e-learning/RoboGuru portal to all students in the school.</li>
+                        <li>Second Party shall propose and conduct robotics events, marketing exercises, etc., in the school, post consultation &amp; approval from the First Party and subject to a revenue-sharing equation (if any) to be decided at that given point.</li>
+                        <li>First Party will decorate the lab with inspirational designs and wallpapers, which can serve as an enormous promotional activity for the schools.</li>
+                    </ol>
+                </div>
+                <div style="margin-top:30px; font-size:13px; line-height:1.6;">
+                    <h4><strong>B. TRAINERS &amp; SUPPORT</strong></h4>
+                    <ol style="margin-left: 20px;">
+                        <li>First Party is responsible to set up adequate trainers at the school as per the need.</li>
+                        <li>First Party is responsible for the technical issues, support, and AMC of the lab.</li>
+                        <li>If Second Party has any issues regarding the lab, Second Party can send a notice email to <a href="mailto:support@robox.in">support@robox.in</a>, detailing out the issue.</li>
+                        <li>Second Party should identify a Point of Contact (POC) from the School side for assisting the trainers from the First Party.</li>
+                        <li>The trainers from the First Party will be of expert level and Certified STEM Trainers.</li>
+                        <li>Trainer from the First Party will be the in charge of the lab at the school, reporting to the School Principal or specified authorities. The Trainer will have access to the equipment in the school.</li>
+                        <li>First Party will constantly train and educate the trainers on the latest technologies and ensure they stay updated with market trends and futuristic needs.</li>
+                        <li>Neither First Party nor Second Party should be held responsible by the other party for issues that arise because of situational handling or individual behavior at the workplace. However, both parties should ensure to take corrective measures as required or applicable as per law in the best spirit of this Agreement to ensure the initiative moves in a positive direction.</li>
+                        <li>Neither Party should recruit the employees of the other party, either directly or indirectly, for at least 6 months from the resignation date from their original parent organization.</li>
+                        <li>Neither Party should encourage discussions of confidential information or internal matters related to the parent organizations at the workplace.</li>
+                        <li>A School Relationship Manager will be assigned to the School.</li>
+                        <li>For any administrative or sales-related discussions, the Second Party will directly bring it to the First Party’s School Relationship Manager.</li>
+                    </ol>
+                </div>
+                <div style="margin-top:30px; font-size:13px; line-height:1.6;">
+                    <h4><strong>C. PRICING SECTION: COSTING &amp; PAYMENT TERMS</strong></h4>
+                    <ol style="margin-left: 20px;">
+                        <li><strong>Costing Model:</strong> The model of costing is Pay per Student.</li>
+                        <li><strong>Total Students:</strong> The students are assumed to be <span t-out="doc.no_of_students" /> in number. (If any additions are there, the same will be adjusted through an update on email and added as annexure to this MoU).</li>
+                        <li><strong>Period Type:</strong> <span t-esc="doc.period_type" /></li>
+                        <li><strong>Grade:</strong> <span t-esc="doc.grade" /></li>
+                        <li>Total Costing per Year:</li>
+                        <t t-if="doc.custom_order_line_ids">
+                            <table class="table table-sm table-bordered" style="width:100%; margin-top:1em;">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-left">Product</th>
+                                        <th class="text-left">Description</th>
+                                        <th class="text-right">Quantity</th>
+                                        <th class="text-right">Unit Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.custom_order_line_ids" t-as="line">
+                                        <tr t-if="line.display == True">
+                                            <td><span t-field="line.product_id.display_name" /></td>
+                                            <td><span t-field="line.name" /></td>
+                                            <td class="text-right"><span t-field="line.product_uom_qty" /></td>
+                                            <td class="text-right"><span t-field="line.price_unit" /></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <li>The above prices are inclusive of taxes.</li>
+                        <li>There will be additional 10% increase of prices every year, for the second year</li>
+                        <li>Payments Schedule: Terms:</li>
+                        <t t-if="doc.installment_ids">
+                            <table class="table table-sm table-bordered" style="width:100%; margin-top:1em;">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-left">Year</th>
+                                        <th class="text-left">Installment</th>
+                                        <th class="text-right">Date</th>
+                                        <th class="text-left">Percentage</th>
+                                        <th class="text-left">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.installment_ids" t-as="i">
+                                    <tr t-if="i.display == True">
+                                        <td><span t-field="i.year" /></td>
+                                        <td><span t-field="i.installment_no" /></td>
+                                        <td><span t-field="i.date" t-options='{"widget": "date"}' /></td>
+                                        <td><span t-field="i.percentage" /></td>
+                                        <td class="text-right"><span t-field="i.amount" /></td>
+                                    </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <li>
+                            Soft copy of the invoices will be sent from the mail ID:
+                            <a href="mailto:finance@jayrobotix.com">finance@jayrobotix.com</a>.
+                            In case of failure of the payment by the above-mentioned date by the Second Party,
+                            a <strong>2% interest</strong> will be charged on a monthly basis starting from the 15th day after the invoice date.
+                        </li>
+                        <li>
+                            All invoices from the First Party must be sent to <strong><span t-out="doc.contact_name" /></strong>,
+                            Contact No: <span t-out="doc.mobile" /> of the Second Party.
+                        </li>
+                    </ol>
+                    <h4><strong>D. Delivery:</strong></h4>
+                    <ol style="margin-left: 20px;">
+                        <li>
+                            As the first step, the PO (Purchase Order) should be delivered by the Second Party to the First Party.
+                            The PO can be emailed to <a href="mailto:finance@jayrobotix.com">finance@jayrobotix.com</a>.
+                        </li>
+                        <li>
+                            Once the PO is raised, the First Party will raise an invoice, which must be cleared immediately.
+                        </li>
+                        <li>
+                            After the invoice is cleared, the goods will be sent to the school within <strong>four weeks</strong>.
+                        </li>
+                        <li>
+                            The Delivery Challan and invoices will be sent to the Second Party over email once the goods are delivered
+                            within four weeks of the payment of the first invoice.
+                        </li>
+                        <li>
+                            The First Party should be provided with all necessary support from the Second Party in submitting any required forms for transport.
+                        </li>
+                        <li>
+                            The Second Party must follow government guidelines and ensure eligibility to receive the kits/equipment through all modes of transport.
+                        </li>
+                        <li>List of Deliverables on Yearly Basis:</li>
+                        <!-- DELIVERABLES -->
+                        <t t-if="doc.deliverable_ids">
+                            <table class="table table-sm table-bordered" style="width:100%; margin-top:1em;">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-left">SRNo</th>
+                                        <th class="text-left">Year</th>
+                                        <th class="text-left">Deliverable</th>
+                                        <th class="text-left">Description</th>
+                                        <th class="text-left">UOM</th>
+                                        <th class="text-right">Quantity</th>
+                                        <!-- <th class="text-left">Display</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.deliverable_ids" t-as="d">
+                                        <tr t-if="d.display == True">
+                                            <td><span t-field="d.srno" /></td>
+                                            <td><span t-field="d.year" /></td>
+                                            <td><span t-field="d.item" /></td>
+                                            <td><span t-field="d.description" /></td>
+                                            <td><span t-field="d.uom" /></td>
+                                            <td class="text-right"><span t-field="d.quantity" /></td>
+                                            <!-- <td><span t-field="d.display" /></td> -->
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                    </ol>
+                    <h4><strong>Service:</strong></h4>
+                    <ol style="margin-left: 20px;">
+                        <li>Each year First Party will conduct the activities year-round, conduct minimum of 3 quizzes, 3 Examinations or assessments, one competition (Robotics Day) in a Year.</li>
+                        <li>First Party will also Provide Second Party with a 1-2-minute Promotional video of the activities which can serve as a branding support to the school.</li>
+                    </ol>
+                    <h4><strong>E. SUPPORT &amp; AMC POLICY:</strong></h4>
+                    <span style="margin-left: 20px;">1. First Party will unconditionally take care of the support of the lab, equipment, and up-gradation.</span>
+                    <h4><strong>F. JURISDICTION:</strong></h4>
+                    <span style="margin-left: 20px;"> 1. The subject matter of THIS AGREEMENT is within the jurisdiction of India, and the Second Party carrying out business across Indian Territory, the cause of action arises in India.
+                        In the absence of a specific provision in THIS AGREEMENT, the provisions of the Indian Contract Act shall be applicable, provided the First Party and &lt;School Name&gt; agree to concur and implement it to resolve any issues.</span>
+                    <h4><strong>G. EXIT POLICY: </strong></h4>
+                    <span style="margin-left: 20px;">The Agreement will always be observed by both the parties in letter and spirit and both the parties always try to arrive at amicable solution to resolve the issues. Communication on E-mails will stand as proof for official dialogue although the Project execution. In case of issues and no solution, this Agreement can be terminated by either party only after arriving at appropriate solution regarding the points mentioned below:</span><br />
+                    <ol style="margin-left: 20px;">
+                        <li>The Agreement cannot be terminated by the Second Party within the first year of operations.</li>
+                        <li>This Agreement can be terminated only after due clearance of pending dues on both sides, if any, as on the date. Both parties must issue a No Objection Certificate (NoC) and No Dues Certificate to the other party in this regard.</li>
+                        <li>If this Agreement is terminated within five years of the signing date, the First Party and Second Party will come to an amicable solution and close the relationship accordingly.</li>
+                        <li>Failure of the Program arising due to internal issues of the Second Party, such as timetable management, lack of basic infrastructure, or lack of support from the school, cannot be attributed to the First Party.</li>
+                    </ol>
+                    <h4><strong>H. USE OF TRADEMARKS: </strong></h4>
+                    <span>First party confirms that it is the owner of all the intellectual property and the product and its ownership is not under any dispute or litigation under any laws anywhere in the world. </span>
+                    <h4><strong>I. CONFIDENTIAL INFORMATION; NO REVERSE ENGINEERING</strong></h4>
+                    <span>First party may provide SECOND PARTY with certain confidential or proprietary information (“Confidential Information”). Confidential Information includes information, whether written, electronic or oral, which SECOND PARTY knows or reasonably should know is proprietary, confidential or a trade secret of First party, including any and all technical or business information, the Curriculum/Software including its source codes and documentation, specifications and design information of the products. Such information should not be shared to any third party whatsoever and both the parties should try to protect the information. Second Party should not try to reverse engineer any of the products of the First Party for whatever the reason.</span><br />
+                    <span>Addresses for Notices:</span>
+                    <p>Jay Robotix Learning India Pvt. Ltd.<br />
+                        Office No 2: Plot No: B-11/8IN, Industrial Estate,<br />
+                        First Floor, Sy No:15, Pantancheru,<br />
+                        Sangareddy, Hyderabad, Telangana, 502319 IN</p>
+                    <p><strong>Second Party:</strong></p>
+                    <h5><strong style="font-size: 16pt;" t-out="doc.partner_id.name" /></h5>
+                    <span>With their registered office at:</span><br />
+                    <t t-if="doc.partner_id.street"><span t-out="doc.partner_id.street" /><br /></t>
+                    <t t-if="doc.partner_id.street2"><span t-out="doc.partner_id.street2" /><br /></t>
+                    <t t-if="doc.partner_id.state_id"><span t-out="doc.partner_id.state_id.name" />-</t>
+                    <t t-if="doc.partner_id.zip"><span t-out="doc.partner_id.zip" /><br /></t>
+                    <br />
+                    <span>IN WITNESS WHERE OF the FIRST PARTY &amp; SECOND PARTY have signed the THIS AGREEMENT and have respectively set their hands hereto in token of acceptance of the terms and conditions stipulated above in the presence of the following witnesses on the day.</span>
+                    <br /><br />
+                    <table style="width: 100%; margin-top: 30px;">
+                        <tr>
+                            <td style="width: 50%; vertical-align: top;margin-left: 20px;">
+                                <strong>First Party</strong><br />
+                                M/s. Jay Robotix Learning India Pvt Ltd<br /><br /><br />
+                                <strong>Seal &amp; Signature</strong>
+                            </td>
+                            <td style="width: 50%; vertical-align: top;margin-left: 20px;">
+                                <strong>Second Party</strong><br />
+                                <span t-out="doc.partner_name" /><br /><br /><br />
+                                <strong>Seal &amp; Signature</strong>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="report_mou_proposal_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="custom_crm_proposal.report_mou_proposal" t-lang="doc.partner_id.lang" />
+            </t>
+        </t>
+    </template>
+</odoo>

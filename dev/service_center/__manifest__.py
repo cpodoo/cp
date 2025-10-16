@@ -1,0 +1,27 @@
+{
+    'name':'Service Center',
+    'version':'1.0',
+    'description':"""All the brand service center""",
+    'auther':'Qnomix Technologies',
+    'website':'http://www.qnomixtechnologies.com/',
+    'category':'Qnomix Tech',
+    "license": "LGPL-3",
+    'depends':['base','mail','contacts','purchase','sale','report_xlsx','product','web'],
+    'data':[
+        "security/service_center_security.xml",
+        "security/ir.model.access.csv",
+        "wizard/plannig_month_view.xml",
+        'data/sequence.xml',
+        "views/service_request_mail.xml",
+        "views/brand_view.xml",
+        "views/product_item.xml",
+        "views/service_request_view.xml",
+        "views/menuitems.xml",
+        "report/service_request_template.xml",
+    ],
+    'demo':[],
+    'auto_install':False,
+    'application':True,
+    'installable':True,
+
+}

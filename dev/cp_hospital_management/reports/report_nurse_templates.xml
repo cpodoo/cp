@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="nurse_card">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="res_company" t-value="o.env.company"/>
+                    <div style="margin: 10px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); overflow: hidden; font-family: sans-serif; ">
+                        <div style="background-color: #1E88E5; color: white; border-radius: 8px 8px 0 0; padding: 0;"> 
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="width: 70%; padding: 12px 15px; vertical-align: middle;">
+                                        <h3 style="color: white; font-weight: bold; margin: 0; font-size: 1.1em; text-align: left;">Nurse Card</h3>
+                                    </td>
+                                    <td style="width: 30%; padding: 12px 15px; vertical-align: middle; text-align: right;">
+                                        <t t-if="res_company.logo">
+                                            <img t-att-src="image_data_uri(res_company.logo)" style="max-height: 35px; max-width: 100px; display: inline-block; vertical-align: middle;" alt="Company Logo"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span style="font-size: 0.9em; color: #e0e0e0; vertical-align: middle;">[Your Logo]</span>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="padding: 15px; background-color: white; border-radius: 0 0 8px 8px;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.9em; ">
+                                <tr style="line-height: 1.8;">
+                                    <td style="padding: 5px 4px; font-weight: bold; width: 35%; vertical-align: top;">Nurse Name</td>
+                                    <td style="padding: 5px 4px; width: 65%;"><span t-field="o.name"/></td>
+                                </tr>
+                                <tr style="line-height: 1.8;">
+                                    <td style="padding: 5px 4px; font-weight: bold; vertical-align: top;">Nurse ID</td>
+                                    <td style="padding: 5px 4px;"><span t-field="o.seq_no" /></td>
+                                </tr>
+                                <tr style="line-height: 1.8;">
+                                    <td style="padding: 5px 4px; font-weight: bold; vertical-align: top;">Roles</td>
+                                    <td style="padding: 5px 4px;"><span t-field="o.role" /></td>
+                                </tr>
+                                <tr style="line-height: 1.8;">
+                                    <td style="padding: 5px 4px; font-weight: bold; vertical-align: top;">NMC Nr</td>
+                                    <td style="padding: 5px 4px;"><span t-field="o.nmc_no" /></td>
+                                </tr>
+                                 <tr style="line-height: 1.8;">
+                                    <td style="padding: 5px 4px; font-weight: bold; vertical-align: top;">Work Email</td>
+                                    <td style="padding: 5px 4px;"><span t-field="o.work_email" /></td>
+                                </tr>
+                                <tr style="line-height: 1.8;">
+                                    <td style="padding: 5px 4px; font-weight: bold; vertical-align: top;">Work Mobile</td>
+                                    <td style="padding: 5px 4px;"><span t-field="o.work_phone" /></td>
+                                </tr>
+                                <tr style="line-height: 1.8;">
+                                    <td style="padding: 5px 4px; font-weight: bold; vertical-align: top;">Sex</td>
+                                    <td style="padding: 5px 4px;"><span t-field="o.nurse_sex" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <template id="nurse">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="cp_hospital_management.nurse_card" />
+                </t>
+            </t>
+        </template>
+
+        <record id="paperformat_nurse_card" model="report.paperformat">
+            <field name="name">Nurse Card Format</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">90</field>  
+            <field name="page_width">150</field> 
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,251 @@
+<odoo>
+    <!-- Gantt View for Service Requests -->
+    <record id="view_service_request_gantt" model="ir.ui.view">
+        <field name="name">service.request.view.gantt</field>
+        <field name="model">service.request</field>
+        <field name="arch" type="xml">
+            <gantt
+                string="Service Requests"
+                date_start="start_date"
+                date_stop="end_date"
+                default_group_by="status"
+                progress="progress"
+                default_scale="week"
+                scales="day,week,month,year"
+                precision="{'day': 'hour:full', 'week': 'day:full', 'month': 'day:full', 'year': 'day:full'}"
+                color="priority">
+                <field name="name"/>
+                <field name="sequence"/>
+                <field name="status"/>
+                <field name="priority"/>
+                <field name="progress"/>
+            </gantt>
+        </field>
+    </record>
+
+    <!--Tree veiw-->
+    <record id="view_service_request_list" model="ir.ui.view">
+        <field name="name">Service Request</field>
+        <field name="model">service.request</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="priority" optional="show" widget="priority" nolabel="1"/>
+                <field name="sequence"/>
+                <field name="name"/>
+                <!--                <field name="customer_name"/>-->
+                <field name="date"/>
+                <!--                <field name="type"/>-->
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <!--form-->
+    <record id="view_service_request_from" model="ir.ui.view">
+        <field name="name">Service Request</field>
+        <field name="model">service.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="preview_service_request_report" type="object" string="Priview Layout"
+                            class="oe_highlight"/>
+                    <button name="send_email" type="object" string="Send Email" class="oe_highlight"/>
+                    <button name="in_process" invisible="status in ['process','cancel','done']" class="oe_highlight"
+                            string="In Progress" type="object"/>
+                    <button name="cancel" invisible="status in ['cancel','scrap','done']" class="oe-primary"
+                            string="Cancel" type="object"/>
+                    <button name="scrap" invisible="status in ['scrap','process','done','new']" class="oe_highlight"
+                            string="Scrap" type="object"/>
+                    <button name="done" invisible="status in ['cancel','new','scrap','done']" class="oe_highlight"
+                            string="Done" type="object"/>
+                    <button name="duplicate_record" invisible="status in ['process','cancel','scrap','new']"
+                            class="oe_highlight"
+                            string="Re Progress" type="object"/>
+
+                    <!--                    <button name="%(action_service_request)d" string="new Request" type="action" class="oe_highlight" />-->
+                    <!--                    <button name="%(purchase.purchase_rfq)d" string="open PO tree view" type="action" class="oe_highlight" />-->
+                    <!--                    <button name="%(sale.action_quotations_with_onboarding)d" string="open SO tree view" type="action" class="oe_highlight" />-->
+                    <button name="%(action_planning_months)d" string="Create Planning Month" type="action"
+                            class="btn-primary"/>
+
+                    <field name="status" widget="statusbar" class="clickable-statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <h1>
+                                <field name="sequence" nolabel="1"/>
+                            </h1>
+                            <field name="name"/>
+                            <!--                            <field name="customer_name"/>-->
+                            <!--                            <field name="type" widget="boolean"/>-->
+                            <div>
+                                <span class="d-inline-flex">
+                                    <field name="is_hardware" widget="boolean" options="{'horizontal': True}"/>
+                                    <label for="is_hardware"/>
+                                </span>
+                                <span class="d-inline-flex">
+                                    <field name="is_software" widget="boolean" options="{'horizontal': True}"/>
+                                    <label for="is_software"/>
+                                </span>
+                                <span class="d-inline-flex">
+                                    <field name="is_other" widget="boolean" options="{'horizontal': True}"/>
+                                    <label for="is_other"/>
+                                </span>
+                            </div>
+                            <field name="email" widget="email"/>
+                            <field name="phone" widget="phone"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="duration"/>
+                            <field name="planning_month"/>
+                            <field name="time" widget="float_time" invisible="1"/>
+                            <field name="file" widget="file" invisible="1"/>
+                            <field name="file" string="PDF View" widget="pdf_viewer" options="{'size': [50,50]}"
+                                   invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Product">
+                            <field name="request_line">
+                                <list editable="bottom">
+<!--                                    <field name="brand_id"/>-->
+                                    <field name="item_id"/>
+                                    <field name="image" widget="image" options="{'size': [50,50]}"/>
+                                    <field name="description"/>
+                                    <field name="sensitive_items" option="True"/>
+                                    <field name="repair_status"/>
+                                    <field name="price"/>
+                                </list>
+                            </field>
+                                <control>
+                                    <button name="action_open_product_catalog" type="object"
+                                            string="Open Product Catalog"
+                                            class="oe_highlight"/>
+                                </control>
+                            <group>
+                                <group name="internal_notes" string="Internal Notes">
+                                    <field colspan="2" name="notes" nolabel="1"
+                                           placeholder="Define your terms and conditions ..."/>
+                                </group>
+                                <group class="oe_subtotal_footer">
+                                    <field name="total_amount" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="service_request_calendar" model="ir.ui.view">
+        <field name="name">service.request.calendar</field>
+        <field name="model">service.request</field>
+        <field name="arch" type="xml">
+            <calendar date_start="date" string="Service Request"
+            >
+                <field name="name"/>
+                <!--                <field name="customer_name"/>-->
+                <field name="status"/>
+                <field name="total_amount"/>
+            </calendar>
+        </field>
+    </record>
+    <!--    graph-->
+    <record model="ir.ui.view" id="service_request_graph">
+        <field name="name">service.request.graph</field>
+        <field name="model">service.request</field>
+        <field name="type">graph</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="name"/>
+                <field name="status" operator="*"/>
+            </graph>
+        </field>
+    </record>
+    <!--    kamban-->
+    <!--    <record id="service_request_kanban" model="ir.ui.view">-->
+    <!--        <field name="name">service.request.kanban</field>-->
+    <!--        <field name="model">service.request</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <kanban>-->
+    <!--&lt;!&ndash;                <progressbar field="status"/>&ndash;&gt;-->
+    <!--                <template>-->
+    <!--                    <t t-name="card">-->
+    <!--                        <div class="d-flex align-items-baseline mb-2">-->
+    <!--                            <field name="name" class="fw-bolder fs-5 me-2"/>-->
+    <!--&lt;!&ndash;                            <field name="date"/>&ndash;&gt;-->
+    <!--                            <field name="total_amount" widget="monetary" class="fw-bolder ms-auto flex-shrink-0"/>-->
+    <!--                        </div>-->
+    <!--                        <footer class="align-items-end">-->
+    <!--                            <field name="date" class="align-items-end"/>-->
+    <!--                            <field name="status" widget="label_selection"/>-->
+    <!--                        </footer>-->
+    <!--                    </t>-->
+    <!--                </template>-->
+    <!--            </kanban>-->
+    <!--        </field>-->
+
+    <!--    </record>-->
+    <record id="service_request_kanban" model="ir.ui.view">
+        <field name="name">service.request.kanban</field>
+        <field name="model">service.request</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="status"/>
+                <progressbar field="status" colors='{"new": "success", "cancel": "warning", "done": "danger"}'/>
+                <template>
+                    <t t-name="card">
+                        <field name="name" class="fw-bold fs-5"/>
+                        <div class="d-flex align-items-baseline mb-2">
+                            <field name="name" class="fw-bolder fs-5 me-2"/>
+                            <field name="total_amount" widget="monetary" class="fw-bolder ms-auto flex-shrink-0"/>
+                        </div>
+                        <footer class="align-items-end">
+                            <field name="date" class="align-items-end"/>
+                            <field name="status" widget="label_selection"/>
+                        </footer>
+                    </t>
+                </template>
+            </kanban>
+        </field>
+
+    </record>
+    <!--search-->
+    <record id="view_service_request_search" model="ir.ui.view">
+        <field name="name">service.request.search</field>
+        <field name="model">service.request</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <!--                <field name="customer_name"/>-->
+                <field name="date"/>
+                <!--                <field name="type"/>-->
+                <field name="status"/>
+
+                <filter name="today_date" string="Today's Request" domain="[('date', '=', context_today())]"/>
+                <filter name="new_status" string="New" domain="[('status','=','new')]"/>
+                <filter name="in_process_status" string="In Progress" domain="[('status','=','process')]"/>
+                <filter name="done_status" string="Done" domain="[('status','=','done')]"/>
+                <filter name="cancel_status" string="Cancelled" domain="[('status','=','cancel')]"/>
+                <filter name="scrap_status" string="Scrap" domain="[('status','=','scrap')]"/>
+
+                <filter name="group_by_status" string="Status" context="{'group_by':'status'}"/>
+                <!--                <filter name="group_by_type" string="Type" context="{'group_by':'type'}"/>-->
+                <filter name="name" string="Customer" context="{'group_by':'name'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!--action-->
+    <record id="action_service_request" model="ir.actions.act_window">
+        <field name="name">Service Request</field>
+        <field name="res_model">service.request</field>
+        <field name="view_mode">list,form,calendar,graph,kanban,gantt</field>
+    </record>
+</odoo>

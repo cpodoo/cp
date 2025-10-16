@@ -1,0 +1,17 @@
+<odoo>
+    <menuitem id="menu_shop_root"
+              name="Shop"
+              parent="sale.sale_menu_root"
+              sequence="100"/>
+
+    <menuitem id="menu_shop_store"
+              name="Store"
+              parent="menu_shop_root"
+              sequence="10"/>
+
+    <menuitem id="menu_mobile_sell_bill"
+              name="Mobile Sell Bills"
+              parent="menu_shop_store"
+              action="action_mobile_sell_bill"
+              sequence="10"/>
+</odoo>

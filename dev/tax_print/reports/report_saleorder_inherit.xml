@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document_inherit_price" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//table[hasclass('o_main_table')]/thead/tr/th[last()]" position="after">
+            <t t-if="doc.print_final_price">
+                <th class="text-right">Final Price</th>
+            </t>
+            <t t-if="doc.print_tax">
+                <th class="text-right">Tax Amount</th>
+            </t>
+        </xpath>
+        <xpath expr="//table[hasclass('o_main_table')]/tbody/t/tr/t/td[last()]" position="after">
+            <t t-if="doc.print_final_price">
+                <td class="text-right">
+                    <span t-field="line.final_price"/>
+                </td>
+            </t>
+            <t t-if="doc.print_tax">
+                <td class="text-right">
+                    <span t-esc="line.price_tax"
+                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                </td>
+            </t>
+        </xpath>
+        <xpath expr="//th[@name='th_taxes']" position="attributes">
+            <attribute name="t-if">doc.print_tax</attribute>
+        </xpath>
+        <xpath expr="//td[@name='td_taxes']" position="attributes">
+            <attribute name="t-if">doc.print_tax</attribute>
+        </xpath>
+        <xpath expr="//t[@t-call='sale.document_tax_totals']" position="replace">
+            <t t-if="doc.print_tax">
+                <t t-set="tax_totals" t-value="doc.tax_totals"/>
+                <t t-set="currency" t-value="doc.currency_id"/>
+                <t t-if="doc.tax_totals and 'groups' in doc.tax_totals">
+                    <t t-foreach="doc.tax_totals['groups']" t-as="group">
+                        <tr>
+                            <td>
+                                <span t-esc="group['tax_group_name']"/>
+                            </td>
+                            <td class="text-end">
+                                <span t-esc="group['tax_group_amount']"
+                                      t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+                <tr>
+                    <td>
+                        <strong>Total</strong>
+                    </td>
+                    <td class="text-end">
+                        <span t-field="doc.amount_total"/>
+                    </td>
+                </tr>
+            </t>
+            <t t-else="">
+                <tr>
+                    <td>
+                        <strong>Subtotal</strong>
+                    </td>
+                    <td class="text-end">
+                        <span t-field="doc.amount_untaxed"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Total</strong>
+                    </td>
+                    <td class="text-end">
+                        <span t-field="doc.amount_untaxed"/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+    </template>
+</odoo>

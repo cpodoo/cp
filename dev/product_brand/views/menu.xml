@@ -1,0 +1,12 @@
+<odoo>
+    <!-- Inventory -->
+    <menuitem id="product_brand_menu" 
+        name="Product Brands" 
+        parent="stock.menu_stock_root" 
+        sequence="3" />
+    <menuitem id="product_brand_submenu" 
+        name="Product Brands" 
+        parent="product_brand_menu" 
+        sequence="1" 
+        action="product_brand_action" />
+</odoo>

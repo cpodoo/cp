@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="view_disease_list">
+	    <field name="name">disease.list</field>
+	    <field name="model">disease</field>
+	    <field name="arch" type="xml">
+	        <list>
+	            <field name="disease_name"/>
+	            <field name="code"/>
+	            <field name="disease_category"/>
+	        </list>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_disease_form">
+	    <field name="name">disease.form</field>
+	    <field name="model">disease</field>
+	    <field name="arch" type="xml">
+	        <form string="Disease">
+	            <sheet>
+	                <group col="4">
+	                    <field name="disease_name"/>
+	                    <field name="code"/>
+	                    <field name="disease_category"/>
+	                </group>
+	            </sheet>
+	        </form>
+	    </field>
+	</record>
+	<record model="ir.actions.act_window" id="action_disease">
+	    <field name="name">Diseases</field>
+	    <field name="res_model">disease</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	
+	<menuitem name="Pathology" id="menu_pathology_config" parent="menu_config" sequence="3"/>
+	<menuitem name="Diseases" id="menu_disease_config" parent="menu_pathology_config" action="action_disease" sequence="0"/>
+	
+	<record model="ir.ui.view" id="view_disease_category_list">
+	    <field name="name">disease.category.list</field>
+	    <field name="model">disease.category</field>
+	    <field name="arch" type="xml">
+	        <list>
+	            <field name="category_name"/>
+	        </list>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_disease_category_form">
+	    <field name="name">disease.category.form</field>
+	    <field name="model">disease.category</field>
+	    <field name="arch" type="xml">
+	        <form string="Disease Categories">
+	            <sheet>
+	                <group col="2">
+	                    <field name="category_name"/>
+	                </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	<record model="ir.actions.act_window" id="action_disease_category">
+	    <field name="name">Diseases Categories</field>
+	    <field name="res_model">disease.category</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	
+	<menuitem name="Disease Categories" id="menu_disease_category_config" parent="menu_pathology_config" action="action_disease_category" sequence="1"/>
+
+</odoo>

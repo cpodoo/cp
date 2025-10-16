@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="paperformat_crm_lead" model="report.paperformat">
+        <field name="name">Generate Business Proposal</field>
+        <field name="default" eval="True" />
+        <field name="format">custom</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">30</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="report_business_proposal_action" model="ir.actions.report">
+        <field name="name">Business Proposal</field>
+        <field name="model">crm.lead</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_crm_proposal.report_business_proposal_template</field>
+        <field name="report_file">custom_crm_proposal.report_business_proposal_template</field>
+        <field name="binding_model_id" ref="crm.model_crm_lead"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="custom_crm_proposal.paperformat_crm_lead"/>
+    </record>
+
+    <record id="report_mou_proposal_action" model="ir.actions.report">
+        <field name="name">MOU Proposal</field>
+        <field name="model">crm.lead</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_crm_proposal.report_mou_proposal_template</field>
+        <field name="report_file">custom_crm_proposal.report_mou_proposal_template</field>
+        <field name="binding_model_id" ref="crm.model_crm_lead"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="custom_crm_proposal.paperformat_crm_lead"/>
+    </record>
+    <!-- Business Proposal Layout -->
+    <template id="proposal_custom_layout">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+        <div class="header">
+            <div class="row">
+                <div class="col-2">
+                    <img t-att-src="'/custom_crm_proposal/static/src/img/pps_logo.png'" style="height:50px;"/>
+                </div>
+                <div class="col-10 text-center">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0" />
+        </div>
+        <div class="footer">
+            <div style="width: 100%; height: 20px; position: relative; margin-top: 10px;" data-oe-version="1.1">
+                <div style="height: 25%; width: 25%; background-color: #f7df47; float: left;"><br/></div> 
+                <div style="height: 25%; width: 25%; background-color: #cb6d2f; float: left;"><br/></div> <!-- Brown/Orange -->
+                <div style="height: 25%; width: 25%; background-color: #7ac17d; float: left;"><br/></div> <!-- Green -->
+                <div style="height: 25%; width: 25%; background-color: #3a63a2; float: left;"><br/></div> <!-- Blue -->
+                <div class="text-center">
+                    Products for a World Class 360o Robotics, STEM Education &amp; IOT Program
+                </div>
+            </div>
+        </div> 
+    </template>
+    <!-- MOU Layout -->
+    <template id="mou_custom_layout">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+        <div class="header">
+            <div class="row">
+                <div class="col-5">
+                    <img t-att-src="'/custom_crm_proposal/static/src/img/jr_logo.png'" style="height:100px;"/>
+                </div>
+                <div class="col-6 text-center">
+                    
+                </div>
+                <div class="col-1 text-right">
+                    <img t-att-src="'/custom_crm_proposal/static/src/img/jr_logo2.png'" style="height:100px;"/>
+                </div>
+            </div>
+        </div>
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0" />
+        </div>
+        <div class="footer" style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+        <div style="width: 100%; height: 20px; position: relative; margin-top: px;" data-oe-version="1.1">
+            <div style="height: 25%; width: 100%; background-color: #EE304A; float: left;"/> 
+        </div>
+        <div class="row">
+            <div style="width: 60%; vertical-align: top;">
+                <strong>Jay Robotix Learning India Pvt. Ltd.</strong><br/>
+                Office No 2: Plot no: B-11/8IN, Industrial Estate,<br/>
+                First Floor, Sy No:15, Pantancheru, Sangareddy,<br/>
+                Hyderabad, Telangana, 502319 IN
+            </div>
+            <div style="width: 40%; vertical-align: top; text-align: right;">
+                <p><a href="mailto:info@jayrobotix.com" style="color: #333; text-decoration: none;">info@jayrobotix.com</a></p>
+                <p><a href="http://www.jayrobotix.com" target="_blank" style="color: #333; text-decoration: none;">www.jayrobotix.com</a></p>
+            </div>
+        </div>
+           
+    </div>
+    </template>
+</odoo>

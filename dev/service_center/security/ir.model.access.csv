@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+service_center.access_brand_brand,access_brand_brand,service_center.model_brand_brand,service_center.service_request_manager,1,1,1,1
+service_center.access_brand_brand,access_brand_brand,service_center.model_brand_brand,service_center.service_request_user,1,0,0,0
+
+
+service_center.access_product_item,access_product_item,service_center.model_product_item,base.group_user,1,1,1,1
+service_center.access_service_request,access_service_request,service_center.model_service_request,base.group_user,1,1,1,1
+service_center.access_service_request_line,access_service_request_line,service_center.model_service_request_line,base.group_user,1,1,1,1
+service_center.access_planning_month,access_planning_month,service_center.model_planning_month,base.group_user,1,1,1,1

@@ -1,0 +1,15 @@
+<odoo>
+    <record id="module_category_service" model="ir.module.category">
+        <field name="name">Service Management</field>
+        <field name="sequence">22</field>
+    </record>
+
+    <record id="service_request_manager" model="res.groups">
+        <field name="name">Service Admin</field>
+        <field name="category_id" ref="module_category_service" />
+    </record>
+    <record id="service_request_user" model="res.groups">
+        <field name="name">Service User</field>
+        <field name="category_id" ref="module_category_service" />
+    </record>
+</odoo>

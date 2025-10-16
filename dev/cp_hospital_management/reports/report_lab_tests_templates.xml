@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="lab_tests_document">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div style="height: 150px;"></div>
+                    <div style="margin-bottom: 15px;">
+                        <h3 style="color: #2A3F54; font-weight: bold; margin-bottom: 10px; text-align: center;">Patient Lab Tests</h3>
+                        <div style="font-size: 25px; font-weight: bold; margin-bottom: 10px;">
+                            <span t-field="o.name"/>
+                        </div>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    <strong>Patient:</strong> <span t-field="o.patient.name"/>
+                                </td>
+                                <td style="width: 50%;">
+                                    <t t-if="o.physician_id"><strong>Physician:</strong> <span t-field="o.physician_id.name"/></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%;">
+                                    <t t-if="o.pathologist_id"><strong>Pathologist:</strong> <span t-field="o.pathologist_id.name"/></t>
+                                </td>
+                                <td style="width: 50%;">
+                                    <strong>Date Requested:</strong> <span t-field="o.date_requested" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%;">
+                                    <t t-if="o.date_analysis"><strong>Date of Analysis:</strong> <span t-field="o.date_analysis" /></t>
+                                </td>
+                                <td/>
+                            </tr>
+                        </table>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="font-weight: bold; color: #2A3F54;">Sequence</th>
+                                <th style="font-weight: bold; color: #2A3F54;">Test</th>
+                                <th style="font-weight: bold; color: #2A3F54;">Result</th>
+                                <th style="font-weight: bold; color: #2A3F54;">Normal Range</th>
+                                <th style="font-weight: bold; color: #2A3F54;">Units</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.test_line" t-as="line">
+                                <td><span t-field="line.sequence"/></td>
+                                <td><span t-field="line.test_type"/></td>
+                                <td><span t-field="line.result"/></td>
+                                <td><span t-field="line.range"/></td>
+                                <td><span t-field="line.units"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <record id="paperformat_lab_tests" model="report.paperformat">
+            <field name="name">Patient Lab Tests</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">96</field>
+        </record>
+        <template id="lab_tests">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="cp_hospital_management.lab_tests_document" t-lang="o.patient.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

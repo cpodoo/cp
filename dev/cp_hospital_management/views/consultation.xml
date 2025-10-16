@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_consultation_view_form" model="ir.ui.view">
+	    <field name="name">Consultation</field>
+	    <field name="model">evaluation</field>
+		<field name="inherit_id" ref="cp_hospital_management.view_evaluation_form"/>
+	    <field name="arch" type="xml">
+			<xpath expr ='//form/sheet/notebook' position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr ="//form/sheet/group[2]" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr="//field[@name='patient']" position="attributes">
+				<attribute name="domain">[('is_patient','=',True)]</attribute>
+			</xpath>
+			<xpath expr="//field[@name='evaluation_end_date']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr="//field[@name='evaluation_start_date']" position="attributes">
+				<attribute name="string">Consultation Date</attribute>
+			</xpath>
+			<xpath expr="//field[@name='evaluation_end_date']" position="attributes">
+				<attribute name="string">Consultation End Date</attribute>
+			</xpath>
+			<xpath expr="//field[@name='evaluation_type']" position="attributes">
+				<attribute name="string">Consultation Type</attribute>
+			</xpath>
+			<xpath expr="//field[@name='chief_complaint']" position="replace">
+				 <label for="bmi" string="Body Mass Index"/>
+					<div class="o_row no-gutters d-flex">
+						<field name="bmi" readonly="0" class="oe_inline text-left"/>
+						<label for="uom_id" string="" class="oe_inline"/>
+						<field name="uom_id" class="oe_inline"/>
+					</div>
+			</xpath>
+			<xpath expr="//field[@name='doctor']" position="replace">
+				<field name="doctor_id"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="view_consultation_view_list" model="ir.ui.view">
+	    <field name="name">Consultation</field>
+	    <field name="model">evaluation</field>
+		<field name="inherit_id" ref="cp_hospital_management.view_evaluation_list"/>
+	    <field name="arch" type="xml">
+			<xpath expr="//field[@name='name']" position="attributes">
+				<attribute name="string">Consultation</attribute>
+			</xpath>
+			<xpath expr="//field[@name='doctor']" position="attributes">
+				<attribute name="string">Doctor</attribute>
+			</xpath>
+			<xpath expr="//field[@name='evaluation_start_date']" position="attributes">
+				<attribute name="string">Consultation Start Date</attribute>
+			</xpath>
+			<xpath expr="//field[@name='evaluation_type']" position="attributes">
+				<attribute name="string">Consultation Type</attribute>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="cp_hospital_management.action_patient_evaluations" model="ir.actions.act_window">
+			<field name="name">Consultation</field>
+	</record>
+
+</odoo>

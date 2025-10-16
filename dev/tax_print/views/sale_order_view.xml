@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_final_price" model="ir.ui.view">
+        <field name="name">sale.order.form.final.price</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_print_retail_bill"
+                        string="Print Retail Bill"
+                        type="object"
+                        class="btn-primary"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="print_tax"/>
+                <field name="print_final_price"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

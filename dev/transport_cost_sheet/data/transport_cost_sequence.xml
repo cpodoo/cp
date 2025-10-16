@@ -1,0 +1,12 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_transport_cost_sheet" model="ir.sequence">
+            <field name="name">Transport Cost Sheet</field>
+            <field name="code">transport.cost.sheet</field>
+            <field name="prefix">TCS/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="implementation">no_gap</field>
+        </record>
+    </data>
+</odoo>

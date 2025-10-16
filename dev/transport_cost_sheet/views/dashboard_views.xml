@@ -1,0 +1,4 @@
+<record id="action_transport_dashboard" model="ir.actions.client">
+    <field name="name">Transport Dashboard</field>
+    <field name="tag">transport_dashboard_tag</field>
+</record>

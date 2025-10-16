@@ -1,0 +1,12 @@
+<odoo>
+    <!-- Top Level Menu -->
+    <menuitem id="menu_asset_maintenance_root" name="Asset Maintenance" sequence="10"/>
+
+    <!-- Submenus -->
+    <menuitem id="menu_maintenance_order" name="Maintenance Orders"
+              parent="menu_asset_maintenance_root" action="action_maintenance_order" sequence="10"/>
+
+    <menuitem id="menu_inspection_order" name="Inspection Orders"
+              parent="menu_asset_maintenance_root" action="action_inspection_order" sequence="20"/>
+
+</odoo>

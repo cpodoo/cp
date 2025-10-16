@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_postop_wound_list" model="ir.ui.view" >
+        <field name="name">postop.wound_list</field>
+        <field name="model">postop.wound</field>
+        <field name="arch" type="xml">
+            <list string="Post_Op Wound">
+                <field name="creation_date"/>
+                <field name="date_time"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_postop_wound_form" model="ir.ui.view">
+        <field name="name">postop.wound_form</field>
+        <field name="model">postop.wound</field>
+        <field name="arch" type="xml">
+            <form string="Post_Op Wound">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="creation_date"/>
+                            <field name="pre_op_checked"/>
+                            <label for="pre_op_checked_char" string=" "/>
+                            <field name="pre_op_checked_char" nolabel="1"
+                                   attrs="{'invisible':[('pre_op_checked','!=','yes')]}"/>
+                            <field name="bleeding_absence"/>
+                            <label for="bleeding_absence_char" string=" "/>
+                            <field name="bleeding_absence_char" nolabel="1"
+                                   attrs="{'invisible':[('bleeding_absence','!=','yes')]}"/>
+                            <field name="wound_closed"/>
+                            <label for="wound_closed_char" string=" "/>
+                            <field name="wound_closed_char" nolabel="1"
+                                   attrs="{'invisible':[('wound_closed','!=','yes')]}"/>
+                            <field name="reported_to"/>
+                            <field name = 'photos_complete' widget="many2many_binary"
+                                   options="{'preview_image': 'image_128'}"/>
+                        </group>
+                        <group>
+                            <field name="date_time"/>
+                            <field name="no_wound_edge"/>
+                            <label for="no_wound_edge_char" string=" "/>
+                            <field name="no_wound_edge_char" nolabel="1"
+                                   attrs="{'invisible':[('no_wound_edge','!=','yes')]}"/>
+                            <field name="granulating"/>
+                            <label for="granulating_char" string=" "/>
+                            <field name="granulating_char" nolabel="1"
+                                   attrs="{'invisible':[('granulating','!=','yes')]}"/>
+                            <field name="infection_occuring"/>
+                            <label for="infection_occuring_char" string=" "/>
+                            <field name="infection_occuring_char" nolabel="1"
+                                   attrs="{'invisible':[('infection_occuring','!=','yes')]}"/>
+                            <field name="action_required"/>
+                            <label for="action_required_char" string=" "/>
+                            <field name="action_required_char" nolabel="1"
+                                   attrs="{'invisible':[('action_required','!=','yes')]}"/>
+                        </group>
+                        <label for="special_notes" string="Special Instructions / Notes"/>
+                        <field name="special_notes"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+</odoo>

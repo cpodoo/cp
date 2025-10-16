@@ -1,0 +1,60 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_form_mobile_sell_bill" model="ir.ui.view">
+        <field name="name">mobile.sell.bill.form</field>
+        <field name="model">mobile.sell.bill</field>
+        <field name="arch" type="xml">
+            <form string="Sell Bill">
+                <header>
+                    <button name="print_sell_bill"
+                            type="object"
+                            string="Print Sell Bill"
+                            class="btn-primary"
+                            icon="fa-print"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="date"/>
+                        <field name="phone_model"/>
+                        <field name="imei_number"/>
+                        <field name="id_proof"/>
+                        <field name="id_proof_attachment"/>
+                    </group>
+                    <group>
+                        <field name="customer_name"/>
+                        <field name="customer_address"/>
+                        <field name="customer_phone"/>
+                        <field name="remarks"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_tree_mobile_sell_bill" model="ir.ui.view">
+        <field name="name">mobile.sell.bill.tree</field>
+        <field name="model">mobile.sell.bill</field>
+        <field name="arch" type="xml">
+            <list string="Sell Bills">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="customer_name"/>
+                <field name="phone_model"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_mobile_sell_bill" model="ir.actions.act_window">
+        <field name="name">Mobile Sell Bills</field>
+        <field name="res_model">mobile.sell.bill</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Sell Bill
+            </p>
+        </field>
+    </record>
+</odoo>

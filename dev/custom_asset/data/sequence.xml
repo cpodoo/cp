@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sequence for Inspection Order -->
+    <record id="seq_inspection_order" model="ir.sequence">
+        <field name="name">Inspection Order</field>
+        <field name="code">inspection.order</field>
+        <field name="prefix">INSP/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- Sequence for Maintenance Order -->
+    <record id="seq_maintenance_order" model="ir.sequence">
+        <field name="name">Maintenance Order</field>
+        <field name="code">maintenance.order</field>
+        <field name="prefix">MAINT/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+</odoo>

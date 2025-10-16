@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_template_sale_order" model="mail.template">
+        <field name="name">Sale Order Email Demo Template</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="email_from">{{ object.company_id.email }}</field>
+        <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="subject">Your Sale Order {{ object.name }}</field>
+        <field name="body_html" type="html">
+            <div>
+                <p>Dear {{ object.partner_id.name }},</p>
+                <p>Thanks for your order: {{ object.name }}</p>
+                <p>Total: {{ object.amount_total }}</p>
+            </div>
+        </field>
+    </record>
+</odoo>

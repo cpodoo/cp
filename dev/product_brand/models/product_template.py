@@ -1,0 +1,8 @@
+from odoo import fields, models
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    brand_id = fields.Many2one('product.brand', string='Brand',
+                               help="Name of the brand which the product"
+                                    " belongs to")
