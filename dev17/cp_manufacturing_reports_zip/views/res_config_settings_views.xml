@@ -1,0 +1,18 @@
+<odoo>
+    <record id="res_config_settings_view_form_mo" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.mail.brand</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="40"/>
+        <field name="inherit_id" ref="mrp.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='security_lead_time']" position="after">
+                <setting id="default_zip_report" help="Default Manufacturing Report For Zip"
+                         title="Select The Default Report of Manufacturing.">
+                    <field name="mo_report_zip"
+                           domain="[('model', '=', 'mrp.production'), ('report_type', 'in', ['qweb-html', 'qweb-pdf'])]"
+                           class="ml16"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

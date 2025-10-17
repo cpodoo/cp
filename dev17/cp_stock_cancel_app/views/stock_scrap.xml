@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="cancel_stock_scrap_cancel_form_view" model="ir.ui.view">
+        <field name="name">cancel.stock.scrap.cancel.form.view</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Cancel button after Validate -->
+            <xpath expr="//button[@name='action_validate']" position="after">
+                <button class="btn-primary" name="action_cancel_scrap" string="Cancel" type="object"
+                        groups="cp_stock_cancel_app.group_scrap_cancels"
+                        invisible="context.get('params', {}).get('default_state') != 'done'"/>
+            </xpath>
+            <!-- Allow delete -->
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

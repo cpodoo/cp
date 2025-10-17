@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_purchase_cp" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.purchase.cp</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='purchase_setting_container']" position="after">
+                <block name="show_images" title="Show Product Images">
+                    <setting name="purchase_product_image_report"
+                             string="Show Product Image"
+                             help="Show product images in the printed purchase order report.">
+                        <field name="purchase_product_image_report"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

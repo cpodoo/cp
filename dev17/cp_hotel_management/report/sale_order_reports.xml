@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Action report record (Aa pela thi j hashe) -->
+    <record id="action_report_sale_order" model="ir.actions.report">
+        <field name="name">Sale Order</field>
+        <field name="model">room.booking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cp_hotel_management.report_sale_order</field>
+        <field name="report_file">cp_hotel_management.report_sale_order</field>
+        <field name="binding_model_id" ref="model_room_booking"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="report_sale_order">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <h2>Sale Order</h2>
+                    <br/>
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Sl No.</th>
+                                <th class="text-left">Guest Name</th>
+                                <th class="text-left">Check In Date</th>
+                                <th class="text-left">Check Out Date</th>  
+                                <th class="text-left">Reference No.</th>
+                                <th class="text-right">Amount Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="0"/>
+                            <t t-foreach="booking" t-as="line">
+                                <t t-set="i" t-value="i+1"/>
+                                <tr>
+                                    <td>
+                                        <span t-esc="i"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.get('partner_id', '')"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.get('date_order', '')" t-options='{"widget": "datetime"}'/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.get('date_order', '')" t-options='{"widget": "datetime"}'/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.get('name', '')"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="line.get('amount_total', 0.0)" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="not booking">
+                                <tr>
+                                    <td colspan="5">No records found for the selected criteria.</td> <!-- Colspan 5 -->
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

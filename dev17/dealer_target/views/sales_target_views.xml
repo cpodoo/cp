@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sales_target_form" model="ir.ui.view">
+        <field name="name">sales.target.form</field>
+        <field name="model">sales.target</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Cancel" type="object" name="action_discard" class="oe_primary"/>
+                    <button name="action_send_email" string="Send Email" type="object" class="oe_highlight"/>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight"/>
+                    <button name="action_draft" string="Draft" type="object" class="oe_primary" invisible="state != 'canceled'"/>
+                    <button name="action_open" string="Open" type="object" class="oe_primary" invisible="state != 'draft'"/>
+                    <button name="action_close" string="Close" type="object" class="oe_primary"/>
+                    <button name="action_cancel" string="Cancel" type="object" class="oe_primary" invisible="state in ['closed', 'canceled']"/>
+                    <field name="state" widget="statusbar" class="clickable-statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="salesperson_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="target_achieve"/>
+                        </group>
+                        <group>
+                            <field name="target"/>
+                            <field name="achieve"/>
+                            <field name="difference" readonly="1"/>
+                            <field name="achieve_percentage" widget="progressbar"
+                                   options="{'current_value': 'achieve_percentage', 'max_value': 100}"/>
+                            <field name="responsible_salesperson_id"/>
+                        </group>
+                    </group>
+
+                    <field name="product_order_lines">
+                        <tree editable="bottom">
+                            <field name="product_id"/>
+                            <field name="sale_count" invisible="parent.target_achieve != 'sale_order_confirm'"/>
+                            <field name="invoice_quantity" invisible="parent.target_achieve != 'invoice_created'"/>
+                            <field name="paid_quantity" invisible="parent.target_achieve != 'invoice_paid'"/>
+                        </tree>
+                    </field>
+                </sheet>
+
+                <footer>
+                    <button string="Save" type="object" name="action_save" class="oe_highlight"/>
+                    <button string="Discard" type="object" name="action_discard" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sales_target_tree" model="ir.ui.view">
+        <field name="name">sales.target.tree</field>
+        <field name="model">sales.target</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="salesperson_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="target_achieve"/>
+                <field name="target"/>
+                <field name="achieve"/>
+                <field name="difference"/>
+                <field name="achieve_percentage" widget="progressbar"
+                       options="{'current_value': 'achieve_percentage', 'max_value': 100}"/>
+                <field name="responsible_salesperson_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sales_target" model="ir.actions.act_window">
+        <field name="name">Sales Target</field>
+        <field name="res_model">sales.target</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_sales_target_root" name="Sales Target"/>
+    <menuitem id="menu_sales_target" name="Sales Target" parent="menu_sales_target_root" action="action_sales_target"/>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_report_inherit_id" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//thead/tr/th[@name='th_description']" position="before">
+            <th class="text-start">No.</th>
+        </xpath>
+        <xpath expr="//thead/tr/th[@name='th_description']" position="after">
+            <th t-if="env['ir.config_parameter'].sudo().get_param('cp_so_po_image.sale_product_image_report')"
+                class="text-start">
+                Image
+            </th>
+        </xpath>
+        <xpath expr="//t[@t-if='not line.display_type']/td[@name='td_name']" position="before">
+            <td class="text-start">
+                <span t-field="line.seq_no"/>
+            </td>
+        </xpath>
+        <xpath expr="//t[@t-if='not line.display_type']/td[@name='td_name']" position="after">
+            <td t-if="env['ir.config_parameter'].sudo().get_param('cp_so_po_image.sale_product_image_report')"
+                class="text-start">
+                <img t-if="line.product_id.image_128"
+                     t-att-src="image_data_uri(line.product_id.image_128)"
+                     style="width: 60px; height: auto;"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>

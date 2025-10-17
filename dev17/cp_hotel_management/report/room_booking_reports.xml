@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<odoo>
+    <template id="report_room_booking">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Room Booking</h2>
+                    <br/>
+                    <table class="table table-sm o_main_table table-bordered">
+                        <thead>
+                            <tr>
+                                <th name="th_sl" class="text-left"><span>Sl No.</span></th>
+                                <th name="th_guest" class="text-left"><span>Guest Name</span></th>
+                                <th name="th_room" class="text-left"><span>Room No.</span></th>
+                                <th name="th_checkin" class="text-left"><span>Check-In</span></th>
+                                <th name="th_checkout" class="text-left"><span>Check-Out</span></th>
+                                <th name="th_ref" class="text-left"><span>Reference No.</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="booking_details" t-as="detail" t-key="detail_index">
+                                <td><span t-esc="detail_index + 1"/></td>
+                                <td><span t-esc="detail.get('partner_id', '')"/></td>
+                                <td><span t-esc="detail.get('room', '')"/></td>
+                                <td><span t-esc="detail.get('checkin_date')" t-options='{"widget": "date"}'/></td>
+                                <td><span t-esc="detail.get('checkout_date')" t-options='{"widget": "date"}'/></td>
+                                <td><span t-esc="detail.get('name', '')"/></td>
+                            </tr>
+                            <tr t-if="not booking_details">
+                                <td colspan="6" class="text-center">No booking details found for the selected criteria.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- Action definition remains the same -->
+    <record id="action_report_room_booking" model="ir.actions.report">
+        <field name="name">Room Booking</field>
+        <field name="model">room.booking.detail</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cp_hotel_management.report_room_booking</field>
+        <field name="report_file">cp_hotel_management.report_room_booking</field>
+        <field name="print_report_name">'Room Booking Report - %s' % (object.checkin or '')</field>
+        <field name="binding_model_id" ref="model_room_booking"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

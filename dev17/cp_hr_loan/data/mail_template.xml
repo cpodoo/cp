@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--Email template -->
+    <data noupdate="1">
+        <record id="cp_manager_request" model="mail.template">
+            <field name="name">Request to Department Manager</field>
+            <field name="model_id" ref="cp_hr_loan.model_employee_loan"/>
+            <field name="email_from">{{ object.user_id.email }}</field>
+            <field name="email_to">hasti.mungara9554@gmail.com</field>
+            <field name="subject">Loan {{ object.name }} Request from {{ object.employee_id.name }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Dear <i><t t-out="object.manager_id.name"></t></i>,</p>
+                    <p>A loan request has been submitted by <b><i><t t-out="object.employee_id.name"></t></i></b>. Below are the details:</p>
+                    <ul>
+                        <li><strong>Loan Type:</strong><t t-out="object.loan_type_id.name"></t></li>
+                        <li><strong>Loan Amount:</strong><t t-out="object.loan_amount"></t></li>
+                        <li><strong>Loan Term:</strong><t t-out="object.term"></t></li>
+                        <li><strong>Payment Start Date:</strong><t t-out="object.start_date"></t></li>
+                        <li><strong>Payment End Date:</strong><t t-out="object.end_date"></t></li>
+                    </ul>
+
+                    <p>You can access the loan request using the link below:</p>
+                    <p><a href="{{ object.loan_url }}"><t t-out="object.loan_url"></t></a></p>
+                    <p><strong>Regards,</strong><br/><t t-out="object.employee_id.name"></t></p>
+                </div>
+            </field>
+        </record>
+
+        <!--Email template -->
+        <record id="cp_hr_manager_request" model="mail.template">
+            <field name="name">Loan Request to HR Manager</field>
+            <field name="model_id" ref="cp_hr_loan.model_employee_loan"/>
+            <field name="email_from">{{ object.manager_id.work_email }}</field>
+            <field name="email_to"></field>
+            <field name="subject">Loan {{ object.name }} Request form {{ object.employee_id.name }}</field>
+            <field name="body_html" type="html">
+                <div>
+                	<p>To <strong><i>HR Manager</i></strong></p>
+                	<p> Loan request from <b><i><t t-out="object.employee_id.name"></t></i></b></p>
+                	<p> Loan Request Approve by <b><i><t t-out="object.manager_id.name"></t></i></b> Department Manager</p>
+                	<ul>
+                        <li><strong>Loan Detail:</strong></li>
+                        <li><strong>Loan Type:</strong><t t-out="object.loan_type_id.name"></t></li>
+                        <li><strong>Loan Amount:</strong><t t-out="object.loan_amount"></t></li>
+                        <li><strong>Loan Term:</strong><t t-out="object.term"></t></li>
+                        <li><strong>Payment Start Date:</strong><t t-out="object.start_date"></t></li>
+                        <li><strong>Payment End Date:</strong><t t-out="object.end_date"></t></li>
+                    </ul>
+
+                	<p>You can access the loan request using the link below:</p>
+                    <p><a href="{{ object.loan_url }}"><t t-out="object.loan_url"></t></a></p>
+                    <p><strong>Regards,</strong><br/><t t-out="object.manager_id.name"></t></p>
+                </div>
+            </field>
+        </record>
+
+        <record id="hr_manager_confirm_loan" model="mail.template">
+            <field name="name">Loan Request Confirm</field>
+            <field name="model_id" ref="cp_hr_loan.model_employee_loan"/>
+            <field name="email_from">{{ object.hr_manager_id.work_email }}</field>
+            <field name="email_to"></field>
+            <field name="subject">Your Loan {{ object.name }} Request has been Confirmed</field>
+            <field name="body_html" type="html">
+                <div>
+                	<p>Dear <i><t t-out="object.employee_id.name"></t></i>,</p>
+                	<p></p>
+                	<p> Your Loan <strong><i><t t-out="object.name"></t></i></strong> Request Confirm By <strong><i><t t-out=" object.hr_manager_id.name"></t></i></strong></p>
+                	<p>You can access the loan request using the link below:</p>
+                    <p><a href="{{ object.loan_url }}"><t t-out="object.loan_url"></t></a></p>
+                    <p><strong>Regards,</strong><br/><t t-out="object.manager_id.name"></t></p>
+                </div>
+            </field>
+        </record>
+
+        <record id="cp_loan_manager_reject" model="mail.template">
+            <field name="name">cp Manager Loan Request Reject</field>
+            <field name="model_id" ref="cp_hr_loan.model_employee_loan"/>
+            <field name="email_from">{{ object.manager_id.work_email }}</field>
+            <field name="email_to"></field>
+            <field name="subject">Your Loan {{ object.name }} Request has been Rejected</field>
+            <field name="body_html" type="html">
+                <div>
+                	<p>Dear <i><t t-out="object.employee_id.name"></t></i>,</p>
+                	<p></p>
+                	<p> Your Loan <strong><i><t t-out="object.name"></t></i></strong>> Request Rejected By <strong><i><t t-out="object.manager_id.name"></t></i></strong></p>
+                	<p>You can access the loan request using the link below:</p>
+                    <p><a href="{{ object.loan_url }}"><t t-out="object.loan_url"></t></a></p>
+                    <p><strong>Regards,</strong><br/><t t-out="object.manager_id.name"></t></p>
+                </div>
+            </field>
+        </record>
+
+        <record id="hr_loan_manager_reject_loan" model="mail.template">
+            <field name="name">Loan Request Reject</field>
+            <field name="model_id" ref="cp_hr_loan.model_employee_loan"/>
+            <field name="email_from">{{ object.hr_manager_id.work_email }}</field>
+            <field name="email_to"></field>
+            <field name="subject">Your Loan {{ object.name }} Request has been Rejected</field>
+            <field name="body_html" type="html">
+                <div>
+                	<p>Dear <i><t t-out="object.employee_id.name"></t></i>,</p>
+                	<p></p>
+                	<p> Your Loan <strong><i><t t-out="object.name"></t></i></strong>> Request Rejected By <strong><i><t t-out="object.hr_manager_id.name"></t></i></strong></p>
+                	<p>You can access the loan request using the link below:</p>
+                    <p><a href="{{ object.loan_url }}"><t t-out="object.loan_url"></t></a></p>
+                    <p><strong>Regards,</strong><br/><t t-out="object.manager_id.name"></t></p>
+                </div>
+            </field>
+        </record>
+
+        <record id="hr_manager_closed_loan" model="mail.template">
+            <field name="name">Closed Loan</field>
+            <field name="model_id" ref="cp_hr_loan.model_employee_loan"/>
+            <field name="email_from">{{ object.hr_manager_id.work_email }}</field>
+            <field name="email_to"></field>
+            <field name="subject">Your Loan {{ object.name }} has been closed</field>
+            <field name="body_html" type="html">
+                <div>
+                	<p>Dear <i><t t-out="object.employee_id.name"></t></i>,</p>
+                	<p></p>
+                	<p> Your Loan <strong><i><t t-out="object.name"></t></i></strong> has been closed By <strong><i><t t-out="tobject.hr_manager_id.name"></t></i></strong>></p>
+                	<p>You can access the loan request using the link below:</p>
+                    <p><a href="{{ object.loan_url }}"><t t-out="object.loan_url"></t></a></p>
+                    <p><strong>Regards,</strong><br/><t t-out="object.manager_id.name"></t></p>
+                </div>
+            </field>
+        </record>
+
+        <record id="employee_loan_detail_send_mail" model="mail.template">
+            <field name="name">Employee Loan Send Mail</field>
+            <field name="model_id" ref="model_employee_loan"/>
+            <field name="email_from">{{ object.company_id.email }}</field>
+            <field name="email_to">{{ object.employee_id.work_email }}</field>
+            <field name="subject">{{ object.name }} Loan Details</field>
+            <!-- <field name="template_fs">{{ object.name or '' }}</field> -->
+            <!-- <field name="report_name">{{ (object.name or 'Loan') + '_Details.pdf' }}</field> -->
+            <field name="report_template_ids" eval="[(4, ref('cp_hr_loan.action_employee_loan_report'))]"/>
+            <field name="body_html" type="html">
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 14px; color: rgb(34, 34, 34); background-color: #FFF; padding: 10px;">
+                    <p>Dear <strong t-out="object.employee_id.name or ''"></strong>,</p>
+                    <br/>
+                    <p>
+                        Please find attached the details for your loan: <strong t-out="object.name or ''"></strong>.
+                    </p>
+                    <br/>
+                    <p>
+                        Thank you.
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

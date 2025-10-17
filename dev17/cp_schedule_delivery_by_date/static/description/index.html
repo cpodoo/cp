@@ -1,0 +1,144 @@
+<section style="min-height:85vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+         background:#ffffff; color:#222; text-align:center; padding:60px 20px; border-bottom:1px solid #eaeaea;">
+    <h1 style="font-size:54px; margin:0 0 24px 0; font-weight:800; letter-spacing:-1px; color:#2C0091;">
+        Sale Delivery By Scheduled Date
+    </h1>
+    <div style="max-width:960px; margin:0 auto;">
+        <p style="font-size:20px; line-height:1.6; margin:0 0 16px 0; color:#444;">
+            The <b>Sale Delivery By Scheduled Date</b> module allows you to manage and automate the delivery
+            process based on the scheduled delivery date in Odoo 17.
+        </p>
+        <p style="font-size:20px; line-height:1.6; margin:0; color:#444;">
+            It enhances the sales and inventory process by automatically generating and managing delivery orders.
+            Every delivery record is tracked in the <b>Stock Move History</b> menu, giving you a clear and
+            organized view of stock movements. This improves order tracking and streamlines inventory
+            management by linking sales with stock operations seamlessly.
+        </p>
+    </div>
+</section>
+
+<section style="position:relative; max-width:1200px; margin:0 auto; padding:100px 20px;">
+    <div style="position:absolute; top:0; bottom:0; left:50%; width:4px; background:#ddd; transform:translateX(-50%);"></div>
+    <div style="display:flex; justify-content:flex-start; margin-bottom:120px; position:relative;">
+        <div style="width:50%; padding-right:40px; text-align:right;">
+            <h2 style="font-size:30px; color:#2C0091; margin-bottom:12px;">Quotation</h2>
+            <p style="font-size:18px; color:#555;">Start by preparing the quotation with scheduled delivery dates.</p>
+        </div>
+        <div style="width:50%; padding-left:40px;">
+            <img alt="Quotation"
+                 onclick="document.getElementById('lightbox').style.display='flex';
+                          document.getElementById('lightbox-img').src=this.src;
+                          document.getElementById('lightbox-caption').innerText=this.alt;"
+                 onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+                 onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 28px rgba(0,0,0,0.2)';"
+                 src="D-1.png"
+                 style="max-width:90%; border-radius:12px; border:1px solid #e0e0e0;
+                 transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        </div>
+    </div>
+
+    <div style="display:flex; justify-content:flex-end; margin-bottom:120px; position:relative;">
+        <div style="width:50%; padding-right:40px;">
+            <img alt="Delivery Order"
+                 onclick="document.getElementById('lightbox').style.display='flex';
+                          document.getElementById('lightbox-img').src=this.src;
+                          document.getElementById('lightbox-caption').innerText=this.alt;"
+                 onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+                 onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 28px rgba(0,0,0,0.2)';"
+                 src="D-2.png"
+                 style="max-width:90%; border-radius:12px; border:1px solid #e0e0e0;
+                 transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        </div>
+        <div style="width:50%; padding-left:40px; text-align:left;">
+            <h2 style="font-size:30px; color:#148963; margin-bottom:12px;">Delivery Order</h2>
+            <p style="font-size:18px; color:#555;">Delivery orders are automatically created according to your
+                schedule.</p>
+        </div>
+    </div>
+
+    <div style="display:flex; justify-content:flex-start; margin-bottom:120px; position:relative;">
+        <div style="width:50%; padding-right:40px; text-align:right;">
+            <h2 style="font-size:30px; color:#2C0091; margin-bottom:12px;">Inventory Overview</h2>
+            <p style="font-size:18px; color:#555;">Track deliveries seamlessly within your inventory dashboard.</p>
+        </div>
+        <div style="width:50%; padding-left:40px;">
+            <img alt="Inventory Overview"
+                 onclick="document.getElementById('lightbox').style.display='flex';
+                          document.getElementById('lightbox-img').src=this.src;
+                          document.getElementById('lightbox-caption').innerText=this.alt;"
+                 onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+                 onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 28px rgba(0,0,0,0.2)';"
+                 src="D-4.png"
+                 style="max-width:90%; border-radius:12px; border:1px solid #e0e0e0;
+                 transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        </div>
+    </div>
+
+    <div style="display:flex; justify-content:flex-end; margin-bottom:120px; position:relative;">
+        <div style="width:50%; padding-right:40px;">
+            <img alt="Movement History"
+                 onclick="document.getElementById('lightbox').style.display='flex';
+                          document.getElementById('lightbox-img').src=this.src;
+                          document.getElementById('lightbox-caption').innerText=this.alt;"
+                 onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+                 onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 28px rgba(0,0,0,0.2)';"
+                 src="D-5.png"
+                 style="max-width:90%; border-radius:12px; border:1px solid #e0e0e0;
+                 transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        </div>
+        <div style="width:50%; padding-left:40px; text-align:left;">
+            <h2 style="font-size:30px; color:#148963; margin-bottom:12px;">Movement History</h2>
+            <p style="font-size:18px; color:#555;">Keep a detailed log of every stock movement for accuracy.</p>
+        </div>
+    </div>
+
+    <div style="display:flex; justify-content:flex-start; position:relative;">
+        <div style="width:50%; padding-right:40px; text-align:right;">
+            <h2 style="font-size:30px; color:#2C0091; margin-bottom:12px;">Delivery Logs</h2>
+            <p style="font-size:18px; color:#555;">Review complete logs to ensure transparency in deliveries.</p>
+        </div>
+        <div style="width:50%; padding-left:40px;">
+            <img alt="Delivery Logs"
+                 onclick="document.getElementById('lightbox').style.display='flex';
+                          document.getElementById('lightbox-img').src=this.src;
+                          document.getElementById('lightbox-caption').innerText=this.alt;"
+                 onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+                 onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 28px rgba(0,0,0,0.2)';"
+                 src="D-6.png"
+                 style="max-width:90%; border-radius:12px; border:1px solid #e0e0e0;
+                 transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        </div>
+    </div>
+</section>
+
+<div id="lightbox"
+     onclick="this.style.display='none'"
+     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.8); justify-content:center; align-items:center;
+            flex-direction:column; z-index:9999;">
+    <img alt="" id="lightbox-img" src=""
+         style="max-width:75%; max-height:auto%; border-radius:12px; box-shadow:0 8px 28px rgba(0,0,0,0.5);">
+    <p id="lightbox-caption"
+       style="color:#fff; font-size:22px; margin-top:20px; font-weight:600; text-align:center;"></p>
+</div>
+
+<section style="padding:80px 20px; text-align:center; background:#fafafa; border-top:1px solid #eee; border-bottom:1px solid #eee;">
+    <h2 style="font-size:32px; margin:0 0 18px 0; font-weight:700; color:#2C0091;">
+        Need Support?
+    </h2>
+    <p style="font-size:18px; margin:0 0 28px 0; color:#555; max-width:600px; line-height:1.5; margin-left:auto; margin-right:auto;">
+        We’re here to help — reach out anytime and we’ll get back quickly.
+    </p>
+    <a href="mailto:chandni.patel1616@gmail.com"
+       onmouseout="this.style.background='#2C0091';"
+       onmouseover="this.style.background='#148963';"
+       style="display:inline-block; padding:14px 32px; background:#2C0091; color:#fff;
+            text-decoration:none; font-size:16px; border-radius:6px; font-weight:600;
+            transition:all 0.3s ease;">
+        ✉ Contact Support
+    </a>
+</section>
+
+<footer style="padding:30px 20px; text-align:center; background:#f9f9f9; color:#777; font-size:14px; border-top:1px solid #eee;">
+    <p style="margin:0;">© 2025 Sale Delivery By Scheduled Date • Odoo 17</p>
+</footer>

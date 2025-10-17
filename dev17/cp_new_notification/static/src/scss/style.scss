@@ -1,0 +1,23 @@
+// Optional: Add specific styles for the notification content within the dialog
+.o_dialog .modal-body .new_notification_content {
+    // Example: Make images responsive within the popup
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    // Example: Adjust heading margins if needed
+    h1, h2, h3 {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        font-weight: 500; // Or bold
+    }
+
+    // Example: Default paragraph styling
+    p {
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+    }
+}
