@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="property_management_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">property.management</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{'search_default_available':True}</field>
+    </record>
+    <!-- Tree View -->
+    <record id="property_management_view_tree" model="ir.ui.view">
+        <field name="name">property.management.tree</field>
+        <field name="model">property.management</field>
+        <field name="arch" type="xml">
+            <tree string="Properties"
+                  decoration-success="state in ['offer_received','offer_accepted']"
+                  decoration-danger="state in ['completed']"
+                  decoration-info="state in ['offer_accepted']">
+                <field name="name"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
+                <field name="phone"/>
+                <field name="total_area"/>
+                <field name="tenure"/>
+                <field name="client_budget"/>
+                <field name="client_id"/>
+                <field name="state" optional="1" attrs="{'invisible': True}"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Form View -->
+    <record id="property_management_view_form" model="ir.ui.view">
+        <field name="name">property.management.form</field>
+        <field name="model">property.management</field>
+        <field name="arch" type="xml">
+            <form string="Properties">
+                <header>
+                    <button name="property_management_action_complete"
+                            string="Complete"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('state', 'in', ['completed', 'failure'])]}"/>
+                    <button name="property_management_action_fail"
+                            string="Fail"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('state', 'in', ['completed', 'failure'])]}"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="new,offer_received,offer_accepted,execution,completed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="Title"/>
+                            <field name="contract_id"/>
+                        </group>
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" string="Tags"
+                                   options="{'color_field':'color'}" placeholder="specify your tags..."/>
+                            <field name="property_type_id" string="Property Type"
+                                   options="{'no_create':True,'no_open':True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <separator string="Address"/>
+                            <field name="address"/>
+                        </group>
+                        <group>
+                            <separator string="Contact"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <separator string="Duration"/>
+                            <field name="tenure" string="Tenure (months)"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                        <group>
+                            <separator string="Budget"/>
+                            <field name="client_budget"/>
+                            <field name="contractor_budget"/>
+                            <field name="pending_amount"
+                                   attrs="{'invisible': [('state', 'in', ['new','offer_received'])]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                                <field name="description"/>
+                                <field name="active"/>
+                                <field name="living_area"/>
+                                <field name="garden"/>
+                                <field name="garden_area" attrs="{'invisible': [('garden', '=', False)]}"/>
+                                <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}"/>
+                                <field name="total_area"/>
+                            </group>
+                        </page>
+                        <page string="Property Images">
+                            <group>
+                                <field name="image" widget="image" options="{'size': (200, 250)}"/>
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <field name="offer_ids"
+                                   attrs="{'readonly': [('state', 'in', ['offer_accepted','completed','excution','failure'])]}"/>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="client_id"/>
+                                <field name="contractor_id"/>
+                            </group>
+                        </page>
+                        <page string="Payments"
+                              attrs="{'invisible': [('state', 'in', ['new','offer_received'])]}">
+                            <field name="payment_ids" attrs="{'readonly': [('pending_amount', '=', 0)]}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Search View -->
+    <record id="property_management_view_search" model="ir.ui.view">
+        <field name="name">property.management.search</field>
+        <field name="model">property.management</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field name="name" string="Title"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="client_budget"/>
+                <field name="total_area"
+                       filter_domain="[('total_area', '>=', self)]"/>
+                <separator/>
+                <filter string="Available" name="available"
+                        domain="['|',('state', '=', 'new'),('state','=','offer_received')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Start Date" name="start_date"
+                            context="{'group_by':'start_date'}"/>
+                    <filter string="End Date" name="end_date"
+                            context="{'group_by':'end_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

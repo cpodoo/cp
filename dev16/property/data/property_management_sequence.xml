@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="property_management_sequence" model="ir.sequence">
+            <field name="name">property Management Sequence</field>
+            <field name="code">property.management.contract_id</field>
+            <field name="prefix">CM/%(year)s/</field>
+            <field name="suffix">/ODOO</field>
+            <field name="number_next_actual">0</field>
+        </record>
+    </data>
+</odoo>

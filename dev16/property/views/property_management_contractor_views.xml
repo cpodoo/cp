@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="property_management_contractor_action" model="ir.actions.act_window">
+        <field name="name">Contractors Details</field>
+        <field name="res_model">property.management.contractor</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+</odoo>
