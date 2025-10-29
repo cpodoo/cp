@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail_template_notify_user" model="mail.template">
+            <field name="name">New Notification Activated</field>
+            <field name="model_id" ref="cp_new_notification.model_new_update_notification"/>
+            <field name="email_from"></field>
+            <field name="email_to"></field> 
+            <field name="subject">You have a new active notification: {{ object.name }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0; padding: 0; font-family: 'Arial', sans-serif; font-size: 14px;">
+                    <p>Hello <strong><t t-out="object.user_notification_ids and object.user_notification_ids[0].user.partner_id.name"/></strong>,</p>
+                    <p>A new notification titled <strong><t t-out="object.name"/></strong> is now active.</p>
+                    <p><strong>Description:</strong><br/><t t-out="object.description"/></p>
+                    <p>Thank you!</p>
+                    <t t-if="user.signature">
+                        <br/>
+                        <t t-out="user.signature"/>
+                    </t>
+                </div>
+            </field>
+            <field name="auto_delete" eval="False"/> 
+        </record>
+    </data>
+</odoo>

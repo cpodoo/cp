@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="notication_popup_info" name="Notification Popup Content">
+        <div class="new_notification_content">
+            <t t-raw="newnoti.description"/>
+        </div>
+    </template>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_new_update_notification_manager,access.new.update.notification.manager,model_new_update_notification,base.group_erp_manager,1,1,1,1
+access_user_update_notification_manager,access.user.update.notification.manager,model_user_update_notification,base.group_erp_manager,1,1,1,1
+access_new_update_notification_user,access.new.update.notification.user,model_new_update_notification,base.group_user,1,1,1,1
+access_user_update_notification_user,access.user.update.notification.user,model_user_update_notification,base.group_user,1,1,1,1
