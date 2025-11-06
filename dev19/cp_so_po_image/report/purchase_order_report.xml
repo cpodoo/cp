@@ -11,14 +11,14 @@
                position="before">
             <th name="num" class="text-start">No.</th>
         </xpath>
-        <xpath expr="//t[@t-foreach='o.order_line']//td[@id='product']" position="after">
+        <xpath expr="//td[@id='product']" position="after">
             <t t-if="env['ir.config_parameter'].sudo().get_param('cp_so_po_image.purchase_product_image_report')">
-                <td class="text-right">
-                    <img t-if="line.image_128" t-att-src="image_data_uri(line.image_128)" style="width: 90%"/>
+                <td style="height:100px !important;width:100px !important;">
+                    <img t-att-src="image_data_uri(line.product_id.image_1920)" class="img-fluid"/>
                 </td>
             </t>
         </xpath>
-        <xpath expr="//t[@t-foreach='o.order_line']//td[@id='product']" position="before">
+        <xpath expr="//td[@id='product']" position="before">
             <td>
                 <span t-field="line.seq_no"/>
             </td>
@@ -36,18 +36,17 @@
         <xpath expr="//table[@class='table table-borderless']//thead/tr/th[@name='th_description']" position="before">
             <th name="num" class="text-start">No.</th>
         </xpath>
-        <xpath expr="//t[@t-foreach='o.order_line']//td[@id='product']" position="after">
+        <xpath expr="//td[@id='product']" position="after">
             <t t-if="env['ir.config_parameter'].sudo().get_param('cp_so_po_image.purchase_product_image_report')">
-                <td class="text-right">
-                    <img t-if="order_line.image_128" t-att-src="image_data_uri(order_line.image_128)"
-                         style="width: 90%"/>
+                <td style="height:100px !important;width:100px !important;">
+                    <img t-att-src="image_data_uri(order_line.product_id.image_1920)" class="img-fluid"/>
                 </td>
             </t>
             <td class="text-end">
                 <span t-field="order_line.price_unit"/>
             </td>
         </xpath>
-        <xpath expr="//t[@t-foreach='o.order_line']//td[@id='product']" position="before">
+        <xpath expr="//td[@id='product']" position="before">
             <td>
                 <span t-field="order_line.seq_no"/>
             </td>

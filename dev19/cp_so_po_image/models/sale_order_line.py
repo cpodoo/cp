@@ -4,7 +4,7 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     image_128 = fields.Image(related='product_id.image_1920', string='Image')
-    seq_no = fields.Integer(string='No.', compute="_compute_sequence")
+    seq_no = fields.Integer(string='No.', compute="_compute_sequence", store=True)
 
     @api.depends('order_id.order_line')
     def _compute_sequence(self):
