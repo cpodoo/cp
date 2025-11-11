@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_doctor_membership_form" model="ir.ui.view">
+	    <field name="name">Membership</field>
+	    <field name="model">doctor.membership</field>
+		<field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <group>
+                        <field name="membership_number"/>
+                        <field name="type_of_membership"/>
+                        <field name="valid_till"/>
+                        <field name="other_remarks"/>
+                        <field name="membership_attach" widget="many2many_binary" options="{'preview_image': 'membership_attach'}"/>
+                    </group>
+                </group>
+            </sheet>
+            <chatter/>
+        </form>
+		</field>
+	</record>
+
+    <record id="view_doctor_membership_list" model="ir.ui.view">
+	    <field name="name">Membership</field>
+	    <field name="model">doctor.membership</field>
+		<field name="arch" type="xml">
+            <list string = 'Membership'>
+                <field name="membership_number"/>
+            </list>
+		</field>
+	</record>
+</odoo>

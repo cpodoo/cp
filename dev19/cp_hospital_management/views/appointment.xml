@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Appointments -->
+	<record id="view_medical_appointment" model="ir.ui.view">
+	    <field name="name">appointment.calendar</field>
+	    <field name="model">appointment</field>
+	    <field name="type">calendar</field>
+	    <field name="arch" type="xml">
+	        <calendar string="Appointments" color="doctor" date_start="appointment_sdate">
+	            <field name="patient"/>
+	            <field name="doctor"/>
+	        </calendar>
+	    </field>
+	</record>
+	
+	<record id="action_view_move" model="ir.actions.act_window">
+	    <field name='name'>Move</field>
+	    <field name='res_model'>account.move</field>
+	</record>
+
+	<record model="ir.ui.view" id="medical_appointment_view">
+	    <field name="name">Appointment</field>
+	    <field name="model">appointment</field>
+	    <field name="arch" type="xml">
+	        <form string="Appointment">
+	
+	            <header>
+	               <button name="requested" string="Request" type="object" invisible="state != 'draft'"/>
+	               <button name="outcome" string="Outcome" type="object" invisible="state != 'requested'"/>
+	               <button name="create_invoices" class="btn-primary" string="Create Invoice" type="object" invisible="state != 'outcome' or invoice_id != False or no_invoice == True"/>
+	               <button name="cancel" string="Cancel" type="object" invisible="state not in ('draft', 'requested')"/>
+	               <field name="state" widget="statusbar" statusbar_visible="draft,requested,outcome,invoiced"/>
+	            </header>
+	
+	            <sheet>
+	                <div class="oe_button_box" name="button_box">
+	                    <button name="action_view_invoice" type="object" context="{'search_default_number': name,'default_number': name}"
+	                           invisible="invoice_count == 0" class="oe_stat_button" icon="fa-pencil-square-o">
+	                        <field string="Invoices" name="invoice_count" widget="statinfo" readonly="1"/>
+	                    </button>
+	
+	                </div>
+	                <group colspan="4" col="4">
+	                   <field name="name"/>
+	                   <field name="patient" domain="[('is_patient','=',True)]"/>
+	                   <field name="urgency"/>
+	                   <field name="request_date" />
+	                   <field name="doctor"  />
+	                   <field name="appointment_sdate" />
+	                   <field name="appointment_edate" />
+	                   <field name="pricelist_id"  />
+		            </group>
+			        <group string="Tests"> <!-- Added a new group for tests -->
+			           <field name="test_ids" widget="many2many_tags" options="{'no_create_edit': True}" required="1"/>
+			        </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	
+	<record model="ir.ui.view" id="medical_appointment_list">
+	    <field name="name">Appointments</field>
+	    <field name="model">appointment</field>
+	    <field name="arch" type="xml">
+	        <list string='Appointment Information' decoration-success="state=='draft'" decoration-info="state=='requested'" decoration-muted="state=='outcome'" decoration-danger="state=='cancel'">
+	            <field name="name"/>
+	            <field name="patient"/>
+	            <field name="urgency"/>
+	            <field name="appointment_sdate"/>
+	            <field name="doctor"/>
+	            <field name="state"/>
+	        </list>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="medical_action_form_appointment">
+	    <field name="name">Appointments</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">appointment</field>
+ 	    <field name="view_mode">calendar,list,form</field>
+	    <field name="view_id" ref="medical_appointment_list"/>
+	</record>
+	
+	<menuitem name="Appointments" id="menu_appointments" parent="menu_physicians" action="medical_action_form_appointment" sequence="1"/>
+	
+	<record id="view_medical_appointment_search" model="ir.ui.view">
+	    <field name="name">appointment.select</field>
+	    <field name="model">appointment</field>
+	    <field name="type">search</field>
+	    <field name="arch" type="xml">
+	        <search string="Search Appointments">
+	            <filter name="my_appointments" icon="terp-personal" string="My appointments" domain="[('user_id','=',uid)]"/>
+	            <newline/>
+	            <separator orientation="vertical"/>
+	            <field name="doctor" />
+	            <field name="patient" />
+	            <field name="appointment_sdate" />
+	            <newline/>
+	            <group expand="1" string="Group By..." >
+	                <filter name="doctor" string="Doctor" icon="terp-personal"  context="{'group_by':'doctor'}"/>
+	                <filter name="date" string="Date" icon="terp-go-month"  context="{'group_by':'appointment_sdate'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+</odoo>

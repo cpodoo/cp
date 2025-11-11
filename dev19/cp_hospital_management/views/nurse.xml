@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_nurse_data_form_view" model="ir.ui.view">
+	    <field name="name">Nurse</field>
+	    <field name="model">hr.employee</field>
+		<field name="inherit_id" ref="hr.view_employee_form"/>
+	    <field name="arch" type="xml">
+			<xpath expr = "//field[@name='job_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='job_title']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='address_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='grad_inst_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='is_pharmacist']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='consult_type']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='consult_charge']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='licence_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='mobile_phone']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='department_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='work_email']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='parent_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='company_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='coach_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//button[@name='%(cp_hospital_management.action_physician_appointments)d']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//button[@name='%(cp_hospital_management.action_physician_prescriptions)d']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr="//page[@name='personal_information']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr="//page[@name='hr_settings']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='degree_ids']" position = 'before'>
+				<field name="is_nurse"/>
+			</xpath>
+			<xpath expr = "//form/sheet/div/div/h1[@class='d-flex flex-row align-items-center']" position = 'before'>
+				<h1 invisible="not is_nurse">
+					<field name="seq_no" style="line-height:0.01"/>
+				</h1>
+			</xpath>
+			<xpath expr = "//field[@name='work_phone']" position="before">
+				<field name="degree" widget="many2many_tags" required="is_nurse"/>
+				<field name="institute" required="is_nurse"/>
+				<field name="role" widget="many2many_tags" options="{'no_quick_create': True, 'no_create_edit' : True}" required="is_nurse"/>
+				<field name="nmc_no"/>
+				<field name="work_email" widget="email" required="is_nurse"/>
+			</xpath>
+			<xpath expr = "//field[@name='work_phone']" position="attributes">
+				<attribute name="invisible">False</attribute>
+				<attribute name="string">Work Mobile</attribute>
+				<attribute name="invisible">0</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='department_id']" position="after">
+				<label for="street" string="Address"/>
+				<div class="o_address_format">
+					<field name="street" placeholder="Street..." class="o_address_street"/>
+					<field name="street2" placeholder="Street 2..." class="o_address_street"/>
+					<field name="city" placeholder="City" class="o_address_city"/>
+					<field name="state_id" class="o_address_state" placeholder="Status" options='{"no_open": True}'/>
+					<field name="nurse_zip" placeholder="ZIP" class="o_address_zip" />
+					<field name="nurse_country_id" placeholder="Country" class="o_address_country" options='{"no_open": True}'/>
+				</div>
+				<field name="user_id"/>
+				<field name="availibility_check"/>
+				<field name="nurse_sex"/>
+			</xpath>
+			<xpath expr="//notebook/page[@name='public']" position="replace">
+				<page string="General Info">
+					<group>
+						<group>
+							<field name="health_centre_id" widget="many2many_tags" required="is_nurse"/>
+
+							<field name="nurse_general_info_ids" widget="many2many_binary"/>
+						</group>
+						<group>
+
+							<field name="nurse_dob"  required="is_nurse"/>
+						</group>
+					</group>
+				</page>
+				<page name="bank_details" string="Bank Details" autofocus="autofocus">
+					<group>
+						<group>
+							<field name="bank_name" required="is_nurse"/>
+							<field name="acc_no" required="is_nurse"/>
+							<field name="sort_code" required="is_nurse"/>
+							<field name="swift_code" required="is_nurse"/>
+							<field name="iban_code" required="is_nurse"/>
+						</group>
+					</group>
+				</page>
+				<page name="nurse_work_details" string="Work Permit" autofocus="autofocus">
+					<group>
+						<group>
+							<field name="citizenship_ids" widget="many2many_tags"/>
+							<field name="national_insurance_no"/>
+							<field name="work_permit"/>
+							<field name="work_validity"/>
+							<field name="nurse_permit_attach_ids" widget="many2many_binary"/>
+						</group>
+					</group>
+				</page>
+				<page name="nurse_dbs_details" string="DBS Details" autofocus="autofocus">
+					<group>
+						<group>
+							<field name="dbs_no"/>
+							<field name="certification_validity"/>
+						</group>
+					</group>
+				</page>
+				<page name="vaccine_details" string="Vaccination" autofocus="autofocus">
+					<field name = 'vaccine_ids'>
+						<list editable="bottom">
+							<field name="name"/>
+							<field name="date"/>
+							<field name="validity_date"/>
+							<field name="certificate_ids" widget="many2many_binary"/>
+						</list>
+					</field>
+				</page>
+				<page name="training_details" string="Training" autofocus="autofocus">
+					<group>
+						<group>
+							<field name = 'training'/>
+						</group>
+					</group>
+				</page>
+				<page name="work_exp" string="Work Experience" autofocus="autofocus">
+				</page>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="view_nurse_masters_data_kanban_view" model="ir.ui.view">
+	    <field name="name">Nurse</field>
+	    <field name="model">hr.employee</field>
+		<field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+	    <field name="arch" type="xml">
+			<xpath expr = "//field[@name='name']" position = 'before'>
+				<field name="is_nurse" invisible="1"/>
+				<div invisible="not is_nurse">
+					<b><field name="seq_no"/></b>
+				</div>
+			</xpath>
+		</field>
+	</record>
+
+   
+    <record id="hr_employee_calendar_new_form_view" model="ir.ui.view">
+		<field name="name">Nurse</field>
+		<field name="model">hr.employee</field>
+		<field name="arch" type="xml">
+			<calendar string="Nurse" date_start="work_validity" date_stop="work_validity"  >
+				<field name="name"/>
+			</calendar>
+		</field>
+	</record>
+    <!--  <record id="hr_employee_calendar_new_form_view" model="ir.ui.view">
+		<field name="name">Nurse</field>
+		<field name="model">hr.employee</field>
+		<field name="arch" type="xml">
+			<calendar string="Nurse" date_start="work_validity">
+				<field name="name"/>
+			</calendar>
+		</field>
+	</record> -->
+
+
+	<record id="action_nurse_form" model="ir.actions.act_window">
+		<field name="name">Nurse</field>
+		<field name="res_model">hr.employee</field>
+		<field name="context">{'default_is_nurse': 1}</field>
+		<field name="domain">[('is_nurse','=',True)]</field>
+		<field name="view_mode">calendar,kanban,list,form</field>
+	</record>
+
+	<menuitem name="Nurse" id="menu_nurse" parent = "menu_master_data" action="action_nurse_form" sequence="2"/>
+
+</odoo>

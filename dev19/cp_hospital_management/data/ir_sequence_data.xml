@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequences for inpatient.admissions -->
+        <record id="seq_inpatient_admission" model="ir.sequence">
+            <field name="name">Inpatient Admissions</field>
+            <field name="code">inpatient.admissions</field>
+            <field name="prefix">IN</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for appointments -->
+        <record id="seq_appointment" model="ir.sequence">
+            <field name="name">Appointment</field>
+            <field name="code">medical.appointment</field>
+            <field name="prefix">AP</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- Sequences for prescription -->
+        <record id="seq_prescription" model="ir.sequence">
+            <field name="name">Prescription</field>
+            <field name="code">prescription</field>
+            <field name="prefix">PR</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- Sequences for evaluation -->
+        <record id="seq_evaluation" model="ir.sequence">
+            <field name="name">Evaluation</field>
+            <field name="code">evaluation</field>
+            <field name="prefix">EV</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- Sequences for call log-->
+        <record id="seq_call_log" model="ir.sequence">
+            <field name="name">Call Log</field>
+            <field name="code">call.log</field>
+            <field name="prefix">CL/%(year)s-%(month)s-%(day)s/</field>
+            <field name="padding">5</field>
+        </record>
+
+
+         <!--Sequences for lab tests -->
+        <record id="seq_lab_test" model="ir.sequence">
+            <field name="name">lab test</field>
+            <field name="code">lab.tests</field>
+            <field name="prefix">LT</field>
+            <field name="padding">5</field>
+        </record>
+
+
+        <!--Sequences for Imaging tests -->
+        <record id="seq_imaging_test" model="ir.sequence">
+            <field name="name">Imaging lab test</field>
+            <field name="code">imaging.test</field>
+            <field name="prefix">IM</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!--Sequences for Surgeries-->
+        <record id="seq_surgery" model="ir.sequence">
+            <field name="name">Surgery</field>
+            <field name="code">surgery</field>
+            <field name="prefix">SR/%(year)s-%(month)s-%(day)s/</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="sequence_patient_number" model="ir.sequence">
+           <field name="name">Patient</field>
+           <field name="code">res.partner</field>
+           <field name="active">TRUE</field>
+            <field name="prefix">P</field>
+           <field name="padding">5</field>
+           <field name="number_next">1</field>
+           <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_doctor_number" model="ir.sequence">
+           <field name="name">Doctor</field>
+           <field name="code">doctor.record</field>
+           <field name="active">TRUE</field>
+            <field name="prefix">D</field>
+           <field name="padding">5</field>
+           <field name="number_next">1</field>
+           <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_nurse_number" model="ir.sequence">
+           <field name="name">Nurse</field>
+           <field name="code">hr.employee</field>
+           <field name="active">TRUE</field>
+            <field name="prefix">N</field>
+           <field name="padding">4</field>
+           <field name="number_next">1</field>
+           <field name="number_increment">1</field>
+        </record>
+
+    </data>
+</odoo>

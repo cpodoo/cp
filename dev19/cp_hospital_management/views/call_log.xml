@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="view_call_log_list">
+	    <field name="name">call.log.list</field>
+	    <field name="model">call.log</field>
+	    <field name="arch" type="xml">
+	        <list string="Call Logs Information">
+	            <field name="name" readonly="1"/>
+	            <field name="call_type" required="1"/>
+	            <field name="log_date" required="1"/>
+	            <field name="patient" required="1"/>
+	            <field name="person_in_charge" required="1"/>
+	            <field name="call_log" required="1"/>
+	        </list>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_call_log_form">
+	    <field name="name">call.log.form</field>
+	    <field name="model">call.log</field>
+	    <field name="arch" type="xml">
+	        <form string="Call Logs">
+	            <sheet>
+	                <div class="oe_left" style="width: 500px;">
+	                    <div class="oe_title">
+	                    <h1>
+	                        <field name="name" readonly="1" placeholder="Name"/>
+	                    </h1>
+	                </div>
+	            </div>
+	            <group>
+	                <group>
+	                    <field name="patient" domain="[('is_patient','=',True)]" required="1"/>
+	                    <field name="person_in_charge" options="{'no_create': True}" readonly="1" required="1"/>
+	                </group>
+	                <group>
+	                    <field name="call_type" required="1"/>
+	                    </group>
+	                </group>
+	                <group>
+	                    <field name="log_date" required="1"/>
+	                </group>
+	                <group string="Call Log">
+	                    <group>
+	                        <field name="call_log" nolabel="1" required="1"/>
+	                    </group>
+	                </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	<record model="ir.actions.act_window" id="action_call_log">
+	    <field name="name">Call Log</field>
+	    <field name="res_model">call.log</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	<menuitem name="Call Logs" id="menu_call_log" parent="menu_patient_management" action="action_call_log" sequence="4"/>
+
+</odoo>

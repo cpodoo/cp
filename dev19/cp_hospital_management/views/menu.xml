@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<menuitem name="Hospital Management"
+			  web_icon="cp_hospital_management,static/description/icon.png"
+			  id="menu_root_hospital_management"/>
+	<menuitem name="Health Center" id="menu_health_centers_main" parent="menu_root_hospital_management" sequence="0"/>
+	<menuitem name="Patient" id="menu_patient_management" parent="menu_root_hospital_management" sequence="1"/>
+	<menuitem name="Physicians &amp; Appointments " id="menu_physicians" parent="menu_root_hospital_management" sequence="2"/>
+	<menuitem name="Pediatrics" id="menu_pediatrics" parent="menu_root_hospital_management" sequence="3"/>
+	<menuitem name="Insurance" id="menu_insurance_management" parent="menu_root_hospital_management" sequence="4"/>
+	<menuitem name="Laboratory" id="menu_laboratory" parent="menu_root_hospital_management" sequence="5"/>
+	<menuitem name="Imaging" id="menu_imaging_main" parent="menu_root_hospital_management" sequence="6"/>
+	<menuitem name="Configuration" id="menu_config" parent="menu_root_hospital_management" sequence="7"/>
+	<menuitem name="Health &amp; Products" id="menu_health_product_config" parent="menu_config" sequence="4"/>
+
+</odoo>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_physician_appointments" model="ir.actions.act_window">
+        <field name="name">Physician Appointments</field>
+        <field name="res_model">appointment</field>
+    </record>
+
+    <record id="action_physician_prescriptions" model="ir.actions.act_window">
+        <field name="name">Physician Prescription</field>
+        <field name="res_model">prescription</field>
+    </record>
+
+    <record id="view_physician_form" model="ir.ui.view">
+        <field name="name">physician.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_button_box']" position="inside">
+                <button type="action" class="oe_stat_button" name="%(action_physician_appointments)d" icon="fa-calendar" groups="hr.group_hr_user">
+                    <field string="Appointments" name="app_count" widget="statinfo" readonly="1"/>
+                </button>
+                <button type="action" class="oe_stat_button" name="%(action_physician_prescriptions)d" icon="fa-list" groups="hr.group_hr_user">
+                    <field string="Prescriptions" name="prescription_count" widget="statinfo" readonly="1"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="placeholder">Name</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_ids']" position="replace">
+                <field name="speciality_id" placeholder="Speciality" options="{'no_create': False, 'no_edit': False}" />
+            </xpath>
+            <xpath expr="//h2/field[@name='job_title']" position="after">
+                <group>
+                    <group>
+                        <field name="degree_ids" widget="many2many_tags" placeholder="Degrees..." options="{'no_create': False, 'no_edit': False}" />
+                        <field name="grad_inst_id" string="Graduation Institute" options="{'no_create': True}" />
+                        <field name="is_pharmacist" />
+                    </group>
+                    <group>
+                        <field name="consult_type" />
+                        <field name="consult_charge" />
+                        <field name="licence_id" />
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='hr_settings']" position="attributes">
+                <attribute name="string">General</attribute>
+            </xpath>
+            <xpath expr="//group/group/label[@for='private_street']" position="attributes">
+                <attribute name="string">Working Institute</attribute>
+            </xpath>
+            <xpath expr="//group/field[@name='work_email']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//group/field[@name='work_phone']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+             <xpath expr="//field[@name='job_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='%(hr.plan_wizard_action)d']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//page/group" position="inside">
+                <group string="Other Information">
+                    <field name="resp"/>
+                    <field name="work_phone"/>
+                    <field name="work_location"/>
+                </group>
+            </xpath>
+            <xpath expr="//notebook/page[@name='hr_settings']" position="after">
+                <page string="Weekly Availability" autofocus="autofocus">
+                </page>
+                <page string="Extra Info" autofocus="autofocus">
+                </page>
+            </xpath>
+            <xpath expr="//page/group/group[2]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//notebook/page[last()-1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//notebook/page[last()]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_physician">
+        <field name="name">Physicians</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="domain">[('is_physician', '=', True)]</field>
+        <field name="context">{'default_is_physician': True}</field>
+    </record>
+
+    <menuitem name="Physicians" id="menu_my_profile" parent="menu_physicians" action="action_physician" sequence="0"/>
+    <menuitem name="Configuration" id="menu_config" parent="menu_physicians" sequence="100"/>
+    <menuitem name="Physicians" id="menu_physician_config" parent="menu_config" sequence="1"/>
+
+    <record id="view_physician_speciality_list" model="ir.ui.view">
+        <field name="name">physician.speciality.list</field>
+        <field name="model">physician.speciality</field>
+        <field name="arch" type="xml">
+            <list string="Speciality" editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+            </list>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_physician_speciality">
+        <field name="name">Physician Speciality</field>
+        <field name="res_model">physician.speciality</field>
+        <field name="view_mode">list</field>
+    </record>
+    <menuitem name="Specialities" id="menu_physician_speciality" parent="menu_physician_config" action="action_physician_speciality" sequence="0"/>
+
+    <record id="view_physician_degree_list" model="ir.ui.view">
+        <field name="name">physician.degree.list</field>
+        <field name="model">physician.degree</field>
+        <field name="arch" type="xml">
+            <list string="Degree" editable="bottom">
+                <field name="name"/>
+                <field name="full_form"/>
+            </list>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_physician_degree">
+        <field name="name">Physician Degree</field>
+        <field name="res_model">physician.degree</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem name="Degrees" id="menu_physician_degree" parent="menu_physician_config" action="action_physician_degree" sequence="1"/>
+
+</odoo>

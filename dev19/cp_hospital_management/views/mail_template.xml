@@ -1,0 +1,17 @@
+<odoo>
+	<record id="patients_email_template" model="mail.template">
+		<field name="name">Patient: Template</field>
+		<field name="model_id" ref="base.model_res_partner"></field>
+		<field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+		<field name="email_to">${object.patient_email}</field>
+		<field name="subject">${object.name}</field>
+		<field name="body_html" type="html">
+		    <div style="margin: 0px; padding: 0px;">Hello <strong>${object.name}</strong>,
+		    <p>Please find the attached document for your reference</p>
+		    <p>Regards,</p>
+		    <p>RSA Surgical</p>
+		    </div>
+		</field>
+	</record>
+
+</odoo>

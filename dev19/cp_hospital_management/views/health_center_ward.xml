@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_ward_search" model="ir.ui.view">
+	    <field name="name">ward.search</field>
+	    <field name="model">health.center.ward</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Ward">
+	            <field name="name"/>
+	            <field name="institution"/>
+	            <field name="building"/>
+	            <field name="gender"/>
+	            <newline />
+	            <group expand="0" string="Group By...">
+	                <filter name="health_center" string="Health Center"  context="{'group_by': 'institution'}"/>
+	                <filter name="building" string="Building"  context="{'group_by': 'building'}"/>
+	                <filter name="type" string="Type"  context="{'group_by': 'gender'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	<record id="view_ward_detail_list" model="ir.ui.view">
+	    <field name="name">ward.list</field>
+	    <field name="model">health.center.ward</field>
+	    <field name="arch" type="xml">
+	        <list string="Wards" >
+	            <field name="name" required="1"/>
+	            <field name="institution" required="1"/>
+	            <field name="building" required="1"/>
+	            <field name="floor" />
+	            <field name="gender" />
+	            <field name="state" />
+	        </list>
+	    </field>
+	</record>
+	<record id="view_ward_form" model="ir.ui.view">
+	    <field name="name">ward.form</field>
+	    <field name="model">health.center.ward</field>
+	    <field name="arch" type="xml">
+	        <form string="Wards">
+	            <header>
+	                <field name="state" widget="statusbar" clickable="True"/>
+	            </header>
+	            <sheet>
+	                <div class="oe_left" style="width: 500px;">
+	                    <div class="oe_title" style="width: 390px;">
+	                        <h1>
+	                            <field name="name" class="oe_inline" required="1"/>
+	                        </h1>
+	                    </div>
+	                </div>
+	                <group>
+	                    <group>
+	                        <field name="institution" required="1"/>
+	                        <field name="floor" />
+	                        <field name="private" />
+	                    </group>
+	                    <group>
+	                        <field name="building" domain="[('institution','=',institution)]" context="{'default_institution': institution}" required="1"/>
+	                        <field name="gender" />
+	                        <field name="bio_hazard" />
+	                    </group>
+	                </group>
+	                <group string="Facilities">
+	                    <group>
+	                        <field name="telephone" />
+	                        <field name="private_bathroom" />
+	                        <field name="tv" />
+	                        <field name="refrigerator" />
+	                    </group>
+	                    <group>
+	                        <field name="ac" />
+	                        <field name="guest_sofa" />
+	                        <field name="internet" />
+	                        <field name="microwave" />
+	                    </group>
+	                </group>
+	                <group string="Extra Information">
+	                    <field name="info" nolabel="1" />
+	                </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="action_health_center_ward">
+	    <field name="name">Wards</field>
+	    <field name="res_model">health.center.ward</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	
+	<menuitem name="Wards" id="menu_health_center_ward" parent="menu_health_centers_main" action="action_health_center_ward" sequence="2"/>
+
+</odoo>

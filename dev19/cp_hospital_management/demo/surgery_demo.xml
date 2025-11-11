@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Surgery type data-->
+        <record id="surgery_type_1" model="surgery.type">
+            <field name="name">Meniscectomy</field>
+            <field name="charge">500000</field>
+        </record>
+
+        <record id="surgery_type_2" model="surgery.type">
+            <field name="name">Shoulder Arthroscopy</field>
+            <field name="charge">450000</field>
+        </record>
+
+        <record id="surgery_type_3" model="surgery.type">
+            <field name="name">Chondroplasty</field>
+            <field name="charge">650000.0</field>
+        </record>
+
+        <record id="surgery_type_4" model="surgery.type">
+            <field name="name">Ligament reconstruction</field>
+            <field name="charge">560000.0</field>
+        </record>
+
+        <record id="surgery_type_5" model="surgery.type">
+            <field name="name">Knee Arthroscopy</field>
+            <field name="charge">550000.0</field>
+        </record>
+
+        <!--Surgery data-->
+        <!-- <record id="surgery_1" model="surgery">
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="surgeon" ref="hr.employee_qdp"/>
+            <field name="anesthetist" ref="hr.employee_admin"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_1"/>
+            <field name="operating_room" ref="cp_hospital_management.ot_1"/>
+            <field name="building" ref="cp_hospital_management.building_1"/>
+            <field name="classification">Optional</field>
+            <field name="state">Draft</field>
+            <field name="surgery_type_id" ref="surgery_type_1"/>
+        </record>
+
+        <record id="surgery_2" model="surgery">
+            <field name="patient" ref="base.res_partner_2"/>
+            <field name="surgeon" ref="hr.employee_admin"/>
+            <field name="anesthetist" ref="hr.employee_qdp"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_2"/>
+            <field name="building" ref="cp_hospital_management.building_2"/>
+            <field name="operating_room" ref="cp_hospital_management.ot_2"/>
+            <field name="classification">Required</field>
+            <field name="state">Confirmed</field>
+            <field name="surgery_type_id" ref="surgery_type_2"/>
+        </record>
+
+        <record id="surgery_3" model="surgery">
+            <field name="patient" ref="base.res_partner_3"/>
+            <field name="surgeon" ref="hr.employee_qdp"/>
+            <field name="anesthetist" ref="hr.employee_admin"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_3"/>
+            <field name="building" ref="cp_hospital_management.building_3"/>
+            <field name="operating_room" ref="cp_hospital_management.ot_3"/>
+            <field name="classification">Optional</field>
+            <field name="state">Draft</field>
+            <field name="surgery_type_id" ref="surgery_type_3"/>
+        </record>
+
+        <record id="surgery_4" model="surgery">
+            <field name="patient" ref="base.res_partner_4"/>
+            <field name="surgeon" ref="hr.employee_admin"/>
+            <field name="anesthetist" ref="hr.employee_qdp"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_1"/>
+            <field name="building" ref="cp_hospital_management.building_1"/>
+            <field name="operating_room" ref="cp_hospital_management.ot_1"/>
+            <field name="classification">Urgent</field>
+            <field name="state">In Progress</field>
+            <field name="surgery_type_id" ref="surgery_type_4"/>
+        </record>
+
+        <record id="surgery_5" model="surgery">
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="surgeon" ref="hr.employee_qdp"/>
+            <field name="anesthetist" ref="hr.employee_admin"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_3"/>
+            <field name="building" ref="cp_hospital_management.building_3"/>
+            <field name="operating_room" ref="cp_hospital_management.ot_3"/>
+            <field name="classification">Emergency</field>
+            <field name="state">Done</field>
+            <field name="surgery_type_id" ref="surgery_type_5"/>
+        </record>
+
+        <record id="surgery_6" model="surgery">
+            <field name="patient" ref="base.res_partner_3"/>
+            <field name="surgeon" ref="hr.employee_admin"/>
+            <field name="anesthetist" ref="hr.employee_qdp"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_2"/>
+            <field name="building" ref="cp_hospital_management.building_2"/>
+            <field name="operating_room" ref="cp_hospital_management.ot_2"/>
+            <field name="classification">Optional</field>
+            <field name="state">Cancelled</field>
+            <field name="surgery_type_id" ref="surgery_type_1"/>
+        </record> -->
+        
+    </data>
+</odoo>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_prescription_search" model="ir.ui.view">
+	    <field name="name">Prescription.search</field>
+	    <field name="model">prescription</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Prescription">
+	            <field name="name"/>
+	            <field name="patient"/>
+	            <field name="date"/>
+	            <field name="doctor"/>
+	            <field name="pharmacy"/>
+	            <newline />
+	            <group expand="0" string="Group By...">
+	                <filter name="physician" string="Physician" context="{'group_by': 'doctor'}"/>
+	                <filter name="patient" string="Patient" context="{'group_by': 'patient'}"/>
+	                <filter name="pharmacy" string="Pharmacy" context="{'group_by': 'pharmacy'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_prescription_list">
+	    <field name="name">prescription.list</field>
+	    <field name="model">prescription</field>
+	    <field name="arch" type="xml">
+	        <list string="Prescriptions">
+	            <field name="name"/>
+	            <field name="patient"/>
+	            <field name="date"/>
+	            <field name="doctor"/>
+	            <field name="pharmacy"/>
+	            <field name="state"/>
+	        </list>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_prescription_form">
+	    <field name="name">prescription.form</field>
+	    <field name="model">prescription</field>
+	    <field name="arch" type="xml">
+	        <form string="Prescriptions">
+	            <header>
+	                 <button name="create_invoices" class="btn-primary" string="Create Invoice" type="object" invisible="state != 'Draft'"/>
+	                 <button name="cancel" string="Cancel" type="object" class="oe_link" invisible="state != 'Draft'"/>
+	                 <field name="state" widget="statusbar" statusbar_visible="Draft,Invoiced" statusbar_colors="{'Draft':'blue','Invoiced':'grey'}" readonly="1"/>
+	
+	             </header>
+	             <sheet>
+	
+	                 <div class="oe_button_box" name="button_box">
+						<button name="action_view_invoice" type="object" context="{'search_default_number': name,'default_number': name}"
+						invisible="invoice_count == 0" class="oe_stat_button" icon="fa-pencil-square-o">
+						<field string="Invoices" name="invoice_count" widget="statinfo" readonly="1"/>
+						</button>
+					</div>
+	
+	                  <div class="oe_left" style="width: 500px;">
+	                      <div class="oe_title">
+	                        <h1>
+	                            <field name="name" readonly="1" required="1"/>
+	                        </h1>
+	                    </div>
+	                </div>
+	                <group>
+	                    <group>
+	                        <field name="patient" domain="[('is_patient','=',True)]" required="1"/>
+	                        <field name="pharmacy" options="{'no_create': True}" />
+	                    </group>
+	                    <group>
+	                        <field name="doctor" options="{'no_create': True}" required="1"/>
+	                        <field name="date"/>
+	                    </group>
+	                </group>
+	                <notebook>
+	                    <page string="Prescription Lines">
+	                        <field name="prescription_line" context="{'patient':patient,'pharmacy':pharmacy}">
+	                            <list string="Prescription Lines">
+	                                <field name="name"/>
+	                                <field name="indication"/>
+	                                <field name="dose"/>
+	                                <field name="frequency_unit"/>
+	                                <field name="dose_form"/>
+	                                <field name="frequency"/>
+	                                <field name="duration"/>
+	                                <field name="duration_period"/>
+	                                <field name="info" string="Comment"/>
+	                            </list>
+	                            <form string="Prescription Lines">
+	                                <group col="4">
+	                                    <field name="name"/>
+	                                    <field name="indication"/>
+	                                    <field name="dose_form"/>
+	                                    <field name="dose_route"/>
+	                                    <field name="start_treatment"/>
+	                                    <field name="end_treatment"/>
+	                                    <field name="patient" invisible="1"/>
+	                                    <field name="pharmacy" invisible="1"/>
+	                                </group>
+	                                <group>
+	                                    <group string="Dosage">
+	                                        <field name="qty"/>
+	                                        <label for="dose" string="Dose" />
+	                                        <div class="address_format">
+	                                            <field name="dose" style="width: 25%" />
+	                                            <field name="dose_unit" placeholder='unit' style="width: 33%" />
+	                                        </div>
+	                                    </group>
+	                                    <group string="Common Dosage" col="2">
+	                                        <field name="common_dosage"/>
+	                                        <field name="admin_times"/>
+	                                    </group>
+	                                </group>
+	
+	                                <separator string="Specific Dosage"/>
+	                                <div>Time in between doses the patient must wait (ie, for 1 pill each 9 hours, put here 9 and select 'hours' in the unit field.</div>
+	                                <group col="4">
+	                                    <field name="frequency"/>
+	                                    <field name="frequency_unit"/>
+	                                </group>
+	
+	                                <separator string="Treatment"/>
+	                                <div>Treatment period that the patient must take the medication in minutes, hours, days, months, years or indefinitely.</div>
+	                                <group col="4">
+	                                    <field name="duration"/>
+	                                    <field name="duration_period"/>
+	                                </group>
+	
+	                                <separator string="Comment"/>
+	                                <field name="info"/>
+	                            </form>
+	                        </field>
+	                    </page>
+	                    <page string="Notes">
+	                        <field name="info" nolabel="1"/>
+	                    </page>
+	                </notebook>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	<record model="ir.actions.act_window" id="action_prescription">
+	    <field name="name">Prescription</field>
+	    <field name="res_model">prescription</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	<menuitem name="Prescriptions" id="menu_prescription" parent="menu_physicians" action="action_prescription" sequence="2"/>
+
+</odoo>

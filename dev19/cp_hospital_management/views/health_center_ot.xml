@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_ot_list" model="ir.ui.view">
+	    <field name="name">ot.list</field>
+	    <field name="model">health.center.ot</field>
+	    <field name="arch" type="xml">
+	        <list string="Operating Theaters" >
+	            <field name="name" required="1"/>
+	            <field name="institution"  />
+	            <field name="building"  />
+	            <field name="state" />
+	        </list>
+	    </field>
+	</record>
+	<record id="view_ot_form" model="ir.ui.view">
+	    <field name="name">ot.form</field>
+	    <field name="model">health.center.ot</field>
+	    <field name="arch" type="xml">
+	        <form string="Operating Theaters">
+	            <header>
+	                <button confirm="Are you sure you want to mark OT as Free?" name="set_to_free" invisible="state == 'Free'" string="Mark as Free" type="object" class="oe_highlight"/>
+	                <button confirm="Are you sure you want to mark OT as Reserved?" name="set_to_reserved"  invisible="state == 'Reserved'" string="Mark as Reserved" type="object" class="oe_highlight"/>
+	                <button confirm="Are you sure you want to mark OT as Occupied?" name="set_to_occupied" invisible="state == 'Occupied'" string="Mark as Occupied" type="object" class="oe_highlight"/>
+	                <button confirm="Are you sure you want to mark OT as Not Available?" name="set_to_not_available" invisible="state == 'Not Available'" string="Mark as Not Available" type="object" class="oe_highlight"/>
+	                <field name="state" widget="statusbar" statusbar_visible="Free,Reserved,Occupied,Not Available" statusbar_colors="{'Occupied':'red','Free':'blue','Reserved':'purple','Not Available':'grey'}" />
+	            </header>
+	            <sheet>
+	                <div class="oe_left" style="width: 500px;">
+	                    <div class="oe_title" style="width: 390px;">
+	                        <h1>
+	                            <field name="name" class="oe_inline"  required="1" placeholder="Name"/>
+	                        </h1>
+	                    </div>
+	                </div>
+	                <group col="4">
+	                    <field name="institution" />
+	                    <field name="building" domain="[('institution','=',institution)]" context="{'default_institution': institution}" />
+	
+	                </group>
+	                <group string="Extra Information">
+	                    <field name="info" nolabel="1" />
+	                </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	<record model="ir.actions.act_window" id="action_health_center_ot">
+	    <field name="name">Operating Room</field>
+	    <field name="res_model">health.center.ot</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	<menuitem name="Operating Room" id="menu_health_center_ot" parent="menu_health_centers_main" action="action_health_center_ot" sequence="4"/>
+
+</odoo>

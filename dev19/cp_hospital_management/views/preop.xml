@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_preop_assesment_list" model="ir.ui.view" >
+        <field name="name">preop.assesment_list</field>
+        <field name="model">preop.assesment</field>
+        <field name="arch" type="xml">
+            <list string="Pre_Op Assesment">
+                <field name="date"/>
+                <field name="admission_date"/>
+                <field name="procedure_id"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="view_preop_assesment_form" model="ir.ui.view">
+        <field name="name">preop.assesment_form</field>
+        <field name="model">preop.assesment</field>
+        <field name="arch" type="xml">
+            <form string="Pre_Op Assesment">
+                <sheet>
+                    <group col="4">
+                        <field name="date"/>
+                        <field name="admission_date"/>
+                        <field name="procedure_id"/>
+                        <field name="procedure_date"/>
+                        <field name="surgeon"/>
+                        <field name="surgical_center"/>
+                        <field name="anaesthesia"/>
+                        <field name="stay"/>
+                        <field name="id_check_by"/>
+                    </group>
+                    <notebook>
+
+                        <page string="Patient Information">
+                            <group>
+                                <group string="Information">
+                                    <!-- <field name="title"/> -->
+                                    <field name="height"/>
+                                    <field name="occupation"/>
+                                    <label for="street" string="Address"/>
+                                    <div>
+                                        <field name="street" placeholder="Street..."/>
+                                        <field name="street2" placeholder="Street2..."/>
+                                        <div class="address_format">
+                                            <field name="city" placeholder="City" style="width: 40%"/>
+                                            <field name="state_id" class="oe_no_button" placeholder="Status"
+                                                   style="width: 37%" options="{'no_open': True}" can_create="true"
+                                                   can_write="true"/>
+                                            <field name="zip" placeholder="ZIP" style="width: 20%"/>
+                                        </div>
+                                        <field name="country_id" placeholder="Country" class="oe_no_button"
+                                               options="{'no_open': True, 'no_create': True}" can_create="true"
+                                               can_write="true"/>
+                                    </div>
+                                    <field name="home_telephone"/>
+                                    <field name="email"/>
+                                </group>
+                                <group string="GP Details">
+                                    <field name="nhs_number"/>
+                                    <field name="gp_name"/>
+                                    <label for="street" string="Address"/>
+                                    <div>
+                                        <field name="gp_street" placeholder="Street..."/>
+                                        <field name="gp_street2" placeholder="Street2..."/>
+                                        <div class="address_format">
+                                            <field name="gp_city" placeholder="City" style="width: 40%"/>
+                                            <field name="gp_state_id" class="oe_no_button" placeholder="Status"
+                                                   style="width: 37%" options="{'no_open': True}" can_create="true"
+                                                   can_write="true"/>
+                                            <field name="gp_zip" placeholder="ZIP" style="width: 20%"/>
+                                        </div>
+                                        <field name="gp_country_id" placeholder="Country" class="oe_no_button"
+                                               options="{'no_open': True, 'no_create': True}" can_create="true"
+                                               can_write="true"/>
+                                    </div>
+                                    <field name="gp_telephone"/>
+                                    <field name="gp_email"/>
+                                </group>
+                            </group>
+
+                            <group string="Additional Information"/>
+                            <h3>If you are under the care of any other health care professional (specialist
+                                doctor,ophthalmologist, or psychiatrist) please provide full details below.
+                            </h3>
+                            <group>
+                                <group>
+                                    <field name="add_name"/>
+                                    <label for="street" string="Address"/>
+                                    <div>
+                                        <field name="add_street" placeholder="Street..."/>
+                                        <field name="add_street2" placeholder="Street2..."/>
+                                        <div class="address_format">
+                                            <field name="add_city" placeholder="City" style="width: 40%"/>
+                                            <field name="add_state_id" class="oe_no_button" placeholder="Status"
+                                                   style="width: 37%" options="{'no_open': True}" can_create="true"
+                                                   can_write="true"/>
+                                            <field name="add_zip" placeholder="ZIP" style="width: 20%"/>
+                                        </div>
+                                        <field name="add_country_id" placeholder="Country" class="oe_no_button"
+                                               options="{'no_open': True, 'no_create': True}" can_create="true"
+                                               can_write="true"/>
+                                    </div>
+                                    <field name="add_telephone"/>
+                                    <field name="add_email"/>
+                                </group>
+                            </group>
+
+                            <group string="Patient’s Health Questionnaire" col="2">
+                                <group>
+                                    <field name="chest_angina"/>
+                                    <label for="chest_angina_text" string=" "/>
+                                    <field name="chest_angina_text" nolabel="1"
+                                           attrs="{'invisible':[('chest_angina','!=','yes')]}"/>
+                                    <field name="heart_attack"/>
+                                    <label for="heart_attack_text" string=" "/>
+                                    <field name="heart_attack_text" nolabel="1"
+                                           attrs="{'invisible':[('heart_attack','!=','yes')]}"/>
+                                    <field name="palpi_heartmurmur"/>
+                                    <label for="palpi_heartmurmur_text" string=" "/>
+                                    <field name="palpi_heartmurmur_text" nolabel="1"
+                                           attrs="{'invisible':[('palpi_heartmurmur','!=','yes')]}"/>
+                                    <field name="high_blood_pressure"/>
+                                    <label for="high_blood_pressure_text" string=" "/>
+                                    <field name="high_blood_pressure_text" nolabel="1"
+                                           attrs="{'invisible':[('high_blood_pressure','!=','yes')]}"/>
+                                    <field name="blackout_faints"/>
+                                    <label for="blackout_faints_text" string=" "/>
+                                    <field name="blackout_faints_text" nolabel="1"
+                                           attrs="{'invisible':[('blackout_faints','!=','yes')]}"/>
+                                    <field name="epilepsy_fits"/>
+                                    <label for="epilepsy_fits_text" string=" "/>
+                                    <field name="epilepsy_fits_text" nolabel="1"
+                                           attrs="{'invisible':[('epilepsy_fits','!=','yes')]}"/>
+                                    <field name="multiple_sclerosis"/>
+                                    <label for="multiple_sclerosis_text" string=" "/>
+                                    <field name="multiple_sclerosis_text" nolabel="1"
+                                           attrs="{'invisible':[('multiple_sclerosis','!=','yes')]}"/>
+                                    <field name="stroke_mini"/>
+                                    <label for="stroke_mini_text" string=" "/>
+                                    <field name="stroke_mini_text" nolabel="1"
+                                           attrs="{'invisible':[('stroke_mini','!=','yes')]}"/>
+                                    <field name="asthma_bronchitis"/>
+                                    <field name="asthma_bronchitis_field1"
+                                           attrs="{'invisible':[('asthma_bronchitis','!=','yes')]}"/>
+                                    <field name="asthma_bronchitis_field2"
+                                           attrs="{'invisible':[('asthma_bronchitis','!=','yes')]}"/>
+                                    <label for="asthma_bronchitis_field2_text" string=" "/>
+                                    <field name="asthma_bronchitis_field2_text" nolabel="1"
+                                           attrs="{'invisible':[('asthma_bronchitis_field2','!=','yes')]}"/>
+                                    <field name="bleeding_bruising"/>
+                                    <label for="bleeding_bruising_text" string=" "/>
+                                    <field name="bleeding_bruising_text" nolabel="1"
+                                           attrs="{'invisible':[('bleeding_bruising','!=','yes')]}"/>
+                                    <field name="anaemia"/>
+                                    <label for="anaemia_text" string=" "/>
+                                    <field name="anaemia_text" nolabel="1"
+                                           attrs="{'invisible':[('anaemia','!=','yes')]}"/>
+                                    <field name="tuberclosis"/>
+                                    <label for="tuberclosis_text" string=" "/>
+                                    <field name="tuberclosis_text" nolabel="1"
+                                           attrs="{'invisible':[('tuberclosis','!=','yes')]}"/>
+                                    <field name="indigestion_heartburn"/>
+                                    <label for="indigestion_heartburn_text" string=" "/>
+                                    <field name="indigestion_heartburn_text" nolabel="1"
+                                           attrs="{'invisible':[('indigestion_heartburn','!=','yes')]}"/>
+                                    <field name="jaundice_liver"/>
+                                    <label for="jaundice_liver_text" string=" "/>
+                                    <field name="jaundice_liver_text" nolabel="1"
+                                           attrs="{'invisible':[('jaundice_liver','!=','yes')]}"/>
+                                    <field name="bowels"/>
+                                    <label for="bowels_text" string=" "/>
+                                    <field name="bowels_text" nolabel="1"
+                                           attrs="{'invisible':[('bowels','!=','yes')]}"/>
+                                    <field name="kidney_urinary"/>
+                                    <label for="kidney_urinary_text" string=" "/>
+                                    <field name="kidney_urinary_text" nolabel="1"
+                                           attrs="{'invisible':[('kidney_urinary','!=','yes')]}"/>
+                                    <field name="diabetes"/>
+                                    <label for="diabetes_text" string=" "/>
+                                    <field name="diabetes_text" nolabel="1"
+                                           attrs="{'invisible':[('diabetes','!=','yes')]}"/>
+                                    <field name="arthritis_joint_rheumatoid"/>
+                                    <label for="arthritis_joint_rheumatoid_text" string=" "/>
+                                    <field name="arthritis_joint_rheumatoid_text" nolabel="1"
+                                           attrs="{'invisible':[('arthritis_joint_rheumatoid','!=','yes')]}"/>
+                                    <field name="thyroid_problems"/>
+                                    <label for="thyroid_problems_text" string=" "/>
+                                    <field name="thyroid_problems_text" nolabel="1"
+                                           attrs="{'invisible':[('thyroid_problems','!=','yes')]}"/>
+                                    <field name="blood_clotting"/>
+                                    <label for="blood_clotting_text" string=" "/>
+                                    <field name="blood_clotting_text" nolabel="1"
+                                           attrs="{'invisible':[('blood_clotting','!=','yes')]}"/>
+                                    <label for="blood_clotting_attach" string=" "/>
+                                    <field name="blood_clotting_attach" nolabel="1"
+                                           attrs="{'invisible':[('blood_clotting','!=','yes')]}"
+                                           widget="many2many_binary"
+                                           options="{'preview_image': 'image_128'}"/>
+                                    <field name="sickle_cell_anaemia"/>
+                                    <label for="sickle_cell_anaemia_text" string=" "/>
+                                    <field name="sickle_cell_anaemia_text" nolabel="1"
+                                           attrs="{'invisible':[('sickle_cell_anaemia','!=','yes')]}"/>
+                                    <label for="sickle_cell_anaemia_attach" string=" "/>
+                                    <field name="sickle_cell_anaemia_attach" nolabel="1"
+                                           attrs="{'invisible':[('sickle_cell_anaemia','!=','yes')]}"
+                                           widget="many2many_binary"
+                                           options="{'preview_image': 'image_128'}"/>
+                                    <field name="skin_problem_eczema"/>
+                                    <label for="skin_problem_eczema_char" string=" "/>
+                                    <field name="skin_problem_eczema_char" nolabel="1"
+                                           attrs="{'invisible':[('skin_problem_eczema','!=','yes')]}"/>
+                                    <field name="sight_impairment"/>
+                                    <label for="sight_impairment_text" string=" "/>
+                                    <field name="sight_impairment_text" nolabel="1"
+                                           attrs="{'invisible':[('sight_impairment','!=','yes')]}"/>
+                                    <field name="hearing_impairment"/>
+                                    <label for="hearing_impairment_text" string=" "/>
+                                    <field name="hearing_impairment_text" nolabel="1"
+                                           attrs="{'invisible':[('hearing_impairment','!=','yes')]}"/>
+                                    <field name="reaction_local_anaesthetic"/>
+                                    <label for="reaction_local_anaesthetic_text" string=" "/>
+                                    <field name="reaction_local_anaesthetic_text" nolabel="1"
+                                           attrs="{'invisible':[('reaction_local_anaesthetic','!=','yes')]}"/>
+                                    <field name="serious_post_ope_complication"/>
+                                    <label for="serious_post_ope_complication_text" string=" "/>
+                                    <field name="serious_post_ope_complication_text" nolabel="1"
+                                           attrs="{'invisible':[('serious_post_ope_complication','!=','yes')]}"/>
+                                    <field name="blood_products"/>
+                                    <label for="blood_products_text" string=" "/>
+                                    <field name="blood_products_text" nolabel="1"
+                                           attrs="{'invisible':[('blood_products','!=','yes')]}"/>
+                                </group>
+                                <group>
+                                    <field name="any_serious_illness"/>
+                                    <label for="any_serious_illness_text" string=" "/>
+                                    <field name="any_serious_illness_text" nolabel="1"
+                                           attrs="{'invisible':[('any_serious_illness','!=','yes')]}"/>
+                                    <field name="any_operation"/>
+                                    <label for="any_operation_text" string=" "/>
+                                    <field name="any_operation_text" nolabel="1"
+                                           attrs="{'invisible':[('any_operation','!=','yes')]}"/>
+                                    <field name="drink_alcohol"/>
+                                    <label for="drink_alcohol_text" string=" "/>
+                                    <field name="drink_alcohol_text" nolabel="1"
+                                           attrs="{'invisible':[('drink_alcohol','!=','yes')]}"/>
+                                    <field name="pregnant"/>
+                                    <label for="pregnant_text" string=" "/>
+                                    <field name="pregnant_text" nolabel="1"
+                                           attrs="{'invisible':[('pregnant','!=','yes')]}"/>
+                                    <field name="breast_fed_3month"/>
+                                    <label for="breast_fed_3month_text" string=" "/>
+                                    <field name="breast_fed_3month_text" nolabel="1"
+                                           attrs="{'invisible':[('breast_fed_3month','!=','yes')]}"/>
+                                    <field name="flight_of_stairs_without_breath"/>
+                                    <label for="flight_of_stairs_without_breath_text" string=" "/>
+                                    <field name="flight_of_stairs_without_breath_text" nolabel="1"
+                                           attrs="{'invisible':[('flight_of_stairs_without_breath','!=','yes')]}"/>
+                                    <field name="anxieties_worries_concern"/>
+                                    <label for="anxieties_worries_concern_text" string=" "/>
+                                    <field name="anxieties_worries_concern_text" nolabel="1"
+                                           attrs="{'invisible':[('anxieties_worries_concern','!=','yes')]}"/>
+                                    <field name="dysmorphia"/>
+                                    <label for="dysmorphia_text" string=" "/>
+                                    <field name="dysmorphia_text" nolabel="1"
+                                           attrs="{'invisible':[('dysmorphia','!=','yes')]}"/>
+                                    <field name="drug_use"/>
+                                    <label for="drug_use_text" string=" "/>
+                                    <field name="drug_use_text" nolabel="1"
+                                           attrs="{'invisible':[('drug_use','!=','yes')]}"/>
+                                    <field name="drug_use_name"
+                                           attrs="{'invisible':[('drug_use','!=','yes')]}"/>
+                                    <field name="depression"/>
+                                    <label for="depression_text" string=" "/>
+                                    <field name="depression_text" nolabel="1"
+                                           attrs="{'invisible':[('depression','!=','yes')]}"/>
+                                    <field name="care_of_psychiatrist"/>
+                                    <label for="care_of_psychiatrist_text" string=" "/>
+                                    <field name="care_of_psychiatrist_text" nolabel="1"
+                                           attrs="{'invisible':[('care_of_psychiatrist','!=','yes')]}"/>
+                                    <field name="suicide"/>
+                                    <label for="suicide_text" string=" "/>
+                                    <field name="suicide_text" nolabel="1"
+                                           attrs="{'invisible':[('suicide','!=','yes')]}"/>
+                                    <field name="contact_hospitalised_patients"/>
+                                    <label for="contact_hospitalised_patients_text" string=" "/>
+                                    <field name="contact_hospitalised_patients_text" nolabel="1"
+                                           attrs="{'invisible':[('contact_hospitalised_patients','!=','yes')]}"/>
+                                    <field name="healthcare_worker"/>
+                                    <label for="healthcare_worker_text" string=" "/>
+                                    <field name="healthcare_worker_text" nolabel="1"
+                                           attrs="{'invisible':[('healthcare_worker','!=','yes')]}"/>
+                                    <field name="mrsa"/>
+                                    <label for="mrsa_text" string=" "/>
+                                    <field name="mrsa_text" nolabel="1"
+                                           attrs="{'invisible':[('mrsa','!=','yes')]}"/>
+                                    <field name="gp_other_problems"/>
+                                    <label for="gp_other_problems_text" string=" "/>
+                                    <field name="gp_other_problems_text" nolabel="1"
+                                           attrs="{'invisible':[('gp_other_problems','!=','yes')]}"/>
+                                    <field name="transgender_programme"/>
+                                    <label for="transgender_programme_text" string=" "/>
+                                    <field name="transgender_programme_text" nolabel="1"
+                                           attrs="{'invisible':[('transgender_programme','!=','yes')]}"/>
+                                    <field name="smoker_6month_past"/>
+                                    <label for="smoker_6month_past_text" string=" "/>
+                                    <field name="smoker_6month_past_text" nolabel="1"
+                                           attrs="{'invisible':[('smoker_6month_past','!=','yes')]}"/>
+                                    <field name="blood_transfusion"/>
+                                    <label for="blood_transfusion_text" string=" "/>
+                                    <field name="blood_transfusion_text" nolabel="1"
+                                           attrs="{'invisible':[('blood_transfusion','!=','yes')]}"/>
+                                </group>
+                            </group>
+
+                            <group col="2">
+                                <group string="Allergies Or Sensitivities">
+                                    <field name="allergies_sensitivities"/>
+                                    <label for="allergies_sensitivities_text" string=" "/>
+                                    <field name="allergies_sensitivities_text" nolabel="1"
+                                           attrs="{'invisible':[('allergies_sensitivities','!=','yes')]}"/>
+                                    <field name="allergies_sensitivities_latex"/>
+                                    <label for="allergies_sensitivities_latex_text" string=" "/>
+                                    <field name="allergies_sensitivities_latex_text" nolabel="1"
+                                           attrs="{'invisible':[('allergies_sensitivities_latex','!=','yes')]}"/>
+                                </group>
+                                <group string="Confirmations">
+                                    <field name="confirm_18_age"/>
+                                    <label for="confirm_18_age_text" string=" "/>
+                                    <field name="confirm_18_age_text" nolabel="1"
+                                           attrs="{'invisible':[('confirm_18_age','!=','yes')]}"/>
+                                    <field name="confirm_procedure"/>
+                                    <label for="confirm_procedure_text" string=" "/>
+                                    <field name="confirm_procedure_text" nolabel="1"
+                                           attrs="{'invisible':[('confirm_procedure','!=','yes')]}"/>
+                                </group>
+                            </group>
+
+                        </page>
+
+                        <page string="Patient’s Medication Questionnaire">
+                            <group col="4">
+                                <field name="hrt"/>
+                                <field name="depot_vera"/>
+                                <field name="contraceptive_implant"/>
+                                <field name="coil"/>
+                                <field name="coc"/>
+                                <field name="mini_pill"/>
+                                <field name="further_information"/>
+                            </group>
+                            <label for="please_note" string="Please Note"/>
+                            <field name="please_note"/>
+                        </page>
+
+                        <page string="Nine Symptom Checklist">
+                            <group string="Over the last 2 weeks, how often have you been bothered by any of the following
+                                problems?"/>
+                            <group string="Read each item carefully, and circle your response."/>
+                            <group col="4">
+                                <field name="little_interest"/>
+                                <field name="feeling_down"/>
+                                <field name="sleeping_too_much"/>
+                                <field name="feeling_tired"/>
+                                <field name="poor_appetite"/>
+                                <field name="feeling_failure"/>
+                                <field name="trouble_concentrating"/>
+                                <field name="speaking_slowly"/>
+                                <field name="hurt_yourself"/>
+                                <field name="take_care"/>
+                            </group>
+                        </page>
+
+                        <page string="Questionaire">
+                            <group col="4"
+                                   string="WITH YOUR ENTIRE ABDOMEN IN MIND, IN THE PAST WEEK, HOW HAVE YOU FELT ABOUT THE BELOW?">
+                                <field name="cloth_fit_your_abdomen"/>
+                                <field name="size_of_abdomen"/>
+                                <field name="side_look_of_abdomen"/>
+                                <field name="shape_of_abdomen"/>
+                                <field name="abdomen_looks_in_swimsuit"/>
+                                <field name="toned_your_abdomen_looks"/>
+                                <field name="abdomen_looks_when_naked"/>
+                            </group>
+                            <group col="4"
+                                   string="WITH YOUR ENTIRE BODY IN MIND, IN THE PAST WEEK, HOW HAVE YOU FELT ABOUT THE BELOW?">
+                                <field name="body_looks_when_dressed"/>
+                                <field name="cloth_fit_to_body"/>
+                                <field name="size_of_body"/>
+                                <field name="shape_of_body"/>
+                                <field name="body_looks_in_photos"/>
+                                <field name="body_looks_from_behind"/>
+                                <field name="body_looks_from_side"/>
+                                <field name="body_looks_summer_cloth"/>
+                                <field name="body_looks_in_swimsuit"/>
+                                <field name="body_looks_in_mirror_uncloth"/>
+                            </group>
+                            <group col="4"
+                                   string="WITH YOUR EYES IN MIND, IN THE PAST WEEK, HOW HAVE YOU FELT ABOUT THE BELOW?">
+                                <field name="shape_of_eyes"/>
+                                <field name="attractive_eyes"/>
+                                <field name="alert_eyes"/>
+                                <field name="open_eyes_look"/>
+                                <field name="bright_eyes_look"/>
+                                <field name="nice_eyes_look"/>
+                                <field name="youthful_eyes_look"/>
+                            </group>
+                            <group col="4"
+                                   string="WITH YOUR BREASTS IN MIND, IN THE PAST WEEK, HOW HAVE YOU FELT ABOUT THE BELOW?">
+                                <field name="look_in_mirror_cloth"/>
+                                <field name="breast_size_match_rest_body"/>
+                                <field name="bras_fit"/>
+                                <field name="breast_size"/>
+                                <field name="cleavage_when_wear_bra"/>
+                                <field name="look_in_mirror_uncloth"/>
+                            </group>
+                            <group col="4"
+                                   string="WITH YOUR ENTIRE FACE IN MIND, IN THE PAST WEEK, HOW HAVE YOU FELT ABOUT THE BELOW?">
+                                <field name="symmetric_face_look"/>
+                                <field name="balanced_face_look"/>
+                                <field name="well_proportioned_face_look"/>
+                                <field name="face_look_at_day_end"/>
+                                <field name="fresh_face_look"/>
+                                <field name="rested_face_look"/>
+                                <field name="profile_sv_look"/>
+                                <field name="face_look_in_photo"/>
+                                <field name="face_look_when_wakeup"/>
+                                <field name="face_look_under_bright_light"/>
+                            </group>
+                            <group col="4"
+                                   string="WITH YOUR ENTIRE NOSE IN MIND, IN THE PAST WEEK, HOW HAVE YOU FELT ABOUT THE BELOW?">
+                                <field name="width_of_nose_bottom"/>
+                                <field name="length_of_nose"/>
+                                <field name="bridge_look_nose"/>
+                                <field name="nose_suits_face"/>
+                                <field name="straight_nose_looks"/>
+                                <field name="size_of_nose"/>
+                                <field name="shape_of_nose_sv"/>
+                                <field name="nose_look_in_photos"/>
+                                <field name="nose_tip_looks"/>
+                                <field name="nose_look_every_angle"/>
+                            </group>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

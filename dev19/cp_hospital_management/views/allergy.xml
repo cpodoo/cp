@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_allergy_form" model="ir.ui.view">
+	    <field name="name">Allergy</field>
+	    <field name="model">allergy</field>
+		<field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </group>
+            </sheet>
+            <chatter/>
+        </form>
+		</field>
+	</record>
+
+    <record id="view_allergy_lidst" model="ir.ui.view">
+	    <field name="name">Allergy</field>
+	    <field name="model">allergy</field>
+		<field name="arch" type="xml">
+        <list string = 'Allergy'>
+            <field name="name"/>
+        </list>
+		</field>
+	</record>
+</odoo>

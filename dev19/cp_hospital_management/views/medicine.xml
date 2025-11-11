@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_medicine_search" model="ir.ui.view">
+	    <field name="name">medicine.search</field>
+	    <field name="model">medicine</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Medicine">
+	            <field name="medicament_type" />
+	            <group expand="0" string="Group By...">
+	                <filter name="type" string="Type"  context="{'group_by': 'medicament_type'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	
+	<record model="ir.ui.view" id="view_medicine_medicine_list">
+	    <field name="name">medicine.list</field>
+	    <field name="model">medicine</field>
+	    <field name="arch" type="xml">
+	        <list string="Medicines">
+	            <field name="name" required="1"/>
+	            <field name="medicament_type" />
+	            <field name="pregnancy_warning"/>
+	            <field name="lst_price" />
+	            <field name="qty_available" required="1"/>
+	        </list>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_medicine_vaccine_list">
+	    <field name="name">vaccine.list</field>
+	    <field name="model">medicine</field>
+	    <field name="arch" type="xml">
+	        <list string="Medicines">
+	            <field name="name"  required="1"/>
+	            <field name="medicament_type" />
+	            <field name="lst_price" />
+	            <field name="qty_available" readonly="1"/>
+	        </list>
+	    </field>
+	</record>
+	<record model="ir.ui.view" id="view_medicine_form">
+	    <field name="name">medicine.form</field>
+	    <field name="model">medicine</field>
+	    <field name="arch" type="xml">
+	        <form string="Medicines">
+	            <sheet>
+	                <div class="oe_left" style="width: 500px;">
+	                    <div class="oe_title" style="width: 390px;">
+	                        <h1>
+	                            <field name="name" class="oe_inline" placeholder="Name" />
+	                        </h1>
+	                    </div>
+	                </div>
+	                <group>
+	                    <group>
+	                        <field name="medicament_type" required="1" />
+	                        <field name="therapeutic_action" invisible="medicament_type == 'Medicine'"/>
+	                        <field name="qty_available" invisible="medicament_type == 'Medicine'" readonly="1"/>
+	                    </group>
+	                    <group>
+	                        <field name="lst_price" />
+	                        <field name="pregnancy_warning" invisible="medicament_type == 'Medicine'"/>
+	                    </group>
+	                </group>
+	                <group invisible="medicament_type == 'Vaccine'">
+	                    <group>
+	                        <field name="pregnancy" />
+	                        <field name="composition" />
+	                        <field name="dosage" />
+	                        <field name="adverse_reaction" />
+	                    </group>
+	                    <group>
+	                        <field name="indications" />
+	                        <field name="overdosage" />
+	                        <field name="storage" />
+	                        <field name="info" />
+	                    </group>
+	                </group>
+	                <group invisible="medicament_type == 'Medicine'">
+	                    <field name="info" />
+	                </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	<record model="ir.actions.act_window" id="action_medicine_medicine">
+	    <field name="name">Medicines</field>
+	    <field name="res_model">medicine</field>
+	    <field name="view_mode">list,form</field>
+	    <field name="domain">[('medicament_type','=','Medicine')]</field>
+	    <field name="context">{"search_default_medicament_type":"Medicine"}</field>
+	    <field name="view_id" ref="view_medicine_medicine_list"/>
+	    <field name="search_view_id" ref="view_medicine_search"/> 
+	</record>
+	
+	<record model="ir.actions.act_window" id="action_medicine_vaccine">
+	    <field name="name">Vaccines</field>
+	    <field name="res_model">medicine</field>
+	    <field name="view_mode">list,form</field>
+	    <field name="domain">[('medicament_type','=','Vaccine')]</field>
+	    <field name="context">{"search_default_medicament_type":"Vaccine"}</field>
+	    <field name="view_id" ref="view_medicine_vaccine_list"/>
+	    <field name="search_view_id" ref="view_medicine_search"/> 
+	</record>
+	
+	<menuitem name="Medicines" id="menu__medicine_medicine" parent="menu_health_product_config" action="action_medicine_medicine" sequence="0"/>
+	<menuitem name="Vaccines" id="menu_medicene_vaccine" parent="menu_health_product_config" action="action_medicine_vaccine" sequence="1"/>
+
+</odoo>

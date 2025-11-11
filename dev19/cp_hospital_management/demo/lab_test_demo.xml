@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Lab Test Types -->
+        <record id="lab_test_type_1" model="lab.tests.type">
+            <field name="name">Hemoglobin</field>
+            <field name="range">11.0 - 16.0</field>
+            <field name="units">g/dl</field>
+            <field name="price">43</field>
+        </record>
+
+        <record id="lab_test_type_2" model="lab.tests.type">
+            <field name="name">RBC</field>
+            <field name="range">3.5 - 5.5</field>
+            <field name="units">10^6/ul</field>
+            <field name="price">50</field>
+        </record>
+
+        <record id="lab_test_type_3" model="lab.tests.type">
+            <field name="name">HCT</field>
+            <field name="range">37.0 - 50.0</field>
+            <field name="units">%</field>
+            <field name="price">48</field>
+        </record>
+
+        <record id="lab_test_type_4" model="lab.tests.type">
+            <field name="name">MCV</field>
+            <field name="range">82.0 - 95.0</field>
+            <field name="units">fl</field>
+            <field name="price">78</field>
+        </record>
+
+        <record id="lab_test_type_5" model="lab.tests.type">
+            <field name="name">MCH</field>
+            <field name="range">27.0 - 31.0</field>
+            <field name="units">pg</field>
+            <field name="price">78</field>
+        </record>
+
+        <record id="lab_test_type_6" model="lab.tests.type">
+            <field name="name">MCHC</field>
+            <field name="range">32.0 - 36.0</field>
+            <field name="units">g/dl</field>
+            <field name="price">456</field>
+        </record>
+
+        <record id="lab_test_type_7" model="lab.tests.type">
+            <field name="name">RDW-CV</field>
+            <field name="range">11.5 - 14.0</field>
+            <field name="units">%</field>
+            <field name="price">256</field>
+        </record>
+
+        <record id="lab_test_type_8" model="lab.tests.type">
+            <field name="name">RDW-SD</field>
+            <field name="range">35.0 - 36.0</field>
+            <field name="units">fl</field>
+            <field name="price">120</field>
+        </record>
+
+        <!-- Lab Tests -->
+        <record id="lab_test_1" model="lab.tests">
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="physician_id" ref="hr.employee_admin"/>
+            <field name="pathologist_id" ref="hr.employee_qdp"/>
+        </record>
+
+        <record id="lab_test_line_1" model="lab.tests.line">
+            <field name="test_id" ref="lab_test_1"/>
+            <field name="test_type" ref="lab_test_type_1"/>
+            <field name="result">15</field>
+        </record>
+
+        <record id="lab_test_line_2" model="lab.tests.line">
+            <field name="test_id" ref="lab_test_1"/>
+            <field name="test_type" ref="lab_test_type_2"/>
+            <field name="result">4.5</field>
+        </record>
+
+        <record id="lab_test_2" model="lab.tests">
+            <field name="patient" ref="base.res_partner_2"/>
+            <field name="physician_id" ref="hr.employee_admin"/>
+            <field name="pathologist_id" ref="hr.employee_qdp"/>
+        </record>
+
+        <record id="lab_test_line_3" model="lab.tests.line">
+            <field name="test_id" ref="lab_test_2"/>
+            <field name="test_type" ref="lab_test_type_3"/>
+            <field name="result">14</field>
+        </record>
+
+        <record id="lab_test_line_4" model="lab.tests.line">
+            <field name="test_id" ref="lab_test_2"/>
+            <field name="test_type" ref="lab_test_type_4"/>
+            <field name="result">3.5</field>
+        </record>
+
+        <!-- Imaging Test Type -->
+        <!-- <record id="imaging_test_type_1" model="imaging.test.type">
+            <field name="name">X-Ray</field>
+            <field name="code">x01</field>
+            <field name="test_charge">340</field>
+        </record> -->
+
+    </data>
+</odoo>

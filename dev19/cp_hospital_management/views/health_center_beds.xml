@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_beds_list" model="ir.ui.view">
+	    <field name="name">beds.list</field>
+	    <field name="model">health.center.beds</field>
+	    <field name="arch" type="xml">
+	        <list string="Beds" >
+	            <field name="name" required="1"/>
+	            <field name="ward" />
+	            <field name="institution"  />
+	            <field name="building" />
+	            <field name="bed_type" required="1"/>
+	            <field name="telephone_number" />
+	            <field name="state" />
+	        </list>
+	    </field>
+	</record>
+	 <record id="view_bed_search" model="ir.ui.view">
+	    <field name="name">bed.search</field>
+	    <field name="model">health.center.beds</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Bed">
+	            <field name="name" />
+	            <field name="ward"/>
+	            <field name="name"/>
+	            <field name="ward"/>
+	            <field name="institution"/>
+	            <field name="building"/>
+	            <field name="bed_type"/>
+	            <field name="telephone_number"/>
+	            <field name="state"/>
+	            <newline />
+	            <group expand="0" string="Group By...">
+	                <filter name="health_center" string="Health Center"  context="{'group_by': 'institution'}"/>
+	                <filter name="buiding" string="Building"  context="{'group_by': 'building'}"/>
+	                <filter name="ward" string="Ward"  context="{'group_by': 'ward'}"/>
+	                <filter name="state" string="State"  context="{'group_by': 'state'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	
+	<record id="view_beds_form" model="ir.ui.view">
+	    <field name="name">beds.form</field>
+	    <field name="model">health.center.beds</field>
+	    <field name="arch" type="xml">
+	        <form string="Beds">
+	            <header>
+	                <field name="state" widget="statusbar" statusbar_visible="Free,Reserved,Occupied,Not Available" statusbar_colors="{'Occupied':'red','Free':'blue','Reserved':'purple','Not Available':'grey'}" />
+	            </header>
+	            <sheet>
+	                <div class="oe_left" style="width: 500px;">
+	                    <div class="oe_title" style="width: 390px;">
+	                       <h1>
+	                           <field name="name" class="oe_inline" required="1"/>
+	                       </h1>
+	                   </div>
+	               </div>
+	               <group>
+	                   <group>
+	                       <field name="institution" required="1"/>
+	                       <field name="telephone_number" />
+	                       <field name="list_price" string="Reservation Charge" />
+	                   </group>
+	                   <group>
+	                       <field name="building" domain="[('institution','=',institution)]" context="{'default_institution': institution}" />
+	                       <field name="ward" domain="[('building','=',building)]" context="{'default_building': building}"  />
+	                       <field name="bed_type" required="1"/>
+	                   </group>
+	               </group>
+	               <group string="Bed Status">
+	                    <field name="change_bed_status" />
+	                </group>
+	                <group string="Extra Information">
+	                    <field name="info" nolabel="1" />
+	                </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="action_health_center_beds">
+	    <field name="name">Bed Management</field>
+	    <field name="res_model">health.center.beds</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	
+	<menuitem name="Bed Management" id="menu_health_center_bed" parent="menu_health_centers_main" action="action_health_center_beds" sequence="3"/>
+
+</odoo>

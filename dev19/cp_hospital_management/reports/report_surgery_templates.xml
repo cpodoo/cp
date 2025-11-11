@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="surgery_document">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div style="height: 150px;"></div>
+                    <div style="margin-bottom: 15px;">
+                        <h3 style="color: #2A3F54; font-weight: bold; margin-bottom: 10px; text-align: center;">Patient Surgery</h3>
+                        <div style="font-size: 25px; font-weight: bold; margin-bottom: 10px;">
+                            <span t-field="o.name"/>
+                        </div>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    <strong>Patient:</strong> <span t-field="o.patient.name"/>
+                                </td>
+                                <td style="width: 50%;">
+                                    <strong>Surgeon:</strong> <span t-field="o.surgeon.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%;">
+                                    <strong>Surgery Start:</strong> <span t-field="o.surgery_start_date" t-options='{"widget": "datetime"}'/>
+                                </td>
+                                <td style="width: 50%;">
+                                    <strong>Surgery End:</strong> <span t-field="o.surgery_end_date" t-options='{"widget": "datetime"}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%;">
+                                    <strong>Health Center:</strong> <span t-field="o.institution.name"/>
+                                </td>
+                                <td style="width: 50%;">
+                                    <strong>Building:</strong> <span t-field="o.building.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%;">
+                                    <strong>Anesthetist:</strong> <span t-field="o.anesthetist.name"/>
+                                </td>
+                                <td style="width: 50%;">
+                                    <strong>Operation Theater:</strong> <span t-field="o.operating_room.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%;">
+                                    <strong>Urgency:</strong> <span t-field="o.classification"/>
+                                </td>
+                                <td style="width: 50%;">
+                                    <strong>Surgery Type:</strong> <span t-field="o.surgery_type_id.name"/>
+                                </td>                            
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <record id="paperformat_surgery" model="report.paperformat">
+            <field name="name">Patient Surgery</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">96</field>
+        </record>
+
+        <template id="surgery">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="cp_hospital_management.surgery_document" t-lang="o.patient.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

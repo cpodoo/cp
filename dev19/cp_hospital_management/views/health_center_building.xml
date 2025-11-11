@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="building_list_view" model="ir.ui.view">
+	    <field name="name">building.list.view</field>
+	    <field name="model">health.center.building</field>
+	    <field name="arch" type="xml">
+	        <list string="Buildings">
+	            <field name="name"/>
+	            <field name="code" />
+	            <field name="institution" can_create="true" can_write="true"/>
+	        </list>
+	    </field>
+	</record>
+	<record id="view_building_search" model="ir.ui.view">
+	    <field name="name">building.search</field>
+	    <field name="model">health.center.building</field>
+	    <field name="priority" eval="8" />
+	    <field name="arch" type="xml">
+	        <search string="Building">
+	            <field name="name" />
+	            <field name="code"/>
+	            <newline />
+	            <group expand="0" string="Group By...">
+	                <filter name="health_center" string="Health Center"  context="{'group_by': 'institution'}"/>
+	            </group>
+	        </search>
+	    </field>
+	</record>
+	<record id="view_building_form" model="ir.ui.view">
+	    <field name="name">building.form</field>
+	    <field name="model">health.center.building</field>
+	    <field name="arch" type="xml">
+	        <form string="Buildings">
+	            <sheet>
+	                <div class="oe_left" style="width: 500px;">
+	                    <div class="oe_title" style="width: 390px;">
+	                        <h1>
+	                            <field name="name" class="oe_inline" required="1" placeholder="Name"/>
+	                        </h1>
+	                    </div>
+	                </div>
+	                <group>
+	                    <group>
+	                        <field name="institution" required="1"/>
+	                    </group>
+	                    <group>
+	                        <field name="code" />
+	                    </group>
+	                </group>
+	                <group string="Extra Information">
+	                    <field name="info" nolabel="1" />
+	                </group>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="action_health_center_building">
+	    <field name="name">Hospital Buildings</field>
+	    <field name="res_model">health.center.building</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	
+	<menuitem name="Hospital Buildings" id="menu_health_center_building" parent="menu_health_centers_main" action="action_health_center_building" sequence="1"/>
+
+</odoo>

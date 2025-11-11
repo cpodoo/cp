@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Inpatient data-->
+        <record id="inpatient_1" model="inpatient.admissions">
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="addmission_type">urgent</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="building" ref="building_1"/>
+            <field name="ward" ref="ward_1"/>
+            <field name="bed" ref="bed_1"/>
+        </record>
+
+        <record id="inpatient_2" model="inpatient.admissions">
+            <field name="patient" ref="base.res_partner_2"/>
+            <field name="addmission_type">maternity</field>
+            <field name="institution" ref="health_centre_2"/>
+            <field name="building" ref="building_2"/>
+            <field name="ward" ref="ward_2"/>
+            <field name="bed" ref="bed_2"/>
+        </record>
+
+        <record id="inpatient_3" model="inpatient.admissions">
+            <field name="patient" ref="base.res_partner_3"/>
+            <field name="addmission_type">urgent</field>
+            <field name="institution" ref="health_centre_3"/>
+            <field name="building" ref="building_3"/>
+            <field name="ward" ref="ward_3"/>
+            <field name="bed" ref="bed_3"/>
+        </record>
+
+        <record id="inpatient_4" model="inpatient.admissions">
+            <field name="patient" ref="base.res_partner_4"/>
+            <field name="addmission_type">maternity</field>
+            <field name="institution" ref="health_centre_1"/>
+            <field name="building" ref="building_1"/>
+            <field name="ward" ref="ward_1"/>
+            <field name="bed" ref="bed_1"/>
+        </record>
+
+        <record id="inpatient_5" model="inpatient.admissions">
+            <field name="patient" ref="base.res_partner_12"/>
+            <field name="addmission_type">urgent</field>
+            <field name="institution" ref="health_centre_3"/>
+            <field name="building" ref="building_3"/>
+            <field name="ward" ref="ward_3"/>
+            <field name="bed" ref="bed_3"/>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_ethnic_group_form" model="ir.ui.view">
+	    <field name="name">Ethnic</field>
+	    <field name="model">ethnic.group</field>
+		<field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </group>
+            </sheet>
+            <chatter/>
+        </form>
+		</field>
+	</record>
+
+    <record id="view_ethnic_group_list" model="ir.ui.view">
+	    <field name="name">Ethnic</field>
+	    <field name="model">ethnic.group</field>
+		<field name="arch" type="xml">
+	        <list string = 'Ethnic Group Name'>
+	            <field name="name"/>
+	        </list>
+		</field>
+	</record>
+</odoo>

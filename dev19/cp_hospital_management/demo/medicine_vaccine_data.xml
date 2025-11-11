@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="medicine_1" model="medicine">
+            <field name="name">Paracetamol</field>
+            <field name="medicament_type">Medicine</field>
+            <field name="qty_available">10</field>
+            <field name="lst_price">53</field>
+        </record>
+
+        <record id="medicine_2" model="medicine">
+            <field name="name">Aceclofenac</field>
+            <field name="medicament_type">Medicine</field>
+            <field name="qty_available">20</field>
+            <field name="lst_price">25</field>
+        </record>
+
+        <record id="medicine_3" model="medicine">
+            <field name="name">Ciprofloxacin</field>
+            <field name="medicament_type">Medicine</field>
+            <field name="qty_available">30</field>
+            <field name="lst_price">37</field>
+        </record>
+
+        <record id="medicine_4" model="medicine">
+            <field name="name">Amlodipine</field>
+            <field name="medicament_type">Medicine</field>
+            <field name="qty_available">40</field>
+            <field name="lst_price">68</field>
+        </record>
+
+        <record id="medicine_5" model="medicine">
+            <field name="name">Doxycycline</field>
+            <field name="medicament_type">Medicine</field>
+            <field name="qty_available">30</field>
+            <field name="lst_price">64</field>
+        </record>
+
+        <record id="medicine_6" model="medicine">
+            <field name="name">Ibuprofen</field>
+            <field name="medicament_type">Medicine</field>
+            <field name="qty_available">10</field>
+            <field name="lst_price">33</field>
+        </record>
+
+        <record id="medicine_7" model="medicine">
+            <field name="name">Pantoprazole</field>
+            <field name="medicament_type">Medicine</field>
+            <field name="qty_available">15</field>
+            <field name="lst_price">23</field>
+        </record>
+
+        <record id="medicine_8" model="medicine">
+            <field name="name">Amoxicillin</field>
+            <field name="medicament_type">Medicine</field>
+            <field name="qty_available">19</field>
+            <field name="lst_price">43</field>
+        </record>
+
+        <record id="medicine_9" model="medicine">
+            <field name="name">Omeprazole</field>
+            <field name="medicament_type">Medicine</field>
+            <field name="qty_available">10</field>
+            <field name="lst_price">43</field>
+        </record>
+
+
+        <record id="medicine_vaccine_1" model="medicine">
+            <field name="name">Hepatitis A</field>
+            <field name="medicament_type">Vaccine</field>
+            <field name="qty_available">10</field>
+            <field name="lst_price">43</field>
+        </record>
+
+        <record id="medicine_vaccine_2" model="medicine">
+            <field name="name">Hepatitis B</field>
+            <field name="medicament_type">Vaccine</field>
+            <field name="qty_available">30</field>
+            <field name="lst_price">43</field>
+        </record>
+
+        <record id="medicine_vaccine_3" model="medicine">
+            <field name="name">Polio</field>
+            <field name="medicament_type">Vaccine</field>
+            <field name="qty_available">15</field>
+            <field name="lst_price">43</field>
+        </record>
+
+        <record id="medicine_vaccine_4" model="medicine">
+            <field name="name">Hepatitis c</field>
+            <field name="medicament_type">Vaccine</field>
+            <field name="qty_available">40</field>
+            <field name="lst_price">43</field>
+        </record>
+
+        <record id="medicine_vaccine_5" model="medicine">
+            <field name="name">Influenza</field>
+            <field name="medicament_type">Vaccine</field>
+            <field name="qty_available">50</field>
+            <field name="lst_price">43</field>
+        </record>
+
+        <record id="vaccine_data_1" model="vaccine">
+            <field name="name" ref="cp_hospital_management.medicine_vaccine_1"/>
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_1"/>
+            <field name="dose">1</field>
+        </record>
+
+        <record id="vaccine_data_2" model="vaccine">
+            <field name="name" ref="cp_hospital_management.medicine_vaccine_2"/>
+            <field name="patient" ref="base.res_partner_2"/>
+            <field name="doctor" ref="hr.employee_qdp"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_2"/>
+            <field name="dose">3</field>
+        </record>
+
+        <record id="vaccine_data_3" model="vaccine">
+            <field name="name" ref="cp_hospital_management.medicine_vaccine_3"/>
+            <field name="patient" ref="base.res_partner_3"/>
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_3"/>
+            <field name="dose">1</field>
+        </record>
+
+        <record id="vaccine_data_4" model="vaccine">
+            <field name="name" ref="cp_hospital_management.medicine_vaccine_4"/>
+            <field name="patient" ref="base.res_partner_4"/>
+            <field name="doctor" ref="hr.employee_qdp"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_2"/>
+            <field name="dose">2</field>
+        </record>
+
+        <record id="vaccine_data_5" model="vaccine">
+            <field name="name" ref="cp_hospital_management.medicine_vaccine_5"/>
+            <field name="patient" ref="base.res_partner_12"/>
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_1"/>
+            <field name="dose">1</field>
+        </record>
+
+        <record id="vaccine_data_6" model="vaccine">
+            <field name="name" ref="cp_hospital_management.medicine_vaccine_1"/>
+            <field name="patient" ref="base.res_partner_18"/>
+            <field name="doctor" ref="hr.employee_qdp"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_2"/>
+            <field name="dose">3</field>
+        </record>
+
+        <record id="vaccine_data_7" model="vaccine">
+            <field name="name" ref="cp_hospital_management.medicine_vaccine_4"/>
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_1"/>
+            <field name="dose">1</field>
+        </record>
+
+        <record id="vaccine_data_8" model="vaccine">
+            <field name="name" ref="cp_hospital_management.medicine_vaccine_2"/>
+            <field name="patient" ref="base.res_partner_4"/>
+            <field name="doctor" ref="hr.employee_qdp"/>
+            <field name="institution" ref="cp_hospital_management.health_centre_3"/>
+            <field name="dose">3</field>
+        </record>
+    </data>
+</odoo>

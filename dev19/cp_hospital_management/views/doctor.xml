@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_doctor_data_form_view" model="ir.ui.view">
+	    <field name="name">Doctor</field>
+	    <field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form"/>
+	    <field name="arch" type="xml">
+
+			<xpath expr = "//field[@name='name']" position = 'after'>
+				<div class="oe_title">
+					<div>
+						<label for="is_doctor" invisible="1"/>
+						<field name="is_doctor" invisible="1"/>
+					</div>
+				</div>
+			</xpath>
+			<xpath expr= "//field[@name='is_patient']" position="attributes">
+				<attribute name="invisible">is_doctor</attribute>
+			</xpath>
+		<!-- 	<xpath expr= "//label[@for='is_patient']" position="attributes">
+				<attribute name="invisible">is_doctor</attribute>
+			</xpath> -->
+			<xpath expr = "//field[@name='company_type']" position="attributes">
+				<attribute name="invisible">is_doctor or is_patient</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='parent_id']" position="attributes">
+				<attribute name="invisible">is_doctor or is_patient</attribute>
+			</xpath>
+			<xpath expr="//sheet/group/group" position="attributes">
+				<attribute name="invisible">is_doctor or is_patient</attribute>
+			</xpath>
+			<xpath expr="//sheet/group/group[2]" position="attributes">
+				<attribute name="invisible">is_doctor or is_patient</attribute>
+			</xpath>
+			<xpath expr="//sheet/notebook/page[@name='contact_addresses']" position="attributes">
+				<attribute name="invisible">is_doctor</attribute>
+			</xpath>
+			<xpath expr="//sheet/notebook/page[@name='sales_purchases']" position="attributes">
+				<attribute name="invisible">is_doctor</attribute>
+			</xpath>
+			<xpath expr="//sheet/notebook/page[@name='internal_notes']" position="attributes">
+				<attribute name="invisible">is_doctor</attribute>
+			</xpath>
+			<xpath expr="//sheet/notebook/page[@name='accounting']" position="attributes">
+				<attribute name="invisible">is_doctor</attribute>
+			</xpath>
+			<xpath expr = "//field[@name='name']" position = 'before'>
+				<div>
+					<field name="doc_seq_no" invisible="not is_doctor"/>
+				</div>
+			</xpath>
+			<xpath expr="//sheet/group" position="inside">
+				<group invisible="not is_doctor">
+					<field name="speciality" required="is_doctor"/>
+					<field name="role" options="{'no_quick_create': True, 'no_create_edit' : True}" required="is_doctor"/>
+					<field name="degree" widget="many2many_tags" required="is_doctor"/>
+					<field name="grad" required="is_doctor"/>
+					<field name="gmc_no" required="is_doctor"/>
+					<field name="doc_sex" widget="selection" required="is_doctor"/>
+					<field name="note"/>
+				</group>
+				<group invisible="not is_doctor">
+					<field name="mobile" widget="phone" required="is_doctor"/>
+					<field name="email" widget="email" required="is_doctor"/>
+					<field name="secretary_name"/>
+					<field name="secretary_phn" widget="phone"/>
+					<field name="secretary_tel" widget="phone"/>
+					<field name="secretary_email" widget="email"/>
+					<field name="availibility_check"/>
+				</group>
+			</xpath>
+			<xpath expr="//sheet/group" position="after">
+				<notebook colspan="4" invisible="not is_doctor">
+					<page name="general_info" string="General Info" autofocus="autofocus">
+						<group>
+							<group>
+								<field name="health_centre_id" widget="many2many_tags" required="is_doctor"/>
+								<field name = 'general_info_attach' widget="many2many_binary" options="{'preview_image': 'general_info_attach'}"/>
+							</group>
+							<group>
+								<field name="doc_dob"  required="is_doctor"/>
+							</group>
+						</group>
+					</page>
+					<page name="procedure" string="Procedures" autofocus="autofocus">
+						<field name="procedure_ids">
+							<list editable="bottom">
+								<field name="procedure_id"/>
+								<field name="avg_time_actual" widget="float_time"/>
+								<field name="avg_time" invisible="1" widget="float_time"/>
+								<field name="min_time" widget="float_time"/>
+								<field name="max_time" widget="float_time"/>
+							</list>
+						</field>
+					</page>
+					<page name="bank_details" string="Bank Details" autofocus="autofocus">
+						<group>
+							<group>
+								<field name="bank_name" required="is_doctor"/>
+								<field name="acc_no" required="is_doctor"/>
+								<field name="sort_code" required="is_doctor"/>
+								<field name="swift_code" required="is_doctor"/>
+								<field name="iban_code" required="is_doctor"/>
+							</group>
+						</group>
+					</page>
+					<page name="ins_details" string="Insurance Details" autofocus="autofocus">
+						<group>
+							<group>
+								<field name="insurance_name"/>
+								<field name="policy_no"/>
+								<field name="start_date"/>
+								<field name="end_date"/>
+								<field name="insurance_provider"/>
+								<field name='insurance_attach' widget="many2many_binary" options="{'preview_image': 'insurance_attach'}"/>
+							</group>
+						</group>
+					</page>
+					<page name="add_details" string="Address" autofocus="autofocus">
+						<group>
+							<group string="Local Address">
+								 <label for="street" string="Address"/>
+									 <div class="o_address_format">
+										<field name="street_loc" placeholder="Street..." class="o_address_street"/>
+										<field name="street2_loc" placeholder="Street 2..." class="o_address_street"/>
+										<field name="city_loc" placeholder="City" class="o_address_city"/>
+										<field name="state_id_loc" class="o_address_state" placeholder="Status" options='{"no_open": True}'/>
+										<field name="zip_loc" placeholder="ZIP" class="o_address_zip"/>
+										<field name="country_id_loc" placeholder="Country" class="o_address_country" options='{"no_open": True}'/>
+									 </div>
+							</group>
+							<group string="Permanent Address">
+								 <label for="street" string="Address"/>
+								 <div class="o_address_format">
+								<field name="street" placeholder="Street..." class="o_address_street"/>
+								<field name="street2" placeholder="Street 2..." class="o_address_street"/>
+								<field name="city" placeholder="City" class="o_address_city"/>
+								<field name="state_id" class="o_address_state" placeholder="Status" options='{"no_open": True}'/>
+								<field name="doc_zip" placeholder="ZIP" class="o_address_zip"/>
+								<field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True}'/>
+								 </div>
+							</group>
+						</group>
+					</page>
+					<page name="membership_details" string="Memberships" autofocus="autofocus">
+						<field name="membership_ids">
+							<list editable="bottom">
+								<field name="membership_number"/>
+								<field name="type_of_membership"/>
+								<field name="valid_till"/>
+								<field name="other_remarks"/>
+								<field name="membership_attach" widget="many2many_binary" options="{'preview_image': 'membership_attach'}"/>
+							</list>
+						</field>
+					</page>
+					<page name="work_details" string="Work permit" autofocus="autofocus">
+						<group>
+							<group>
+								<field name="citizenship" widget="many2many_tags"/>
+								<field name="national_insurance_no"/>
+								<field name="work_permit"/>
+								<field name="work_validity"/>
+								<field name = 'permit_attach' widget="many2many_binary" options="{'preview_image': 'permit_attach'}"/>
+							</group>
+						</group>
+					</page>
+					<page name="practising_details" string="Practicing Privileges" autofocus="autofocus">
+						<group>
+							<field name = 'practising_privileges_attach' widget="many2many_binary"
+								   options="{'preview_image': 'practising_privileges_attach'}"/>
+						</group>
+					</page>
+					<page name="vaccine_details" string="Vaccination" autofocus="autofocus">
+						<field name = 'vaccine_ids'>
+							<list editable="bottom">
+								<field name="name"/>
+								<field name="date"/>
+								<field name="validity_date"/>
+								<field name="certificate_ids" widget="many2many_binary"/>
+							</list>
+						</field>
+					</page>
+					<page name="training_details" string="Training" autofocus="autofocus">
+						<group>
+							<group>
+								<field name = 'training'/>
+							</group>
+						</group>
+					</page>
+				</notebook>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="view_doctor_masters_data_kanban_view" model="ir.ui.view">
+	    <field name="name">Doctor</field>
+	    <field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.res_partner_kanban_view"/>
+	    <field name="arch" type="xml">
+			<xpath expr = "//main//field[@name='display_name']" position = 'before'>
+				<field name="is_doctor" invisible="1"/>
+				<div invisible="not is_doctor">
+					<b>
+						<field name="doc_seq_no" />
+					</b>
+				</div>
+			</xpath>
+			<xpath expr = "//main//field[@name='display_name']" position = 'attributes'>
+				<attribute name="style">font-weight: bold</attribute>
+			</xpath>
+		</field>
+	</record>
+<!-- 
+	<record id="view_doctor_masters_data_kanban_view" model="ir.ui.view">
+	    <field name="name">Doctor</field>
+	    <field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.res_partner_kanban_view"/>
+	    <field name="arch" type="xml">
+			<xpath expr = "//main//field[@name='display_name']" position = 'before'>
+				<field name="is_doctor" invisible="1"/>
+				<div invisible="not is_doctor">
+					<b>
+						<field name="doc_seq_no" />
+					</b>
+				</div>
+			</xpath>
+			<xpath expr = "//main//field[@name='display_name']" position = 'attributes'>
+				<attribute name="style">font-weight: bold</attribute>
+			</xpath>
+		</field>
+	</record>
+ -->
+	<record id="action_doctor_new_view_form" model="ir.actions.act_window">
+		<field name="name">Doctor</field>
+		<field name="res_model">res.partner</field>
+		<field name="context">{'doctor': 'doctor'}</field>
+		<field name="domain">[('is_doctor','=',True)]</field>
+		<field name="view_mode">kanban,list,form</field>
+	</record>
+
+	<record id="view_doctor_invoice_button_hidden" model="ir.ui.view">
+	    <field name="name">Doctor.form</field>
+	    <field name="model">res.partner</field>
+	    <field name="inherit_id" ref="account.partner_view_buttons"/>
+	    <field name="arch" type="xml">
+	        <button name="action_view_partner_invoices" position="attributes">
+	            <attribute  name="invisible">is_doctor or is_patient</attribute>
+	        </button>
+	    </field>
+	</record>
+
+	<record id="view_doctor_purchase_button_hidden" model="ir.ui.view">
+	    <field name="name">Doctor.form</field>
+	    <field name="model">res.partner</field>
+	    <field name="inherit_id" ref="purchase.res_partner_view_purchase_buttons"/>
+	    <field name="arch" type="xml">
+	        <button name="%(purchase.act_res_partner_2_purchase_order)d" position="attributes">
+	            <attribute name="invisible">is_doctor or is_patient</attribute>
+	        </button>
+			<button name="%(purchase_stock.action_purchase_vendor_delay_report)d" position="attributes">
+	            <attribute name="invisible">is_doctor or is_patient</attribute>
+	        </button>
+	    </field>
+	</record>
+<!-- 
+	<record id="view_doctor_vendor_bill_button_hidden" model="ir.ui.view">
+	    <field name="name">Doctor.form</field>
+	    <field name="model">res.partner</field>
+	    <field name="inherit_id" ref="purchase.res_partner_view_purchase_account_buttons"/>
+	    <field name="arch" type="xml">
+	        <button name="%(purchase.act_res_partner_2_supplier_invoices)d" position="attributes">
+	            <attribute  name="invisible">is_doctor or is_patient</attribute>
+	        </button>
+	    </field>
+	</record> -->
+
+	<record id="view_doctor_opportunity_button_hidden" model="ir.ui.view">
+	    <field name="name">Doctor.form</field>
+	    <field name="model">res.partner</field>
+	    <field name="inherit_id" ref="crm.view_partners_form_crm1"/>
+	    <field name="arch" type="xml">
+	        <button name="action_view_opportunity" position="attributes">
+	            <attribute name="invisible">is_doctor or is_patient</attribute>
+	        </button>
+	        <button name="schedule_meeting" position="attributes">
+	            <attribute name="invisible">is_doctor or is_patient</attribute>
+	        </button>
+	    </field>
+	</record>
+
+	<menuitem name="Master Data" id="menu_master_data" parent = "cp_hospital_management.menu_root_hospital_management" sequence="1"/>
+	<menuitem name="Configuration" id="menu_config_data" parent = "cp_hospital_management.menu_root_hospital_management" groups ='base.user_admin'  sequence="1"/>
+	<menuitem name="Doctors" id="menu_doc" parent = "menu_master_data" action="action_doctor_new_view_form" sequence="1"/>
+</odoo>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Appointment data-->
+        <record id="appointment_1" model="appointment">
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="urgency">Normal</field>
+        </record>
+
+        <record id="appointment_2" model="appointment">
+            <field name="doctor" ref="hr.employee_qdp"/>
+            <field name="patient" ref="base.res_partner_2"/>
+            <field name="urgency">Urgent</field>
+        </record>
+
+        <record id="appointment_3" model="appointment">
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="patient" ref="base.res_partner_3"/>
+            <field name="urgency">Medical Emergency</field>
+        </record>
+
+        <record id="appointment_4" model="appointment">
+            <field name="doctor" ref="hr.employee_qdp"/>
+            <field name="patient" ref="base.res_partner_4"/>
+            <field name="urgency">Normal</field>
+        </record>
+
+        <record id="appointment_5" model="appointment">
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="patient" ref="base.res_partner_3"/>
+            <field name="urgency">Medical Emergency</field>
+        </record>
+
+        <record id="appointment_6" model="appointment">
+            <field name="doctor" ref="hr.employee_qdp"/>
+            <field name="patient" ref="base.res_partner_2"/>
+            <field name="urgency">Urgent</field>
+        </record>
+
+        <!--Prescription data-->
+        <record id="prescription_1" model="prescription">
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="patient" ref="base.res_partner_1"/>
+            <field name="pharmacy" ref="apothecary_1"/>
+        </record>
+
+        <record id="prescription_line_1" model="prescription.line">
+            <field name="prescription_id" ref="prescription_1"/>
+            <field name="name" ref="medicine_1"/>
+            <field name="dose">3</field>
+            <field name="frequency">4</field>
+            <field name="frequency_unit">Hours</field>
+        </record>
+
+        <!--Evaluation data-->
+        <record id="evaluation_1" model="evaluation">
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="patient" ref="base.res_partner_1"/>
+        </record>
+
+        <record id="evaluation_2" model="evaluation">
+            <field name="doctor" ref="hr.employee_qdp"/>
+            <field name="patient" ref="base.res_partner_2"/>
+        </record>
+
+        <record id="evaluation_3" model="evaluation">
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="patient" ref="base.res_partner_3"/>
+        </record>
+        <record id="evaluation_4" model="evaluation">
+            <field name="doctor" ref="hr.employee_qdp"/>
+            <field name="patient" ref="base.res_partner_4"/>
+        </record>
+
+        <record id="evaluation_5" model="evaluation">
+            <field name="doctor" ref="hr.employee_admin"/>
+            <field name="patient" ref="base.res_partner_1"/>
+        </record>
+
+    </data>
+</odoo>

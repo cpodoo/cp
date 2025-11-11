@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Category Lab Tests-->
+        <record id="category_lab_test" model="product.category">
+            <field name="name">Lab Test</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+
+        <!--Appointment Product-->
+        <record id="category_appointment" model="product.category">
+            <field name="name">Appointment</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+
+        <record id="product_appointment_normal" model="product.product">
+            <field name="name">Normal Appointment</field>
+            <field name="type">service</field>
+            <field name="lst_price">100</field>
+            <field name="categ_id" ref="category_appointment"/>
+        </record>
+
+        <record id="product_appointment_urgent" model="product.product">
+            <field name="name">Urgent Appointment</field>
+            <field name="type">service</field>
+            <field name="lst_price">200</field>
+            <field name="categ_id" ref="category_appointment"/>
+        </record>
+
+        <record id="product_appointment_medical_emergency" model="product.product">
+            <field name="name">Medical Emergency Appointment</field>
+            <field name="type">service</field>
+            <field name="lst_price">250</field>
+            <field name="categ_id" ref="category_appointment"/>
+        </record>
+
+        <!--Category Medicine-->
+        <record id="category_medicine" model="product.category">
+            <field name="name">Medicine</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+
+        <!--Category Surgery-->
+        <record id="category_surgery" model="product.category">
+            <field name="name">Surgery</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+        
+        <!--Category Imaging Tests-->
+        <record id="category_imaging_test" model="product.category">
+            <field name="name">Imaging Test</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+
+    </data>
+</odoo>

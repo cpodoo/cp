@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_newborn_list" model="ir.ui.view">
+	    <field name="name">newborn.list</field>
+	    <field name="model">newborn</field>
+	    <field name="arch" type="xml">
+	        <list string="Newborn">
+	            <field name="name"/>
+	            <field name="mother"/>
+	            <field name="sex"/>
+	            <field name="bdate"/>
+	            <field name="discharged"/>
+	            <field name="doctor_in_charge"/>
+	            <field name="length"/>
+	            <field name="weight"/>
+	            <field name="cephalic_perimeter"/>
+	            <field name="congenital_diseases"/>
+	        </list>
+	    </field>
+	</record>
+	
+	<record id="view_newborn_form" model="ir.ui.view">
+	    <field name="name">newborn.form</field>
+	    <field name="model">newborn</field>
+	    <field name="arch" type="xml">
+	        <form string="Newborn">
+	            <sheet>
+	                <field name="image" widget="image" class="oe_left oe_avatar" options="{'preview_image': 'image', 'size': [90, 90]}" />
+	                <div class="oe_title">
+	                    <h1>
+	                        <field name="name" default_focus="1" placeholder="Name"/>
+	                    </h1>
+	                </div>
+	                <group col="4">
+	                    <field name="mother"/>
+	                    <field name="sex"/>
+	                    <field name="bdate"/>
+	                    <field name="discharged"/>
+	                    <field name="doctor_in_charge"/>
+	                </group>
+	                <group col="4">
+	                    <field name="length"/>
+	                    <field name="weight"/>
+	                    <field name="cephalic_perimeter"/>
+	                    <field name="congenital_diseases"/>
+	                </group>
+	
+	                <notebook colspan="4">
+	                    <page name="apgar" string="APGAR Scores" autofocus="autofocus">
+	                        <field name="newborn_line" mode="list,kanban">
+	                            <list string="Newborn Lines" editable="bottom">
+	                                <field name="minute"/>
+	                                <field name="apgar"/>
+	                                <field name="appearance"/>
+	                                <field name="pulse"/>
+	                                <field name="grimace"/>
+	                                <field name="activity"/>
+	                                <field name="respiration"/>
+	                            </list>
+	                        </field>
+	                    </page>
+	                </notebook>
+	            </sheet>
+	            <chatter/>
+	        </form>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="action_newborn">
+	    <field name="name">Newborn</field>
+	    <field name="res_model">newborn</field>
+	    <field name="view_mode">list,form</field>
+	</record>
+	
+	<menuitem name="Newborns" id="menu_newborn" parent="menu_pediatrics" action="action_newborn" sequence="0"/>
+
+</odoo>
