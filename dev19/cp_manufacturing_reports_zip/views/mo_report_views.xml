@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Report Action -->
+    <record id="action_mo_report_xlsx" model="ir.actions.report">
+        <field name="name">Download MO Report (Excel)</field>
+        <field name="model">mrp.production</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">cp_manufacturing_reports_zip.report_mo_xlsx</field>
+        <field name="report_file">MO_Report</field>
+        <field name="binding_model_id" ref="mrp.model_mrp_production"/>
+    </record>
+</odoo>
