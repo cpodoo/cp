@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Claim report document details template -->
+    <template id="report_claim_document">
+        <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang if doc.partner_id else 'en_US')" />
+            <div class="page">
+                <h2 class="mt-4 mb-4 text-center">
+                    <span>Claim # </span>
+                    <span t-field="doc.name"/>
+                </h2>
+                <!-- ================= Claim Details (Column Format) ================= -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h4 class="mb-3">Claim Details</h4>
+                        <t t-if="doc.issue or doc.date or doc.reason or doc.state">
+                            <table class="table table-sm table-bordered" style="border: 1px solid black;">
+                                 <thead style="background-color: #f2f2f2;">
+                                     <tr>
+                                        <th class="text-center" style="border: 1px solid black;">Claim Date</th>
+                                        <th class="text-left" style="border: 1px solid black;">Status</th>
+                                        <th class="text-left" style="border: 1px solid black;">Issue Description</th>
+                                        <th class="text-left" style="border: 1px solid black;">Refuse Reason</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr>
+                                        <td class="text-center" style="border: 1px solid black;"><span t-field="doc.date"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.state"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.issue"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.reason"/></td>
+                                    </tr>
+                                 </tbody>
+                            </table>
+                        </t>
+                        <t t-else="">
+                            <p>No claim details available.</p>
+                        </t>
+                    </div>
+                 </div>
+                <!-- ================= Customer Details (Column Format) ================= -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h4 class="mb-3">Customer Details</h4>
+                        <t t-if="doc.partner_id or doc.phone or doc.email">
+                            <table class="table table-sm table-bordered" style="border: 1px solid black;">
+                                <thead style="background-color: #f2f2f2;">
+                                    <tr>
+                                        <th class="text-left" style="border: 1px solid black;">Customer</th>
+                                        <th class="text-left" style="border: 1px solid black;">Phone</th>
+                                        <th class="text-left" style="border: 1px solid black;">Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.partner_id.name"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.phone"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.email"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-else="">
+                            <p>No customer details available.</p>
+                        </t>
+                    </div>
+                </div>
+                <!-- ================= Product Details (Column Format) ================== -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h4 class="mb-3">Product Details</h4>
+                        <t t-if="doc.product_id or doc.product_ref_code or doc.product_barcode or doc.serial_number or doc.sale_order_id">
+                            <table class="table table-sm table-bordered" style="border: 1px solid black;">
+                                <thead style="background-color: #f2f2f2;">
+                                     <tr>
+                                         <th class="text-left" style="border: 1px solid black;">Product</th>
+                                         <th class="text-left" style="border: 1px solid black;">Product Code</th>
+                                         <th class="text-left" style="border: 1px solid black;">Barcode</th>
+                                         <th class="text-left" style="border: 1px solid black;">Serial Number</th>
+                                         <th class="text-left" style="border: 1px solid black;">Claim Sale Order</th>
+                                     </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.product_id.name"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.product_ref_code"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.product_barcode"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.serial_number"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.sale_order_id.name"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-else="">
+                            <p>No product details available.</p>
+                        </t>
+                    </div>
+                </div>
+                <!-- ================= Warranty Details (Column Format) ================= -->
+                 <div class="row mb-4">
+                    <div class="col-12">
+                        <h4 class="mb-3">Warranty Details</h4>
+                        <t t-if="doc.warranty_id or doc.start_date or doc.end_date or doc.warranty_state or doc.warranty_sale_order_id">
+                            <table class="table table-sm table-bordered" style="border: 1px solid black;">
+                                <thead style="background-color: #f2f2f2;">
+                                     <tr>
+                                         <th class="text-left" style="border: 1px solid black;">Warranty ID</th>
+                                         <th class="text-center" style="border: 1px solid black;">Warranty Start Date</th>
+                                         <th class="text-center" style="border: 1px solid black;">Warranty End Date</th>
+                                         <th class="text-left" style="border: 1px solid black;">Warranty Status</th>
+                                         <th class="text-left" style="border: 1px solid black;">Original Sale Order</th>
+                                     </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.warranty_id.name"/></td>
+                                        <td class="text-center" style="border: 1px solid black;"><span t-field="doc.start_date"/></td>
+                                        <td class="text-center" style="border: 1px solid black;"><span t-field="doc.end_date"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.warranty_state"/></td>
+                                        <td class="text-left" style="border: 1px solid black;"><span t-field="doc.warranty_sale_order_id.name"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                         </t>
+                         <t t-else="">
+                            <p>No warranty details available.</p>
+                         </t>
+                    </div>
+                 </div>
+                <!-- =================== Parts Details (Bordered Table) =================== -->
+                <t t-if="doc.claim_warranty_parts_ids">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h4 class="mb-3">Parts Details</h4>
+                            <table class="table table-sm table-bordered" style="border: 1px solid black;">
+                                <thead style="background-color: #f2f2f2;">
+                                    <tr>
+                                        <th name="th_product" class="text-left" style="border: 1px solid black;">Product</th>
+                                        <th name="th_qty" class="text-right" style="border: 1px solid black;">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.claim_warranty_parts_ids" t-as="parts_id">
+                                        <tr>
+                                            <td class="text-left" style="border: 1px solid black;"><span t-esc="parts_id.product_id.name"/></td>
+                                            <td class="text-right" style="border: 1px solid black;"><span t-esc="parts_id.qty"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <!-- sr claim report template -->
+    <template id="sr_report_claim">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="cp_warranty_management.report_claim_document" t-lang="doc.partner_id.lang if doc.partner_id else 'en_US'"/>
+            </t>
+        </t>
+    </template>
+</odoo>

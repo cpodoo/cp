@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- Claim Template -->
+        <template id="claim_template">
+            <table class="table table-sm table-bordered o_main_table" style="border: 1px solid black;">
+                <thead style="background-color: #f2f2f2;"> 
+                    <tr>
+                        <th name="th_name" class="text-center" style="border: 1px solid black;">
+                            <span>Name</span>
+                        </th>
+                        <th name="th_claim_date" class="text-center" style="border: 1px solid black;">
+                            <span>Claim Date</span>
+                        </th>
+                        <th name="th_customer" class="text-center" style="border: 1px solid black;">
+                            <span>Customer</span>
+                        </th>
+                        <th name="th_product" class="text-center" style="border: 1px solid black;">
+                            <span>Product</span>
+                        </th>
+                        <t t-if="is_product_code">
+                            <th name="th_product_code" class="text-center" style="border: 1px solid black;">
+                                <span>Product Code</span>
+                            </th>
+                        </t>
+                        <t t-if="is_product_number">
+                            <th name="th_serial_number" class="text-center" style="border: 1px solid black;">
+                                <span>Serial Number</span>
+                            </th>
+                        </t>
+                        <th name="th_warrant_start_date" class="text-center" style="border: 1px solid black;">
+                            <span>Warranty Start Date</span>
+                        </th>
+                        <th name="th_warranty_end_date" class="text-center" style="border: 1px solid black;">
+                            <span>Warranty End Date</span>
+                        </th>
+                        <th name="th_state" class="text-center" style="border: 1px solid black;">
+                            <span>State</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="claim_ids" t-as="claim_id">
+                        <tr>
+                            <td class="text-center" style="border: 1px solid black;">
+                                <span t-esc="claim_id.name"/>
+                            </td>
+                            <td class="text-center" style="border: 1px solid black;">
+                                <!-- Added date formatting -->
+                                <span t-esc="claim_id.date" t-options='{"widget": "date"}'/>
+                            </td>
+                            <td class="text-center" style="border: 1px solid black;">
+                                <span t-esc="claim_id.partner_id.name"/>
+                            </td>
+                            <td class="text-center" style="border: 1px solid black;">
+                                <span t-esc="claim_id.product_id.name"/>
+                            </td>
+                            <t t-if="is_product_code">
+                                <td class="text-center" style="border: 1px solid black;">
+                                    <span t-esc="claim_id.product_ref_code or '-'"/>
+                                </td>
+                            </t>
+                            <t t-if="is_product_number">
+                                 <td class="text-center" style="border: 1px solid black;">
+                                    <span t-esc="claim_id.serial_number or '-'"/>
+                                </td>
+                            </t>
+                            <td class="text-center" style="border: 1px solid black;">
+                                <span t-esc="claim_id.start_date" t-options='{"widget": "date"}'/>
+                            </td>
+                            <td class="text-center" style="border: 1px solid black;">
+                                <span t-esc="claim_id.end_date" t-options='{"widget": "date"}'/>
+                            </td>
+                            <td class="text-center" style="border: 1px solid black;">
+                                <span t-esc="dict(claim_id.fields_get(allfields=['state'])['state']['selection'])[claim_id.state]"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </template>
+
+        <!-- Claim Report Template -->
+        <template id="sr_claim_report_template">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <div class="page"> 
+                        <div class="text-center mb-4"> 
+                            <h3>
+                                <strong>
+                                    <span>Claim Warranty Report</span>
+                                </strong>
+                            </h3>
+                        </div>
+                        <div class="row mb-4 justify-content-center"> 
+                            <table class="table table-sm table-bordered" style="width: auto; margin: auto; border: 1px solid black;">
+                                <thead style="background-color: #f2f2f2;"> 
+                                    <tr>
+                                        <th class="text-center" style="border: 1px solid black;">
+                                            <span><strong>Start Date</strong></span>
+                                        </th>
+                                        <th class="text-center" style="border: 1px solid black;">
+                                            <span><strong>End Date</strong></span>
+                                        </th>
+                                        <t t-if="docs.state">
+                                            <th class="text-center" style="border: 1px solid black;">
+                                                <span><strong>State</strong></span>
+                                            </th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center" style="border: 1px solid black;">
+                                            <!-- Use t-field for better formatting of model fields -->
+                                            <span t-field="docs.start_date"/>
+                                        </td>
+                                        <td class="text-center" style="border: 1px solid black;">
+                                            <span t-field="docs.end_date"/>
+                                        </td>
+                                        <t t-if="docs.state">
+                                            <td class="text-center" style="border: 1px solid black;">
+                                                 <!-- t-field automatically gets the label for selection -->
+                                                <span t-field="docs.state"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <t t-if="claim_ids">
+                            <t t-call="cp_warranty_management.claim_template" />
+                        </t>
+                        <t t-else="">
+                            <div class="text-center mt-4"> 
+                                <p>There is no data available for the selected criteria.</p>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
